@@ -22,5 +22,6 @@ public class TestClass {
         TestClass tc = new TestClass();
         tc.printString();
         TestClass tc2 = new TestClass();
+        TestClass tc3;
     }
 }
