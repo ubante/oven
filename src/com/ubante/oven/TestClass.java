@@ -8,8 +8,6 @@ public class TestClass {
 
     TestClass() {}
 
-    
-
     void printString() {
         System.out.println(aString);
     }
@@ -23,5 +21,6 @@ public class TestClass {
         printSomething();
         TestClass tc = new TestClass();
         tc.printString();
+        TestClass tc2 = new TestClass();
     }
 }
