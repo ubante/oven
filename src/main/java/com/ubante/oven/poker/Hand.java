@@ -3,6 +3,7 @@ package com.ubante.oven.poker;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by J on 4/29/2014.
@@ -72,6 +73,38 @@ public class Hand {
         return straightResults;
     }
 
+    String evaluateFrequency() {
+        String result = "none";
+
+        // Four-of-a-kind (4-1,5) or full house (2-3,3-2)
+        // A five-of-a-kind is possible but Texas Hold 'em treats them like
+        // four-of-a-kind.
+        if (valueFrequency.size() <= 2) {
+            Map.Entry<Integer, Integer> anEntry =
+                    valueFrequency.entrySet().iterator().next();
+            Integer frequency = anEntry.getValue();
+            if (frequency == 2 || frequency == 3) {
+                result = "full house";
+            } else {
+                result = "four-of-a-kind";
+            }
+            return result;
+        }
+
+        // Three-of-a-kind (1-1-3,1-3-1,3-1-1) or two pairs (1-2-2,2-1-2,2-2-1)
+        if (valueFrequency.size() == 3) {
+            for (Map.Entry entry : valueFrequency.entrySet()) {
+                if (entry.getValue() == new Integer(3)) { return "three-of-a-kind"; }
+                if (entry.getValue() == new Integer(2)) { return "two pairs"; }
+            }
+        }
+
+        if (valueFrequency.size() == 4) { return "pair"; }
+        if (valueFrequency.size() == 5) { return "high card"; }
+
+        return result;
+    }
+
     boolean hasFourOfaKind() {
         if (valueFrequency.size()>2) {
             return false;
@@ -89,19 +122,28 @@ public class Hand {
     }
 
     String evaluate() {
-        String results = "unknown";
+        String result = "unknown";
 
         // There are 9 poker hands
         // Flushes (2 kinds)
         if (isFlush()) {
             if (isStraight()) {
-                results = "straight flush";
+                result = "straight flush";
             } else {
-                results = "flush";
+                result = "flush";
             }
-            return results;
+            return result;
         }
 
+        // Four-of-a-kind, full house, three-of-a-kind, two pairs, pair
+        String resultFrequency = evaluateFrequency();
+        if (!resultFrequency.equals("none")) { return resultFrequency; }
+
+        // Straight
+
+        // High card
+
+        // Hopefully, nuke the below
         // Four-of-a-kind
         if (hasFourOfaKind()) { return "four-of-a-kind"; }
 
@@ -111,7 +153,7 @@ public class Hand {
         if (hasThreeOfaKind()) { return "three-of-a-kind"; }
 
 
-        return results;
+        return result;
     }
 
 
