@@ -45,7 +45,7 @@ public class Card {
     }
 
     void print() {
-        System.out.println(toString());
+        System.out.print(toString());
     }
 
     /**

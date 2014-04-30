@@ -2,6 +2,7 @@ package com.ubante.oven.poker;
 
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by J on 4/29/2014.
@@ -10,15 +11,11 @@ public class Hand {
     int handsize = 5;
     Card[] list = new Card[handsize];
     int[] listValues = new int[handsize];
+    HashMap<Integer,Integer> valueFrequency = new HashMap<Integer,Integer>();
 
-    Hand() {
-        for (int i=0; i<handsize; i++) {
-            list[i] = Card.getRandom();
-            listValues[i] = list[i].value;
-        }
-        Arrays.sort(listValues);
-    }
-
+    /**
+     * Constructors
+     */
     Hand(Card a, Card b, Card c, Card d, Card e) {
         list[0] = a;
         list[1] = b;
@@ -27,8 +24,17 @@ public class Hand {
         list[4] = e;
         for (int i=0; i<handsize; i++) {
             listValues[i] = list[i].value;
+            Integer value = listValues[i];
+            Integer frequency = valueFrequency.get(value);
+            if (frequency == null) { frequency=0; }
+            valueFrequency.put(value, frequency + 1);
         }
         Arrays.sort(listValues);
+    }
+
+    Hand() {
+        this(Card.getRandom(),Card.getRandom(),Card.getRandom(),
+                Card.getRandom(),Card.getRandom());
     }
 
     void print() {
@@ -66,11 +72,26 @@ public class Hand {
         return straightResults;
     }
 
+    boolean hasFourOfaKind() {
+        if (valueFrequency.size()>2) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    boolean hasThreeOfaKind() {
+        if (valueFrequency.size()>3) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     String evaluate() {
         String results = "unknown";
 
         // There are 9 poker hands
-
         // Flushes (2 kinds)
         if (isFlush()) {
             if (isStraight()) {
@@ -78,14 +99,24 @@ public class Hand {
             } else {
                 results = "flush";
             }
+            return results;
         }
+
+        // Four-of-a-kind
+        if (hasFourOfaKind()) { return "four-of-a-kind"; }
+
+        // Full house
+
+        // Three-of-a-kind
+        if (hasThreeOfaKind()) { return "three-of-a-kind"; }
+
 
         return results;
     }
 
 
     public static void main(String[] args) {
-        Hand h = new Hand();
+        Hand h;
 
         for (int i=0; i<100; i++) {
             h = new Hand();
@@ -113,6 +144,34 @@ public class Hand {
         System.out.printf("%20s: ", h.evaluate());
         h.print();
 
+        System.out.println("\nTesting a four-of-a-kind");
+        h = new Hand(
+                new Card("S",3),
+                new Card("C",6),
+                new Card("D",3),
+                new Card("S",3),
+                new Card("H",3));
+        System.out.printf("%20s: ", h.evaluate());
+        h.print();
 
+        System.out.println("\nTesting a full house");
+        h = new Hand(
+                new Card("S",3),
+                new Card("C",6),
+                new Card("D",3),
+                new Card("S",6),
+                new Card("H",3));
+        System.out.printf("%20s: ", h.evaluate());
+        h.print();
+
+        System.out.println("\nTesting a three-of-a-kind");
+        h = new Hand(
+                new Card("S",3),
+                new Card("C",6),
+                new Card("D",3),
+                new Card("S",2),
+                new Card("H",3));
+        System.out.printf("%20s: ", h.evaluate());
+        h.print();
     }
 }
