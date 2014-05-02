@@ -50,7 +50,7 @@ public class Card {
 
     /**
      * Test main
-     * @param args
+     * @param args no args
      */
     public static void main(String[] args) {
         Card c = Card.getRandom();

@@ -156,7 +156,10 @@ public class Hand {
         return result;
     }
 
-
+    /**
+     * Testing main
+     * @param args no args
+     */
     public static void main(String[] args) {
         Hand h;
 
