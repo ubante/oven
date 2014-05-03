@@ -4,6 +4,7 @@ package com.ubante.oven.poker;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Created by J on 4/29/2014.
@@ -12,7 +13,7 @@ public class Hand {
     int handsize = 5;
     Card[] list = new Card[handsize];
     int[] listValues = new int[handsize];
-    HashMap<Integer,Integer> valueFrequency = new HashMap<Integer,Integer>();
+    HashMap<Integer, Integer> valueFrequency = new HashMap<Integer, Integer>();
 
     /**
      * Constructors
@@ -43,6 +44,10 @@ public class Hand {
         for (int i=0; i<handsize; i++) {
             System.out.printf("%3s ", list[i].toString());
         }
+    }
+
+    void println() {
+        print();
         System.out.println();
     }
 
@@ -94,8 +99,11 @@ public class Hand {
         // Three-of-a-kind (1-1-3,1-3-1,3-1-1) or two pairs (1-2-2,2-1-2,2-2-1)
         if (valueFrequency.size() == 3) {
             for (Map.Entry entry : valueFrequency.entrySet()) {
-                if (entry.getValue() == new Integer(3)) { return "three-of-a-kind"; }
-                if (entry.getValue() == new Integer(2)) { return "two pairs"; }
+
+                // XXX
+//                System.out.println("Entry value: "+entry.getValue());
+                if (entry.getValue().equals(new Integer(3))) { return "three-of-a-kind"; }
+                if (entry.getValue().equals(new Integer(2))) { return "two pairs"; }
             }
         }
 
@@ -105,21 +113,21 @@ public class Hand {
         return result;
     }
 
-    boolean hasFourOfaKind() {
-        if (valueFrequency.size()>2) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    boolean hasThreeOfaKind() {
-        if (valueFrequency.size()>3) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+//    boolean hasFourOfaKind() {
+//        if (valueFrequency.size()>2) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+//
+//    boolean hasThreeOfaKind() {
+//        if (valueFrequency.size()>3) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
 
     String evaluate() {
         String result = "unknown";
@@ -140,20 +148,27 @@ public class Hand {
         if (!resultFrequency.equals("none")) { return resultFrequency; }
 
         // Straight
+        if (isStraight()) { return "straight"; }
 
         // High card
 
         // Hopefully, nuke the below
         // Four-of-a-kind
-        if (hasFourOfaKind()) { return "four-of-a-kind"; }
+//        if (hasFourOfaKind()) { return "four-of-a-kind"; }
 
         // Full house
 
         // Three-of-a-kind
-        if (hasThreeOfaKind()) { return "three-of-a-kind"; }
+//        if (hasThreeOfaKind()) { return "three-of-a-kind"; }
 
 
         return result;
+    }
+
+    static Hand joinStartingHandWithFlop(StartingHand startingHand, Flop flop) {
+        Card[] combinedHand = ArrayUtils.addAll(startingHand.list,flop.list);
+
+        return new Hand(combinedHand[0],combinedHand[1],combinedHand[2],combinedHand[3],combinedHand[4]);
     }
 
     /**
@@ -163,13 +178,16 @@ public class Hand {
     public static void main(String[] args) {
         Hand h;
 
-        for (int i=0; i<100; i++) {
+        for (int i=1; i<=200; i++) {
             h = new Hand();
             System.out.printf("%20s: ", h.evaluate());
             h.print();
+            if ( (i%8) == 0 ) {
+                System.out.println();
+            }
         }
 
-        System.out.println("\nTesting a flush");
+        System.out.println("\n\nTesting a flush");
         h = new Hand(
                 new Card("S",4),
                 new Card("S",4),
@@ -177,7 +195,7 @@ public class Hand {
                 new Card("S",4),
                 new Card("S",4));
         System.out.printf("%20s: ", h.evaluate());
-        h.print();
+        h.println();
 
         System.out.println("\nTesting a straight flush");
         h = new Hand(
@@ -187,7 +205,7 @@ public class Hand {
                 new Card("S",8),
                 new Card("S",7));
         System.out.printf("%20s: ", h.evaluate());
-        h.print();
+        h.println();
 
         System.out.println("\nTesting a four-of-a-kind");
         h = new Hand(
@@ -197,7 +215,7 @@ public class Hand {
                 new Card("S",3),
                 new Card("H",3));
         System.out.printf("%20s: ", h.evaluate());
-        h.print();
+        h.println();
 
         System.out.println("\nTesting a full house");
         h = new Hand(
@@ -207,7 +225,7 @@ public class Hand {
                 new Card("S",6),
                 new Card("H",3));
         System.out.printf("%20s: ", h.evaluate());
-        h.print();
+        h.println();
 
         System.out.println("\nTesting a three-of-a-kind");
         h = new Hand(
@@ -217,6 +235,49 @@ public class Hand {
                 new Card("S",2),
                 new Card("H",3));
         System.out.printf("%20s: ", h.evaluate());
-        h.print();
+        h.println();
+
+        System.out.println("\nTesting two pairs");
+        h = new Hand(
+                new Card("S",4),
+                new Card("C",6),
+                new Card("C",4),
+                new Card("S",2),
+                new Card("H",2));
+        System.out.printf("%20s: ", h.evaluate());
+        h.println();
+
+        System.out.println("\nTesting a pair");
+        h = new Hand(
+                new Card("S",4),
+                new Card("C",6),
+                new Card("C",8),
+                new Card("S",10),
+                new Card("H",6));
+        System.out.printf("%20s: ", h.evaluate());
+        h.println();
+
+        System.out.println("\nTesting a straight");
+        h = new Hand(
+                new Card("S",4),
+                new Card("C",6),
+                new Card("C",8),
+                new Card("S",5),
+                new Card("H",7));
+        System.out.printf("%20s: ", h.evaluate());
+        h.println();
+
+        System.out.println("\nTesting high card");
+        h = new Hand(
+                new Card("S",4),
+                new Card("C",2),
+                new Card("C",8),
+                new Card("S",5),
+                new Card("H",12));
+        System.out.printf("%20s: ", h.evaluate());
+        h.println();
+
+
+
     }
 }

@@ -48,6 +48,8 @@ public class Card {
         System.out.print(toString());
     }
 
+    void println() { System.out.println(toString()); }
+
     /**
      * Test main
      * @param args no args
