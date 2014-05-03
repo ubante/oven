@@ -113,6 +113,8 @@ public class Hand {
         return result;
     }
 
+
+
 //    boolean hasFourOfaKind() {
 //        if (valueFrequency.size()>2) {
 //            return false;

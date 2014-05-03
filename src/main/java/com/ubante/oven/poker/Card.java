@@ -23,16 +23,16 @@ public class Card {
 
         switch (suitNumber) {
             case 0:
-                suit = "S";
+                suit = "C";
                 break;
             case 1:
                 suit = "D";
                 break;
             case 2:
-                suit = "H";
+                suit = "S";
                 break;
             case 3:
-                suit = "C";
+                suit = "H";
                 break;
         }
 
