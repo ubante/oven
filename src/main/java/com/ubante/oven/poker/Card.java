@@ -15,7 +15,7 @@ public class Card {
         this.value = value;
     }
 
-    static Card getRandom() {
+    static Card getRandomJur() {
         String suit = "";
         Random r = new Random();
         int value = r.nextInt(maxValue) + 2;
@@ -37,6 +37,35 @@ public class Card {
         }
 
         return new Card(suit,value);
+    }
+
+    static Card getRandomMath() {
+
+        String suit = "";
+        int value = 2 + (int)(Math.random()*13);
+        int suitNumber = (int)(Math.random()*4);
+
+        switch (suitNumber) {
+            case 0:
+                suit = "C";
+                break;
+            case 1:
+                suit = "D";
+                break;
+            case 2:
+                suit = "S";
+                break;
+            case 3:
+                suit = "H";
+                break;
+        }
+
+        return new Card(suit,value);
+    }
+
+    static Card getRandom() {
+//        return getRandomJur();
+        return getRandomMath();
     }
 
     @Override

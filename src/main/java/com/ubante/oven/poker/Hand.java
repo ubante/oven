@@ -145,25 +145,25 @@ public class Hand {
             return result;
         }
 
-        // Four-of-a-kind, full house, three-of-a-kind, two pairs, pair
+        // Four-of-a-kind, full house
         String resultFrequency = evaluateFrequency();
-        if (!resultFrequency.equals("none")) { return resultFrequency; }
+        if ((resultFrequency.equals("four-of-a-kind")) ||
+                (resultFrequency.equals("full house"))) {
+            return resultFrequency;
+        }
 
         // Straight
         if (isStraight()) { return "straight"; }
 
-        // High card
+        // Three-of-a-kind, two pairs, pair, high card
+        if ((resultFrequency.equals("three-of-a-kind")) ||
+                (resultFrequency.equals("two pairs")) ||
+                (resultFrequency.equals("pair")) ||
+                (resultFrequency.equals("high card"))) {
+            return resultFrequency;
+        }
 
-        // Hopefully, nuke the below
-        // Four-of-a-kind
-//        if (hasFourOfaKind()) { return "four-of-a-kind"; }
-
-        // Full house
-
-        // Three-of-a-kind
-//        if (hasThreeOfaKind()) { return "three-of-a-kind"; }
-
-
+        // In case there is an unknown hand
         return result;
     }
 
@@ -189,17 +189,9 @@ public class Hand {
             }
         }
 
-        System.out.println("\n\nTesting a flush");
-        h = new Hand(
-                new Card("S",4),
-                new Card("S",4),
-                new Card("S",4),
-                new Card("S",4),
-                new Card("S",4));
-        System.out.printf("%20s: ", h.evaluate());
-        h.println();
 
-        System.out.println("\nTesting a straight flush");
+
+        System.out.println("\n1. Testing a straight flush");
         h = new Hand(
                 new Card("S",5),
                 new Card("S",6),
@@ -209,7 +201,7 @@ public class Hand {
         System.out.printf("%20s: ", h.evaluate());
         h.println();
 
-        System.out.println("\nTesting a four-of-a-kind");
+        System.out.println("\n2. Testing a four-of-a-kind");
         h = new Hand(
                 new Card("S",3),
                 new Card("C",6),
@@ -219,7 +211,7 @@ public class Hand {
         System.out.printf("%20s: ", h.evaluate());
         h.println();
 
-        System.out.println("\nTesting a full house");
+        System.out.println("\n3. Testing a full house");
         h = new Hand(
                 new Card("S",3),
                 new Card("C",6),
@@ -229,37 +221,17 @@ public class Hand {
         System.out.printf("%20s: ", h.evaluate());
         h.println();
 
-        System.out.println("\nTesting a three-of-a-kind");
-        h = new Hand(
-                new Card("S",3),
-                new Card("C",6),
-                new Card("D",3),
-                new Card("S",2),
-                new Card("H",3));
-        System.out.printf("%20s: ", h.evaluate());
-        h.println();
-
-        System.out.println("\nTesting two pairs");
+        System.out.println("\n4. Testing a flush");
         h = new Hand(
                 new Card("S",4),
-                new Card("C",6),
-                new Card("C",4),
-                new Card("S",2),
-                new Card("H",2));
-        System.out.printf("%20s: ", h.evaluate());
-        h.println();
-
-        System.out.println("\nTesting a pair");
-        h = new Hand(
                 new Card("S",4),
-                new Card("C",6),
-                new Card("C",8),
-                new Card("S",10),
-                new Card("H",6));
+                new Card("S",4),
+                new Card("S",4),
+                new Card("S",4));
         System.out.printf("%20s: ", h.evaluate());
         h.println();
 
-        System.out.println("\nTesting a straight");
+        System.out.println("\n5. Testing a straight");
         h = new Hand(
                 new Card("S",4),
                 new Card("C",6),
@@ -269,7 +241,38 @@ public class Hand {
         System.out.printf("%20s: ", h.evaluate());
         h.println();
 
-        System.out.println("\nTesting high card");
+        System.out.println("\n6. Testing a three-of-a-kind");
+        h = new Hand(
+                new Card("S",3),
+                new Card("C",6),
+                new Card("D",3),
+                new Card("S",2),
+                new Card("H",3));
+        System.out.printf("%20s: ", h.evaluate());
+        h.println();
+
+        System.out.println("\n7. Testing two pairs");
+        h = new Hand(
+                new Card("S",4),
+                new Card("C",6),
+                new Card("C",4),
+                new Card("S",2),
+                new Card("H",2));
+        System.out.printf("%20s: ", h.evaluate());
+        h.println();
+
+        System.out.println("\n8. Testing a pair");
+        h = new Hand(
+                new Card("S",4),
+                new Card("C",6),
+                new Card("C",8),
+                new Card("S",10),
+                new Card("H",6));
+        System.out.printf("%20s: ", h.evaluate());
+        h.println();
+
+
+        System.out.println("\n9. Testing high card");
         h = new Hand(
                 new Card("S",4),
                 new Card("C",2),

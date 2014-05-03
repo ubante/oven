@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class HandStatistics {
     HashMap<String, Integer> suitCountHash = new HashMap<String, Integer>();
     HashMap<Integer, Integer> valueCountHash = new HashMap<Integer, Integer>();
+    int cardCounter = 0;
 
     HandStatistics(HashMap<String, Integer> suitCount,
                    HashMap<Integer, Integer> valueCount) {
@@ -32,19 +33,27 @@ public class HandStatistics {
             valueCount = valueCountHash.get(value);
             if (valueCount == null) { valueCount = 0; }
             valueCountHash.put(value, valueCount+1);
+
+            cardCounter++;
         }
     }
 
-    void print() {
+    void println() {
 
         System.out.println("Here are the measurements:");
 
         for (String suit : suitCountHash.keySet()) {
-            System.out.printf("Suit:   %s  Count: %d\n",suit,suitCountHash.get(suit));
+            System.out.printf("Suit:   %s  Count: %7d  Frequency: %6.2f%%\n",
+                    suit,
+                    suitCountHash.get(suit),
+                    suitCountHash.get(suit)*100.0/cardCounter);
         }
 
         for (Integer value : valueCountHash.keySet()) {
-            System.out.printf("Value: %2d  Count: %d\n",value,valueCountHash.get(value));
+            System.out.printf("Value: %2d  Count: %7d  Frequency: %6.2f%%\n",
+                    value,
+                    valueCountHash.get(value),
+                    valueCountHash.get(value)*100.0/cardCounter);
         }
     }
 
@@ -59,7 +68,7 @@ public class HandStatistics {
 
         HandStatistics stats = new HandStatistics();
         stats.measure(testHand);
-        stats.print();
+        stats.println();
         System.out.println();
 
         testHand = new Hand(
@@ -69,7 +78,7 @@ public class HandStatistics {
                 new Card("S",8),
                 new Card("S",7));
         stats.measure(testHand);
-        stats.print();
+        stats.println();
         System.out.println();
     }
 

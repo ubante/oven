@@ -13,10 +13,10 @@ public class PokerSimulator {
 
     public static void main(String[] args) {
         HashMap<String, Integer> flopHandFrequency = new HashMap<String, Integer>();
-        int flopAttempts = 501000;
+        int flopAttempts = 200000; // 200k hands equals 1M cards
         HandStatistics stats = new HandStatistics();
 
-        System.out.println("Making "+flopAttempts+" attempts.");
+        System.out.println("PokerSimulator: making "+flopAttempts+" attempts.");
         System.out.println("\nHere's the starting hand:");
         StartingHand sh = new StartingHand();
         sh.println();
@@ -24,11 +24,11 @@ public class PokerSimulator {
 
         // Find the success after many flops
         for (int i=0; i<flopAttempts; i++) {
-//            System.out.print("Here's a sample flop:  ");
+//            System.out.println("Here's a sample flop:  ");
             Flop f = new Flop();
 //            f.println();
 
-//            System.out.print("Combined hand:         ");
+//            System.out.println("Combined hand:         ");
             Hand combinedHand = Hand.joinStartingHandWithFlop(sh, f);
 //            combinedHand.println();
 
@@ -43,21 +43,22 @@ public class PokerSimulator {
         }
 
         // Add a straight flush.
-        Hand h = new Hand(
-                new Card("S",5),
-                new Card("S",6),
-                new Card("S",9),
-                new Card("S",8),
-                new Card("S",7));
-        stats.measure(h);
-        String straightFlushEvaluation = h.evaluate();
-        System.out.println("Added a straight flush: "+straightFlushEvaluation);
-        Integer frequency = flopHandFrequency.get(straightFlushEvaluation);
-        if (frequency == null) { frequency=0; }
-        flopHandFrequency.put(straightFlushEvaluation, frequency + 1);
-        System.out.println();
+//        Hand h = new Hand(
+//                new Card("S",5),
+//                new Card("S",6),
+//                new Card("S",9),
+//                new Card("S",8),
+//                new Card("S",7));
+//        stats.measure(h);
+//        String straightFlushEvaluation = h.evaluate();
+//        System.out.println("Added a straight flush: "+straightFlushEvaluation);
+//        Integer frequency = flopHandFrequency.get(straightFlushEvaluation);
+//        if (frequency == null) { frequency=0; }
+//        flopHandFrequency.put(straightFlushEvaluation, frequency + 1);
+//        System.out.println();
 
         // Print the post-flop results
+        System.out.println("After the flop:");
         for (String handValue : flopHandFrequency.keySet()) {
             int flopFrequency = flopHandFrequency.get(handValue);
             System.out.printf("Key: %16s  Count: %6d  Frequency: %6.2f%%\n",
@@ -68,7 +69,8 @@ public class PokerSimulator {
         }
 
         // And the measurements
-        stats.print();
+        System.out.println();
+        stats.println();
     }
 }
 
