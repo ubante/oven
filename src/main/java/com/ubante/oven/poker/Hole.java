@@ -6,11 +6,11 @@ import java.util.Arrays;
 /**
  * Created by J on 5/1/2014.
  */
-public class StartingHand extends Hand {
+public class Hole extends Hand {
     int handsize = 2;
     Card[] list = new Card[handsize];
 
-    StartingHand(Card a, Card b) {
+    Hole(Card a, Card b) {
         list[0] = a;
         list[1] = b;
         for (int i=0; i<handsize; i++) {
@@ -23,7 +23,7 @@ public class StartingHand extends Hand {
         Arrays.sort(listValues);
     }
 
-    StartingHand() {
+    Hole() {
         this(Card.getRandom(), Card.getRandom());
     }
 
@@ -40,8 +40,15 @@ public class StartingHand extends Hand {
      * @param args none
      */
     public static void main(String[] args) {
-        System.out.println("Here's a sample starting hand:");
-        StartingHand sh = new StartingHand();
+        System.out.println("Here's a random starting hand:");
+        Hole sh = new Hole();
+        sh.println();
+
+        System.out.println("Here's a great starting hand:");
+        sh = new Hole(
+                new Card("S",13),
+                new Card("C",12)
+        );
         sh.println();
     }
 }

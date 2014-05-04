@@ -57,7 +57,6 @@ public class HandStatistics {
         }
     }
 
-
     public static void main(String[] args) {
         Hand testHand = new Hand(
                 new Card("S",4),

@@ -42,7 +42,7 @@ public class Flop extends Hand {
     public static void main(String[] args) {
 
         System.out.println("\nHere's a sample starting hand:");
-        StartingHand sh = new StartingHand();
+        Hole sh = new Hole();
         sh.println();
 
         System.out.println("Here's a sample flop:");

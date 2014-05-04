@@ -66,6 +66,7 @@ public class Hand {
     }
 
     boolean isStraight() {
+        // XXX this still needs to identify 2 3 4 5 14 as a straight with a high card of 5
         boolean straightResults = true;
 
         for (int i=1; i<handsize; i++) {
@@ -167,7 +168,7 @@ public class Hand {
         return result;
     }
 
-    static Hand joinStartingHandWithFlop(StartingHand startingHand, Flop flop) {
+    static Hand joinStartingHandWithFlop(Hole startingHand, Flop flop) {
         Card[] combinedHand = ArrayUtils.addAll(startingHand.list,flop.list);
 
         return new Hand(combinedHand[0],combinedHand[1],combinedHand[2],combinedHand[3],combinedHand[4]);
@@ -188,8 +189,6 @@ public class Hand {
                 System.out.println();
             }
         }
-
-
 
         System.out.println("\n1. Testing a straight flush");
         h = new Hand(
