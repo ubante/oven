@@ -1,4 +1,4 @@
-package com.ubante.oven.model.bullet;
+package com.ubante.oven.bulletmodel;
 
 import java.util.ArrayList;
 import java.util.List;

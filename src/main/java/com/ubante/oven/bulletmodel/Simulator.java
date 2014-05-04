@@ -1,4 +1,4 @@
-package com.ubante.oven.model.bullet;
+package com.ubante.oven.bulletmodel;
 
 /**
  * Created by J on 4/7/2014.
