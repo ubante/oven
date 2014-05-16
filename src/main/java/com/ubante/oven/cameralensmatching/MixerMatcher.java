@@ -16,15 +16,28 @@ public class MixerMatcher {
         cropCameras.add(new Camera("XS"));
         cropCameras.add(new Camera("T3i"));
 
-        List lenses = new ArrayList<>();
+        List<Lens> lenses = new ArrayList<>();
         lenses.add(new Lens(14,2.8));
         lenses.add(new Lens(10,3.5,true));
         lenses.add(new Lens(17,4));
         lenses.add(new Lens(17,2.8,true));
         lenses.add(new Lens(28,1.8));
 
-        for (int i=1; i<=10; i++) {
 
+        Camera.printReportHeader();
+        Camera xs = new Camera(1.6, "XS");
+        for (Lens lens : lenses) {
+            xs.attachLens(lens);
+            xs.printReport();
         }
+
+        Camera fiveD = new Camera(1.0, "5D3");
+        for (Lens lens : lenses) {
+            if (lens.isEFS) { continue; }
+            
+            fiveD.attachLens(lens);
+            fiveD.printReport();
+        }
+
     }
 }

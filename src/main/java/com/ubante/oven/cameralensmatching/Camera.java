@@ -7,8 +7,9 @@ public class Camera {
     String name;
     Lens lens = null;
     double cropFactor;
-    double RULE = 600;
+    double RULE = 500;
     double sensorWidth;
+    double blurThreshold;
 
     Camera(double cF,String name) {
         cropFactor = cF;
@@ -23,51 +24,88 @@ public class Camera {
         return name;
     }
 
-    void attachLens(Lens l) throws LensDuntFitException {
+//    void attachLens(Lens l) throws LensDuntFitException {
 
+//        if (l.isEFS && cropFactor==1) {
+//            throw new LensDuntFitException(l.toString()+" dunt fit on a "+toString());
+//        }
+//        lens = l;
+//    }
+
+    void attachLens(Lens l) {
         if (l.isEFS && cropFactor==1) {
-            throw new LensDuntFitException(l.toString()+" dunt fit on a "+toString());
+            System.out.println(l.toString()+" dunt fit on a "+toString());
+            System.exit(2);
         }
         lens = l;
     }
 
     double getAngleOfView() {
-//        double aov = sensorWidth / (2*lens.focalLength);
         double aovRadians = 2*Math.atan(sensorWidth / (2*lens.focalLength));
         return aovRadians / Math.PI * 180;
     }
 
     /**
      * Return the ISO needed for this combination to look "good".  The exposure for Sunny16 is
-     * eV_100 = 15 (see http://en.wikipedia.org/wiki/Exposure_value).  We're looking for
+     * eV_100 = 15 (see http://en.wikipedia.org/wiki/Exposure_value).  We're looking for eV = -5.
+     * This will get us close and we'll work it in post.
+     *
+     * Aurora borealis and australis
+     *          Bright	−4 to −3
+     *          Medium	−6 to −5
+     * Milky Way galactic center	−11 to −9
+     *
      * @return ISO
      */
     double getISO() {
-        double sunny16Multiple = Math.pow(16/lens.aperture,2);
-        return 0;
+        int darknessEV = -3;
+        double apertureAdvantage = Math.pow(16/lens.aperture,2);
+        double shutterSpeedAdvantage = blurThreshold/(1.0/125);
+        double darknessDisadvantage = Math.pow(2,(15 - darknessEV));
+        double iso = darknessDisadvantage/shutterSpeedAdvantage/apertureAdvantage*100;
+
+//        System.out.println("Aperture = "+apertureAdvantage);
+//        System.out.println("Shutter  = "+shutterSpeedAdvantage);
+//        System.out.println("Darkness = "+darknessDisadvantage);
+//        System.out.println("\nISO = "+iso);
+
+        return iso;
     }
 
     /**
-     * Score = (aperture area) × (angular area) × (suggested shutter speed)
+     * Score = (angular area)^2 × (shutter speed) / ISO
      * Reference: http://www.lonelyspeck.com/best-lenses-for-milky-way-photography-canon/
      * @return score
      */
-    int getScore() {
+    double getScore() {
+        double score = getAngleOfView()*getAngleOfView() * blurThreshold / getISO();
 
-        return 1;
+        return score;
+    }
+
+    static void printReportHeader() {
+        System.out.printf("%6s %16s %14s %3s %5s %5s\n",
+                "camera",
+                "lens",
+                "blur-limit",
+                "AoV",
+                "ISO",
+                "score");
+        System.out.printf("%6s %16s %14s %3s %5s %5s\n",
+                "------","----------------","--------------","---","-----","-----");
     }
 
     void printReport() {
-        System.out.printf("%4s: ",toString());
+        System.out.printf("%6s ",toString());
 //        System.out.print(toString() + ": ");
         if (lens == null) {
             System.out.println("no lens");
             return;
         }
 
-        double blurThreshold = RULE / lens.focalLength / cropFactor; // in seconds
-        System.out.printf("%15s - blurs in %3.1f seconds - AoV = %3f - ISO = %.0f\n",
-                lens.toString(),blurThreshold,getAngleOfView(),getISO());
+        blurThreshold = RULE / lens.focalLength / cropFactor; // in seconds
+        System.out.printf("%16s  %5.1f seconds %3.0f %5.0f %5.0f\n",
+                lens.toString(),blurThreshold,getAngleOfView(),getISO(),getScore());
 
         return;
     }
@@ -76,24 +114,36 @@ public class Camera {
 //        Camera c = new Camera(1.0,"5D3");
         Camera c = new Camera(1.6,"60D");
 
-//        Lens l = new Lens(10,3.5,true);
+        Camera.printReportHeader();
+
+//        System.out.printf("%6s %16s %14s %3s %5s %5s\n",
+//                "camera",
+//                "lens",
+//                "blur-threshold",
+//                "AoV",
+//                "ISO",
+//                "score");
+//        System.out.printf("%6s %16s %14s %3s %5s %5s\n",
+//                "------","----------------","--------------","---","-----","-----");
+
         Lens l = new Lens(14,2.8);
-        try {
-            c.attachLens(l);
-        } catch (LensDuntFitException ldfe) {
-            ldfe.printStackTrace();
-            System.exit(1);
-        }
+        c.attachLens(l);
         c.printReport();
 
         Lens l2 = new Lens(10,3.5,true);
-        try {
-            c.attachLens(l2);
-        } catch (LensDuntFitException ldfe) {
-            ldfe.printStackTrace();
-            System.exit(1);
-        }
+        c.attachLens(l2);
         c.printReport();
+
+        c.attachLens(new Lens(24,1.4));
+        c.printReport();
+
+        c = new Camera(1.0, "5D3");
+        c.attachLens(new Lens(16,4));
+        c.printReport();
+
+        c.attachLens(new Lens(14,2.8));
+        c.printReport();
+
 
 
     }
