@@ -1,5 +1,8 @@
 package com.ubante.oven.cameralensmatching;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by J on 5/15/2014.
  */
@@ -10,11 +13,17 @@ public class Camera {
     double RULE = 500;
     double sensorWidth;
     double blurThreshold;
+    double quantumEfficiency; // normalized by 60D and guestimated; higher is better
 
-    Camera(double cF,String name) {
+    Camera(double cF,String name, double quantumEfficiency ) {
         cropFactor = cF;
         this.name = name;
+        this.quantumEfficiency = quantumEfficiency;
         sensorWidth = 36 / cropFactor;
+    }
+
+    Camera(double cF,String name) {
+        this(cF, name, 0.8); // assumes the XS
     }
 
     Camera(String name) { this(1.6,name); }
@@ -58,7 +67,7 @@ public class Camera {
      * @return ISO
      */
     double getISO() {
-        int darknessEV = -3;
+        int darknessEV = -8;
         double apertureAdvantage = Math.pow(16/lens.aperture,2);
         double shutterSpeedAdvantage = blurThreshold/(1.0/125);
         double darknessDisadvantage = Math.pow(2,(15 - darknessEV));
@@ -73,26 +82,31 @@ public class Camera {
     }
 
     /**
-     * Score = (angular area)^2 × (shutter speed) / ISO
+     * Score = (angular area)^2 × shutter speed * quantumEfficiency / ISO
      * Reference: http://www.lonelyspeck.com/best-lenses-for-milky-way-photography-canon/
      * @return score
      */
     double getScore() {
-        double score = getAngleOfView()*getAngleOfView() * blurThreshold / getISO();
+        double score = getAngleOfView()*getAngleOfView() * blurThreshold * quantumEfficiency / getISO();
 
-        return score;
+        return score * 10;
+    }
+
+    static void printReportDivider() {
+        System.out.printf("%6s %16s %14s %3s %5s %5s %s\n",
+                "------","----------------","--------------","---","-----","-----","-----");
     }
 
     static void printReportHeader() {
-        System.out.printf("%6s %16s %14s %3s %5s %5s\n",
+        System.out.printf("%6s %16s %14s %3s %5s %5s %s\n",
                 "camera",
                 "lens",
                 "blur-limit",
                 "AoV",
                 "ISO",
-                "score");
-        System.out.printf("%6s %16s %14s %3s %5s %5s\n",
-                "------","----------------","--------------","---","-----","-----");
+                "score",
+                "notes");
+        Camera.printReportDivider();
     }
 
     void printReport() {
@@ -104,8 +118,8 @@ public class Camera {
         }
 
         blurThreshold = RULE / lens.focalLength / cropFactor; // in seconds
-        System.out.printf("%16s  %5.1f seconds %3.0f %5.0f %5.0f\n",
-                lens.toString(),blurThreshold,getAngleOfView(),getISO(),getScore());
+        System.out.printf("%16s  %5.1f seconds %3.0f %5.0f %5.0f %s\n",
+                lens.toString(),blurThreshold,getAngleOfView(),getISO(),getScore(),lens.notes);
 
         return;
     }
@@ -144,7 +158,31 @@ public class Camera {
         c.attachLens(new Lens(14,2.8));
         c.printReport();
 
+        System.out.println();
+        Camera.printReportHeader();
+        c = new Camera(1.6,"60D");
+        List<Lens> lenses = new ArrayList<>();
+        lenses.add(new Lens(14,2.8));
+        lenses.add(new Lens(10,3.5,true));
+        lenses.add(new Lens(17,4));
+        lenses.add(new Lens(17,2.8,true));
+        lenses.add(new Lens(28,1.8));
+        lenses.add(new Lens(50,1.8));
+        lenses.add(new Lens(40,2.8));
+        lenses.add(new Lens(40,2.8));
+        // suggested by http://www.lonelyspeck.com/best-lenses-for-milky-way-photography-canon/
+        lenses.add(new Lens(24,1.4));
+        lenses.add(new Lens(35,1.4));
+        lenses.add(new Lens(16,2.0,true));
+        lenses.add(new Lens(10,2.8,true));
+        lenses.add(new Lens(11,2.8,true));
 
-
+        // new Canon lenses
+        lenses.add(new Lens(10,4.5,true));
+        lenses.add(new Lens(16,4.0));
+        for (Lens lens : lenses) {
+            c.attachLens(lens);
+            c.printReport();
+        }
     }
 }
