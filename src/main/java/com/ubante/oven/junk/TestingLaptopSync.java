@@ -6,6 +6,6 @@ package com.ubante.oven.junk;
 public class TestingLaptopSync {
 
     public static void main(String[] args) {
-        System.out.println("This originates from laptop 1");
+        System.out.println("This originates from laptop MBP");
     }
 }
