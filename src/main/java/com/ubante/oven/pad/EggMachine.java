@@ -10,7 +10,7 @@ public class EggMachine {
     List<Monster> monsterList = new ArrayList();
 
     EggMachine() {}
-    
+
     Monster pull() {
         Monster m = new Monster();
 
