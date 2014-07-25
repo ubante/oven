@@ -8,8 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * ubante 7/11/14 10:40 AM
- * This is very serious business.
+ * The native java logger.
  */
 public class KnockKnockServer {
 
