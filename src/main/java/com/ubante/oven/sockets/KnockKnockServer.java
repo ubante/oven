@@ -8,7 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * The native java logger.
+ * The native java logger.  Use JUL instead of log4j outside of apache.
  */
 public class KnockKnockServer {
 
