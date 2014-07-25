@@ -5,6 +5,6 @@ package com.ubante.oven.junk;
  */
 public class TrivialClass {
     public static void main(String[] args) {
-        System.out.println("will it blend?");
+        System.out.println("will it blennnnd?");
     }
 }
