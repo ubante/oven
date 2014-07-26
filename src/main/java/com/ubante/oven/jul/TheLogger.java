@@ -14,5 +14,8 @@ public class TheLogger {
 
         JULLOGGER.setLevel(Level.INFO);
 
+        JULLOGGER.info("In the main - JUL.");
+        System.out.println("In the main - sout.");
+
     }
 }
