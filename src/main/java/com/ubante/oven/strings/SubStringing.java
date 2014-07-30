@@ -8,6 +8,9 @@ public class SubStringing {
 
 
     public static void main(String[] args) {
+
+        // first
+        System.out.println("--------------------------------------------------------");
         int numberOfAsterisks = 8;
         String line = "********something: mascosas";
 
@@ -33,6 +36,8 @@ public class SubStringing {
             line = line.substring(numberOfAsterisks);
         }
 
+        // second
+        System.out.println("--------------------------------------------------------");
 
         String overlyPaddedString = "{\"LastDownloadedContent\":\"some stuff we want\\\"extra quotes\\\" and the finish\"}";
         System.out.println("This is the original longline:");
@@ -44,6 +49,9 @@ public class SubStringing {
             System.out.print(" ");
         }
         System.out.println(overlyPaddedString.substring(padding,overlyPaddedString.length()-2));
+
+        // third
+        System.out.println("--------------------------------------------------------");
 
 //        String response = "{        \"content_raw\":\"";
         String response = "ERROR: url not found.";
@@ -57,6 +65,27 @@ public class SubStringing {
             System.out.println(wrappedResponse);
         }
 
+
+        // fourth
+        System.out.println("--------------------------------------------------------");
+        String lineWithNewlines = "somerawefvsevrawercasefbva vfaw e\n casecsefcaf\ncseaces";
+        System.out.println("Here it is with newlines:");
+        System.out.println(lineWithNewlines);
+
+        String lineWithoutFs = lineWithNewlines.replace('f','X');
+        System.out.println("\nHere it is without f's:");
+        System.out.println(lineWithoutFs);
+
+        String lineWithoutNewLines = lineWithNewlines.replace('\n',' ');
+        System.out.println("\nHere it is with spaces instead of newlines");
+        System.out.println(lineWithoutNewLines);
+
+        String simpleLine = "asdfkljas;lfjaslkdfjsal;kdfj";
+        System.out.println("\nHere is a simple line without newlines:");
+        System.out.println(simpleLine);
+        String simplerLine = simpleLine.replace('\n',' ');
+        System.out.println("\nHere it is after replacing the non-existing newlines:");
+        System.out.println(simplerLine);
 
     }
 }
