@@ -13,7 +13,9 @@ public class Collection {
     double completionPercentage;
     int maxSize;
 
-    Collection(int maxSize) { this.maxSize = maxSize; }
+    Collection(int maxSize) {
+        this.maxSize = maxSize;
+    }
 
     void add(Monster m) {
         // If collection is already complete, then just print something.
