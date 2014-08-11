@@ -32,7 +32,7 @@ public class DayThree {
 
     public static void main(String[] args) {
 
-        DayThree ex = new DayThree("Some string to log");
+        DayThree ex = new DayThree("Some string to log in Day3");
         ex.printString();
 
 

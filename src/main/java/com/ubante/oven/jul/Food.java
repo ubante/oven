@@ -12,6 +12,6 @@ public class Food {
 
     Food(String foodName) {
         name = foodName;
-        theLogger.fine("new food created: " + foodName);
+        theLogger.info("new food created: " + foodName);
     }
 }
