@@ -148,8 +148,13 @@ public class OnesComplement {
                         4294958664L, 4160701632L, 1L, 4160589812L,
                         0L, 0L, 4294958664L, 134515022L
                 ));
+        List<Long> numbers4 =
+                new ArrayList<Long>(Arrays.asList(
+                        4294958664L, 4160701632L, 1L, 4160589812L,
+                        0L, 0L, 4294958664L, 134515022L
+                ));
 
-        List<Long> numbers = numbers3;
+        List<Long> numbers = numbers4;
 
         System.out.printf("%13s\t%40s\t%40s\t%13s\t%13s\n","i","bin","get1comp","1comp_dec","sum");
         System.out.printf("%13s\t%40s\t%40s\t%13s\t%13s\n","-","---","--------","---------","---");

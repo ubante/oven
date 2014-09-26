@@ -16,5 +16,12 @@ public class Fu {
 
         List<Long> numbers =
                 new ArrayList<Long>(Arrays.asList(1L, 2L, 3L, 4L));
+
+        long x = 123;
+        long y = Long.MAX_VALUE | x;
+
+        System.out.println(x + " " + y);
+
+
     }
 }
