@@ -66,8 +66,8 @@ public class OnesComplement {
 
     public static void main(String[] args) {
         Long total = 0L;
-//        List<Integer> numbers =
-//                new ArrayList<Integer>(Arrays.asList(1,2,3,4));
+
+        // This set of numbers from the server produces a sum of 28257492851
         List<Long> numbers1 =
                 new ArrayList<Long>(Arrays.asList(
                         214030627L, 2582232842L, 3350859148L, 2538003716L,
@@ -81,6 +81,7 @@ public class OnesComplement {
                         4294958664L, 4160701632L, 1L, 4160589812L,
                         0L, 0L, 4294958664L, 134515022L
                 ));
+        // The below has a sum of 23851979089
         List<Long> numbers2 =
                 new ArrayList<Long>(Arrays.asList(
                         2350007736L, 1889397872L, 4216836850L, 2449916505L,
@@ -94,8 +95,22 @@ public class OnesComplement {
                         4294958664L, 4160701632L, 1L, 4160589812L,
                         0L, 0L, 4294958664L, 134515022L
                 ));
+        // The below has a sum of 26282743779
+        List<Long> numbers3 =
+                new ArrayList<Long>(Arrays.asList(
+                        3469955794L, 3456429757L, 2132653646L, 1020765282L,
+                        284283847L, 4090666243L, 4172109509L, 3352535014L,
+                        2316464850L, 2179727493L, 3727411389L, 2866921972L,
+                        3309205088L, 2196508821L, 418204824L, 672097253L,
+                        196365968L, 2529543965L, 3579713693L, 2021028500L,
+                        3571589174L, 2747162902L, 2962663185L, 2561181178L,
+                        1804684468L, 3982906708L, 2107886265L, 428455625L,
+                        2284957623L, 622556114L, 3390992352L, 3546730000L,
+                        4294958664L, 4160701632L, 1L, 4160589812L,
+                        0L, 0L, 4294958664L, 134515022L
+                ));
 
-        List<Long> numbers = numbers2;
+        List<Long> numbers = numbers3;
 
         System.out.printf("%13s\t%40s\t%40s\t%13s\t%13s\n","i","bin","get1comp","1comp_dec","sum");
         System.out.printf("%13s\t%40s\t%40s\t%13s\t%13s\n","-","---","--------","---------","---");
