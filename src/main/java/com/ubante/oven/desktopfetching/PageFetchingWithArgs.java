@@ -94,7 +94,6 @@ public class PageFetchingWithArgs {
         }
 
 
-
         try {
             urlParameters =
                     "fName=" + URLEncoder.encode("???", "UTF-8") +
