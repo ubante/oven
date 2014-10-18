@@ -19,6 +19,7 @@ service "httpd" do
   action [ :enable, :start ]
 end
 
+
 # disable the default virtual host
 execute "mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.disabled" do
   only_if do
