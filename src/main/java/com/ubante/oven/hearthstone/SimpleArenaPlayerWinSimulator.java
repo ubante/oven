@@ -1,11 +1,11 @@
-package com.ubante.oven.maths;
+package com.ubante.oven.hearthstone;
 
 import java.util.Random;
 
 /**
  * If you win X% of the time and can lose only three matches, how many matches should you expect to win?
  */
-public class Player {
+public class SimpleArenaPlayerWinSimulator {
 
   int matchesPlayed = 0;
   int matchesLost = 0;
@@ -15,7 +15,7 @@ public class Player {
   int tournamentsPlayed = 0;
   int tournamentMatchesWon = 0;
 
-  Player (int percentage) {
+  SimpleArenaPlayerWinSimulator(int percentage) {
     historicalWinRate = percentage;
   }
 
@@ -82,10 +82,10 @@ public class Player {
   }
 
   public static void main(String[] args) {
-    int letsSay = 72;
+    int letsSay = 90; // %
     System.out.println("Let's say you win " + letsSay + "% of the time....");
 
-    Player you = new Player(letsSay);
+    SimpleArenaPlayerWinSimulator you = new SimpleArenaPlayerWinSimulator(letsSay);
     you.playMatch();
     you.displayStats();
 
@@ -93,7 +93,7 @@ public class Player {
     you.displayStats();
 
     System.out.println("\nNow for realsies.");
-    Player forSerious = new Player(letsSay);
+    SimpleArenaPlayerWinSimulator forSerious = new SimpleArenaPlayerWinSimulator(letsSay);
     forSerious.playTournament();
     forSerious.displayStats();
 
@@ -112,8 +112,12 @@ public class Player {
     System.out.println();
     forSerious.displayTournamentRecord();
     /**
+     * You played 10000000 tournies with a historical win rate of 90%, won 269997044 total matches, winning 26.999706 games per tourney
      * You played 10000000 tournies with a historical win rate of 72%, won 77164697 total matches, winning 7.716470 games per tourney
      * You played 10000000 tournies with a historical win rate of 72%, won 77112443 total matches, winning 7.711244 games per tourney
+     * You played 10000000 tournies with a historical win rate of 50%, won 30005568 total matches, winning 3.000557 games per tourney
+     * You played 10000000 tournies with a historical win rate of 50%, won 29992946 total matches, winning 2.999295 games per tourneyYou played 10000000 tournies with a historical win rate of 30%, won 12865751 total matches, winning 1.286575 games per tourney
+     * You played 10000000 tournies with a historical win rate of 30%, won 12857312 total matches, winning 1.285731 games per tourney
      */
   }
 
