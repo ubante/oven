@@ -15,6 +15,10 @@ public class Player {
     dustAmount = 0;
   }
 
+  public Player(int rating) {
+    eloRating = rating;
+  }
+
   public String getStatus() {
     String status = "This is your status:" +
         "\nElo rating: " + eloRating +
@@ -36,10 +40,6 @@ public class Player {
     System.out.println(getStatus());
   }
 
-  public Player(int rating) {
-    eloRating = rating;
-  }
-
   public double getEloRating() {
     return eloRating;
   }
@@ -52,15 +52,22 @@ public class Player {
     goldAmount += g;
   }
 
-  public void joinArena() throws YouAreTooPoorException {
+  public void joinArena() throws YouAreTooPoorException, AlreadyPlayingArenaException {
     if (goldAmount < ArenaTournament.getGoldCost()) {
       throw new YouAreTooPoorException("You only have " + goldAmount + " gold and you need " +
           ArenaTournament.getGoldCost() + " so no Arena for you.");
     }
 
+    if (arenaTournament != null) {
+      throw new AlreadyPlayingArenaException();
+    }
+
     goldAmount -= ArenaTournament.getGoldCost();
     arenaTournament = ArenaTournament.joinTournament(this);
+  }
 
+  public void playArena() {
+    arenaTournament.play();
   }
 }
 
