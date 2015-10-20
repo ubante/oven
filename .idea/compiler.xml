@@ -25,6 +25,8 @@
         <module name="oven" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="oven" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
-
