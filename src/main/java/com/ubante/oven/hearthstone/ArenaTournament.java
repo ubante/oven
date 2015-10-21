@@ -1,7 +1,7 @@
 package com.ubante.oven.hearthstone;
 
 /**
- * Created by J on 10/19/2015.
+ * This is the personal arena tournament that each player may have.  A player may have no more than one.
  */
 public class ArenaTournament {
   static int goldCost = 150;
@@ -9,6 +9,7 @@ public class ArenaTournament {
   public int lossCount = 0;
   public int gamesPlayed = 0;
   public Player player;
+  Boolean isReadyToPlay = false;
 
   public ArenaTournament(Player p) {
     player = p;
@@ -26,6 +27,10 @@ public class ArenaTournament {
   }
 
   public void play() {
-    System.out.println("man I love playing thes arenas");
+    System.out.println(player.playerName + " loves playing thes areners");
+    isReadyToPlay = true;
+    Game game = ArenaFormat.playGame(player);
+
+    // record game results
   }
 }

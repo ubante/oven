@@ -5,18 +5,22 @@ package com.ubante.oven.hearthstone;
  */
 public class Player {
   double eloRating;
-  int goldAmount;
-  int dustAmount;
+  int goldAmount = 0;
+  int dustAmount = 0;
   ArenaTournament arenaTournament = null;
+  String playerName;
 
   public Player() {
-    eloRating = 1000; // find a library later
-    goldAmount = 0;
-    dustAmount = 0;
+    this(1000); // find a library later
   }
 
   public Player(int rating) {
+    this(rating, "Elmo");
+  }
+
+  public Player(int rating, String name) {
     eloRating = rating;
+    playerName = name;
   }
 
   public String getStatus() {

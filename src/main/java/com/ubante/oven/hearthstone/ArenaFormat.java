@@ -3,9 +3,9 @@ package com.ubante.oven.hearthstone;
 import java.util.ArrayList;
 
 /**
- * Players can stay in Arena forever which is unique in all the formats.  The other formats have a set stop/start
- * time.  While Arena's start is up to when a Player joins.  And its stop time is once the Player loses 3 times or
- * wins 12 times.  When a Player joins arena, he will get his own ArenaTournament object.
+ * Players can stay in an ArenaTournament forever which is unique in all the formats.  The other formats have a set
+ * stop/start time.  While Arena's start is up to when a Player joins.  And its stop time is once the Player loses 3
+ * times or wins 12 times.  When a Player joins arena, he will get his own ArenaTournament object.
  */
 public class ArenaFormat extends AbstractGameFormat {
   public static ArrayList<ArenaTournament> runningTournamentList = new ArrayList<>();
@@ -22,5 +22,16 @@ public class ArenaFormat extends AbstractGameFormat {
     System.out.printf("There are %d running arenas.\n", runningTournamentList.size());
   }
 
+  public static Game playGame(Player p) {
 
+    // find an opponent
+
+    // play game
+    Game game = new Game();
+
+    // return results
+
+
+    return game;
+  }
 }
