@@ -30,14 +30,25 @@ public class Person implements Runnable {
       e.printStackTrace();
     }
 
-    synchronized (conch) {
-      try {
-        conch.wait();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
+    while (true) {
+      synchronized (conch) {
+        try {
+          conch.wait();
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+        say("big words, baby, big words.");
       }
-      say("big words, baby, big words.");
     }
+//
+//    synchronized (conch) {
+//      try {
+//        conch.wait();
+//      } catch (InterruptedException e) {
+//        e.printStackTrace();
+//      }
+//      say("my opponent does not eat cheese.");
+//    }
   }
 
   void startTalking() {
