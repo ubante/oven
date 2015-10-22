@@ -1,4 +1,6 @@
-package com.ubante.oven.threads;
+package com.ubante.oven.debatethreads;
+
+import java.util.concurrent.BlockingQueue;
 
 /**
  * Created by J on 10/20/2015.
@@ -6,7 +8,8 @@ package com.ubante.oven.threads;
 public class Person implements Runnable {
   String name;
   Thread t;
-  private DebateMessage conch;
+  private DebateMessage conch; // one way to sync threads
+  private BlockingQueue<Message> queue; // a second way
 
   Person (String n) {
     name = n;
@@ -14,6 +17,10 @@ public class Person implements Runnable {
 
   void setConch (DebateMessage msg) {
     conch = msg;
+  }
+
+  public void setQueue(BlockingQueue<Message> queue) {
+    this.queue = queue;
   }
 
   void say(String bigWords) {
@@ -30,25 +37,25 @@ public class Person implements Runnable {
       e.printStackTrace();
     }
 
-    while (true) {
-      synchronized (conch) {
-        try {
-          conch.wait();
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-        say("big words, baby, big words.");
+    synchronized (conch) {
+      try {
+        conch.wait();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
       }
+      say("big words, baby, big words.");
     }
-//
-//    synchronized (conch) {
-//      try {
-//        conch.wait();
-//      } catch (InterruptedException e) {
-//        e.printStackTrace();
-//      }
-//      say("my opponent does not eat cheese.");
-//    }
+
+    Message msg;
+    try {
+      while ((msg = queue.take()).getMsg() != "exit") {
+        say(StockResponses.getInstance().getResponse());
+      }
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    say("Thanks America.  " + name + " for president 2016!");
   }
 
   void startTalking() {
