@@ -56,14 +56,18 @@ public class Player {
     goldAmount += g;
   }
 
-  public void joinArena() throws YouAreTooPoorException, AlreadyPlayingArenaException {
+  // throwing exceptions is ludicrous
+  public void joinArena() {
     if (goldAmount < ArenaTournament.getGoldCost()) {
-      throw new YouAreTooPoorException("You only have " + goldAmount + " gold and you need " +
-          ArenaTournament.getGoldCost() + " so no Arena for you.");
+//      throw new YouAreTooPoorException("You only have " + goldAmount + " gold and you need " +
+//          ArenaTournament.getGoldCost() + " so no Arena for you.");
+      System.out.println("You need more gold.");
+      System.exit(1);
     }
 
     if (arenaTournament != null) {
-      throw new AlreadyPlayingArenaException();
+//      throw new AlreadyPlayingArenaException();
+      return;
     }
 
     goldAmount -= ArenaTournament.getGoldCost();
@@ -72,6 +76,7 @@ public class Player {
 
   public void playArena() {
     arenaTournament.play();
+    if (arenaTournament.isConcluded) { arenaTournament = null; }
   }
 }
 

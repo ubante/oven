@@ -53,7 +53,7 @@ public class Debate implements Runnable {
     }
 
     // The first approach uses synchronized.
-    poseQuestion("How's the weather?");
+    poseQuestion("How are you doing?");
     try {
       Thread.sleep(questionDelay);
     } catch (InterruptedException e) {

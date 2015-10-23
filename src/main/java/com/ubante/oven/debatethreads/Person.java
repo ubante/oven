@@ -37,6 +37,7 @@ public class Person implements Runnable {
       e.printStackTrace();
     }
 
+    // first method
     synchronized (conch) {
       try {
         conch.wait();
@@ -46,6 +47,7 @@ public class Person implements Runnable {
       say("big words, baby, big words.");
     }
 
+    // second method
     Message msg;
     try {
       while ((msg = queue.take()).getMsg() != "exit") {

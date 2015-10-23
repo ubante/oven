@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * stop/start time.  While Arena's start is up to when a Player joins.  And its stop time is once the Player loses 3
  * times or wins 12 times.  When a Player joins arena, he will get his own ArenaTournament object.
  */
-public class ArenaFormat extends AbstractGameFormat {
+public class ArenaFormat {
   public static ArrayList<ArenaTournament> runningTournamentList = new ArrayList<>();
 
   private ArenaFormat() {
@@ -15,6 +15,10 @@ public class ArenaFormat extends AbstractGameFormat {
 
   public static void addTournament(ArenaTournament at) {
     runningTournamentList.add(at);
+  }
+
+  public static void removeTournament(ArenaTournament at) {
+    runningTournamentList.remove(at);
   }
 
   public static void printStatus() {
@@ -30,8 +34,9 @@ public class ArenaFormat extends AbstractGameFormat {
     Game game = new Game();
 
     // return results
+    System.out.println("The winner is " + p.playerName);
 
-
+    game.setWinner(p); // until I figure out the rest
     return game;
   }
 }

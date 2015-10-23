@@ -7,6 +7,7 @@ package com.ubante.oven.hearthstone;
  * - arena
  * - brawl
  *
+ * XXX this is borderline ludicrous
  */
 public class AbstractGameFormat {
   String formatName;
