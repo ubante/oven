@@ -12,8 +12,4 @@ package com.ubante.oven.hearthstone;
 public class AbstractGameFormat {
   String formatName;
 
-  public Game getGame() {
-    Game game = new Game();
-    return game;
-  }
 }

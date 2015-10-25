@@ -11,6 +11,7 @@ public class ArenaTournament {
   public Player player;
   Boolean isReadyToPlay = false;
   Boolean isConcluded = false;
+  Game game = null;
 
   public ArenaTournament(Player p) {
     player = p;
@@ -41,22 +42,36 @@ public class ArenaTournament {
 
   public void play() {
     isReadyToPlay = true;
-    System.out.println(getStatus());
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+
+    while (game == null) {
+//      System.out.printf("%s(%4.0f) is waiting to play Arena game #%d\n", player.playerName, player.eloRating,
+//          gamesPlayed+1);
+      System.out.printf("%s is waiting to play an Arena game\n", player.getShortArenaStatus());
+      try {
+        Thread.sleep(900);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
     }
-    Game game = ArenaFormat.playGame(player);
+
+
+    // the below is when the "game" happened inside ArenaFormat
+//    System.out.println(getStatus());
+//    try {
+//      Thread.sleep(1000);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+//    Game game = ArenaFormat.playGame(player);
 
     // record game results
-    isReadyToPlay = false;
     gamesPlayed++;
     if (game.getWinner().equals(player)) {
       winCount++;
     } else {
       lossCount++;
     }
+    System.out.printf("=> Result: %s\n", player.getShortArenaStatus());
 
     // this may belong in ArenaFormat
     if ((winCount == 12) || (lossCount == 3)) {

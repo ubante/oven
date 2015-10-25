@@ -3,7 +3,7 @@ package com.ubante.oven.hearthstone;
 /**
  * Created by J on 10/18/2015.
  */
-public class Player {
+public class Player implements Runnable {
   double eloRating;
   int goldAmount = 0;
   int dustAmount = 0;
@@ -30,10 +30,22 @@ public class Player {
         "\nDust: " + dustAmount +
         "\n";
     if (arenaTournament != null) {
-      status += "You are in an arena tournament with a record of XW andYL\n";
+      status += String.format("You are in an arena tournament with a record of %d wins and %d losses\n",
+          arenaTournament.winCount, arenaTournament.lossCount);
     }
 
     return status;
+  }
+
+  public String getShortArenaStatus() {
+    String shortArenaStatus;
+    if (arenaTournament != null) {
+      shortArenaStatus = String.format("%s(%4.0f-%d-%d)", playerName, eloRating, arenaTournament.winCount,
+          arenaTournament.lossCount);
+    } else {
+      shortArenaStatus = String.format("%s(%4.0f)", playerName, eloRating);
+    }
+    return shortArenaStatus;
   }
 
   public int getGoldAmount() {
@@ -50,6 +62,16 @@ public class Player {
 
   public void setEloRating(double eloRating) {
     this.eloRating = eloRating;
+  }
+
+  public void increaseEloRating(double opponentEloRating) {
+    // my creation
+    eloRating = eloRating + (Math.abs(eloRating - opponentEloRating)/3);
+  }
+
+  public void decreaseEloRating(double opponentEloRating) {
+    // my creation
+    eloRating = eloRating - (Math.abs(eloRating - opponentEloRating)/3);
   }
 
   public void addGold(int g) {
@@ -75,8 +97,17 @@ public class Player {
   }
 
   public void playArena() {
-    arenaTournament.play();
+
+    new Thread(this, playerName).start();
     if (arenaTournament.isConcluded) { arenaTournament = null; }
+  }
+
+  @Override
+  public void run() {
+    // to prevent queueing for two games simultaneously
+    if (arenaTournament.isReadyToPlay.equals(false)) {
+      arenaTournament.play();
+    }
   }
 }
 

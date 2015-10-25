@@ -36,6 +36,11 @@ public class ArenaOpponentRankSimulator {
     opp2.playArena();
     me.playArena();
 
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     me.playArena();
   }
 

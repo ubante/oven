@@ -31,18 +31,23 @@ public class ArenaFormat {
     System.out.println("Arena statuses:");
     System.out.printf("There are %d running arenas.\n", runningTournamentList.size());
   }
-
-  public static Game playGame(Player p) {
-
-    // find an opponent
-
-    // play game
-    Game game = new Game();
-
-    // return results
-    System.out.println("The winner is " + p.playerName);
-
-    game.setWinner(p); // until I figure out the rest
-    return game;
-  }
+//
+//  public static Game playGame(Player p) {
+//
+//    // find an opponent
+//    try {
+//      Thread.sleep(1000);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+//
+//    // play game
+//    Game game = new Game(p, p);
+//
+//    // return results
+//    System.out.println("The winner is " + p.playerName);
+//
+//    game.setWinner(p); // until I figure out the rest
+//    return game;
+//  }
 }
