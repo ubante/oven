@@ -11,6 +11,10 @@ public class ArenaOpponentRankSimulator {
 
 
   public static void main(String[] args) {
+
+    // start Arena's game generator
+    ArenaFormat.startGameGenerator();
+
     Player me = new Player(1200);
     me.addGold(500);
     me.printStatus();

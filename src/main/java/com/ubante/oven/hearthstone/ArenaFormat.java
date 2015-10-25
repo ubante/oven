@@ -9,8 +9,14 @@ import java.util.ArrayList;
  */
 public class ArenaFormat {
   public static ArrayList<ArenaTournament> runningTournamentList = new ArrayList<>();
+  private static GameGenerator generator = new GameGenerator();
+  private static Thread generatorThread;
 
-  private ArenaFormat() {
+  private ArenaFormat() {}
+
+  public static void startGameGenerator() {
+    generatorThread = new Thread(generator,"generator");
+    generatorThread.start();
   }
 
   public static void addTournament(ArenaTournament at) {
