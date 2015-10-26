@@ -45,7 +45,13 @@ public class ArenaOpponentRankSimulator {
       Sleep.seconds(20);
     }
 
-    Sleep.seconds(30);
+    Sleep.seconds(10);
+
+    opp1.printHistory();
+    opp2.printHistory();
+    opp3.printHistory();
+    me.printHistory();
+
     System.out.printf("\nAfter %d waves:\n", waveCount);
     ArenaFormat.printHistory();
     System.exit(1);

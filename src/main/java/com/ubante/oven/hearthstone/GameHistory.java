@@ -15,7 +15,6 @@ public class GameHistory {
   public void printHistory() {
     ArrayList<Player> players = new ArrayList<>();
 
-    System.out.println("\nGAME HISTORY:");
     for (Game g: gameHistory) {
       System.out.printf("Game #%d: %s vs %s --> %s wins\n", g.gameNumber, g.statusStartPlayerA, g.statusStartPlayerB,
           g.winner.playerName);

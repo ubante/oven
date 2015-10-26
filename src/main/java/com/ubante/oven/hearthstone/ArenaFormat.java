@@ -11,8 +11,8 @@ public class ArenaFormat {
   public static ArrayList<ArenaTournament> runningTournamentList = new ArrayList<>();
   private static GameGenerator generator = new GameGenerator();
   private static Thread generatorThread;
-  private static ArrayList<Game> gameHistory = new ArrayList<>();
-
+  private static ArrayList<Game> gameHistoryLocal = new ArrayList<>();
+  private static GameHistory gameHistory = new GameHistory();
   private ArenaFormat() {}
 
   public static void startGameGenerator() {
@@ -34,6 +34,7 @@ public class ArenaFormat {
   }
 
   public static void addGameToHistory(Game g) {
+    gameHistoryLocal.add(g);
     gameHistory.add(g);
   }
 
@@ -41,7 +42,7 @@ public class ArenaFormat {
     ArrayList<Player> players = new ArrayList<>();
 
     System.out.println("\nGAME HISTORY:");
-    for (Game g: gameHistory) {
+    for (Game g: gameHistoryLocal) {
       System.out.printf("Game #%d: %s vs %s --> %s wins\n", g.gameNumber, g.statusStartPlayerA, g.statusStartPlayerB,
           g.winner.playerName);
 //      System.out.printf("Game #%d: %s beat %s\n", g.gameNumber, g.winner.playerName, g.loser.playerName);
@@ -52,6 +53,9 @@ public class ArenaFormat {
         players.add(g.loser);
       }
     }
+
+    System.out.println("\nGAME HISTORY:");
+    gameHistory.printHistory();
 
     System.out.println("\nPLAYER RECORDS:");
     for (Player p: players) {

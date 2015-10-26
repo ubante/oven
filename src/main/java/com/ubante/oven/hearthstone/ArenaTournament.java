@@ -12,7 +12,6 @@ public class ArenaTournament {
   Boolean isReadyToPlay = false;
   Boolean isConcluded = false;
   Game game = null;
-  GameHistory history = new GameHistory();
 
   public ArenaTournament(Player p) {
     player = p;
@@ -56,7 +55,7 @@ public class ArenaTournament {
 
     // record game results
     gamesPlayed++;
-    history.add(game);
+    player.history.add(game);
     if (game.getWinner().equals(player)) {
       winCount++;
     } else {

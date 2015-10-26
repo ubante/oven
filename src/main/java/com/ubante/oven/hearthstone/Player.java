@@ -10,6 +10,7 @@ public class Player implements Runnable {
   int dustAmount = 0;
   ArenaTournament arenaTournament = null;
   String playerName;
+  GameHistory history = new GameHistory();
 
   public Player() {
     this(1000); // find a library later
@@ -113,7 +114,9 @@ public class Player implements Runnable {
     }
 
     new Thread(this, playerName).start();
-    if (arenaTournament.isConcluded) { arenaTournament = null; }
+    if (arenaTournament.isConcluded) {
+      arenaTournament = null;
+    }
   }
 
   @Override
@@ -123,6 +126,11 @@ public class Player implements Runnable {
     if (arenaTournament.isReadyToPlay.equals(false)) {
       arenaTournament.play();
     }
+  }
+
+  public void printHistory() {
+    System.out.printf("\n%s game history:\n", playerName);
+    history.printHistory();
   }
 }
 
