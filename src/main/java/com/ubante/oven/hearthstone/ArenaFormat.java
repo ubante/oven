@@ -11,6 +11,7 @@ public class ArenaFormat {
   public static ArrayList<ArenaTournament> runningTournamentList = new ArrayList<>();
   private static GameGenerator generator = new GameGenerator();
   private static Thread generatorThread;
+  private static ArrayList<Game> gameHistory = new ArrayList<>();
 
   private ArenaFormat() {}
 
@@ -31,23 +32,30 @@ public class ArenaFormat {
     System.out.println("Arena statuses:");
     System.out.printf("There are %d running arenas.\n", runningTournamentList.size());
   }
-//
-//  public static Game playGame(Player p) {
-//
-//    // find an opponent
-//    try {
-//      Thread.sleep(1000);
-//    } catch (InterruptedException e) {
-//      e.printStackTrace();
-//    }
-//
-//    // play game
-//    Game game = new Game(p, p);
-//
-//    // return results
-//    System.out.println("The winner is " + p.playerName);
-//
-//    game.setWinner(p); // until I figure out the rest
-//    return game;
-//  }
+
+  public static void addGameToHistory(Game g) {
+    gameHistory.add(g);
+  }
+
+  public static void printHistory() {
+    ArrayList<Player> players = new ArrayList<>();
+
+    System.out.println("\nGAME HISTORY:");
+    for (Game g: gameHistory) {
+      System.out.printf("Game #%d: %s vs %s --> %s wins\n", g.gameNumber, g.statusStartPlayerA, g.statusStartPlayerB,
+          g.winner.playerName);
+//      System.out.printf("Game #%d: %s beat %s\n", g.gameNumber, g.winner.playerName, g.loser.playerName);
+      if (! players.contains(g.winner)) {
+        players.add(g.winner);
+      }
+      if (! players.contains(g.loser)) {
+        players.add(g.loser);
+      }
+    }
+
+    System.out.println("\nPLAYER RECORDS:");
+    for (Player p: players) {
+      System.out.println(p.getShortArenaStatus());
+    }
+  }
 }

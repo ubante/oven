@@ -12,6 +12,7 @@ public class ArenaTournament {
   Boolean isReadyToPlay = false;
   Boolean isConcluded = false;
   Game game = null;
+  GameHistory history = new GameHistory();
 
   public ArenaTournament(Player p) {
     player = p;
@@ -29,6 +30,7 @@ public class ArenaTournament {
   }
 
   private void conclude() {
+    System.out.println(player.playerName + " has concluded its tournament.");
     isConcluded = true;
     ArenaFormat.removeTournament(this);
     // dole out rewards to player
@@ -44,9 +46,7 @@ public class ArenaTournament {
     isReadyToPlay = true;
 
     while (game == null) {
-//      System.out.printf("%s(%4.0f) is waiting to play Arena game #%d\n", player.playerName, player.eloRating,
-//          gamesPlayed+1);
-      System.out.printf("%s is waiting to play an Arena game\n", player.getShortArenaStatus());
+      System.out.printf("(Thread-%s) is waiting to play Arena game #%d\n", player.getShortArenaStatus(), gamesPlayed+1);
       try {
         Thread.sleep(900);
       } catch (InterruptedException e) {
@@ -54,23 +54,17 @@ public class ArenaTournament {
       }
     }
 
-
-    // the below is when the "game" happened inside ArenaFormat
-//    System.out.println(getStatus());
-//    try {
-//      Thread.sleep(1000);
-//    } catch (InterruptedException e) {
-//      e.printStackTrace();
-//    }
-//    Game game = ArenaFormat.playGame(player);
-
     // record game results
     gamesPlayed++;
+    history.add(game);
     if (game.getWinner().equals(player)) {
       winCount++;
     } else {
       lossCount++;
     }
+//    System.out.printf("Game #%d: %s played %s and the winner is %s\n", game.getGameNumber(), player.playerName,
+//        game.getOpponent(player).playerName, game.getWinner().playerName);
+
     System.out.printf("=> Result: %s\n", player.getShortArenaStatus());
 
     // this may belong in ArenaFormat

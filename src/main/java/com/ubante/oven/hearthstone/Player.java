@@ -5,6 +5,7 @@ package com.ubante.oven.hearthstone;
  */
 public class Player implements Runnable {
   double eloRating;
+  int starRating = 0;
   int goldAmount = 0;
   int dustAmount = 0;
   ArenaTournament arenaTournament = null;
@@ -40,8 +41,8 @@ public class Player implements Runnable {
   public String getShortArenaStatus() {
     String shortArenaStatus;
     if (arenaTournament != null) {
-      shortArenaStatus = String.format("%s(%4.0f-%d-%d)", playerName, eloRating, arenaTournament.winCount,
-          arenaTournament.lossCount);
+      shortArenaStatus = String.format("%s(%d-%4.0f-%d-%d)", playerName, starRating, eloRating,
+          arenaTournament.winCount, arenaTournament.lossCount);
     } else {
       shortArenaStatus = String.format("%s(%4.0f)", playerName, eloRating);
     }
@@ -60,35 +61,38 @@ public class Player implements Runnable {
     return eloRating;
   }
 
-  public void setEloRating(double eloRating) {
-    this.eloRating = eloRating;
+  public int getStarRating() {
+    return starRating;
   }
 
   public void increaseEloRating(double opponentEloRating) {
     // my creation
-    eloRating = eloRating + (Math.abs(eloRating - opponentEloRating)/3);
+    eloRating = eloRating + (Math.abs(eloRating - opponentEloRating)/10);
+
+    starRating++;
   }
 
   public void decreaseEloRating(double opponentEloRating) {
     // my creation
-    eloRating = eloRating - (Math.abs(eloRating - opponentEloRating)/3);
+    eloRating = eloRating - (Math.abs(eloRating - opponentEloRating)/10);
+
+    if (starRating > 10) {
+      starRating--;
+    }
   }
 
   public void addGold(int g) {
     goldAmount += g;
   }
 
-  // throwing exceptions is ludicrous
   public void joinArena() {
     if (goldAmount < ArenaTournament.getGoldCost()) {
-//      throw new YouAreTooPoorException("You only have " + goldAmount + " gold and you need " +
-//          ArenaTournament.getGoldCost() + " so no Arena for you.");
       System.out.println("You need more gold.");
       System.exit(1);
     }
 
     if (arenaTournament != null) {
-//      throw new AlreadyPlayingArenaException();
+      System.err.println("You already have an active Arena Tournament.");
       return;
     }
 
@@ -98,12 +102,23 @@ public class Player implements Runnable {
 
   public void playArena() {
 
+    if (arenaTournament == null) {
+      System.out.println(playerName + " cannot play a game since its tournament is concluded.");
+      return;
+    }
+
+    if (arenaTournament.isReadyToPlay) {
+      System.err.println(playerName + " is already waiting to play a game.");
+      return;
+    }
+
     new Thread(this, playerName).start();
     if (arenaTournament.isConcluded) { arenaTournament = null; }
   }
 
   @Override
   public void run() {
+
     // to prevent queueing for two games simultaneously
     if (arenaTournament.isReadyToPlay.equals(false)) {
       arenaTournament.play();

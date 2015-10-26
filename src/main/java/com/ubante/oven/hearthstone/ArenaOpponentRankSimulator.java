@@ -18,30 +18,37 @@ public class ArenaOpponentRankSimulator {
     Player me = new Player(1200);
     me.addGold(500);
     me.printStatus();
-    ArenaFormat.printStatus();
     me.joinArena();
     me.printStatus();
-    ArenaFormat.printStatus();
 
     Player opp1 = new Player(1100,"opp1");
     opp1.addGold(200);
     opp1.joinArena();
 
-    Player opp2 = new Player(1300,"opp2");
+    Player opp2 = new Player(1250,"opp2");
     opp2.addGold(200);
     opp2.joinArena();
 
+    Player opp3 = new Player(1150,"opp3");
+    opp3.addGold(200);
+    opp3.joinArena();
     ArenaFormat.printStatus();
-    opp1.playArena();
-    opp2.playArena();
-    me.playArena();
 
-    try {
-      Thread.sleep(3000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    // play a bunch of games
+    int waveCount = 3;
+    for (int i=1; i<=waveCount; i++) {
+      System.out.println("\n(Thread-Main) Wave #" + i);
+      opp1.playArena();
+      opp2.playArena();
+      opp3.playArena();
+      me.playArena();
+      Sleep.seconds(20);
     }
-    me.playArena();
+
+    Sleep.seconds(30);
+    System.out.printf("\nAfter %d waves:\n", waveCount);
+    ArenaFormat.printHistory();
+    System.exit(1);
   }
 
 
