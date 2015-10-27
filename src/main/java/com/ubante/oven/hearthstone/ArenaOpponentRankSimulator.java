@@ -35,7 +35,7 @@ public class ArenaOpponentRankSimulator {
     ArenaFormat.printStatus();
 
     // play a bunch of games
-    int waveCount = 3;
+    int waveCount = 1;
     for (int i=1; i<=waveCount; i++) {
       System.out.println("\n(Thread-Main) Wave #" + i);
       opp1.playArena();
@@ -44,6 +44,8 @@ public class ArenaOpponentRankSimulator {
       me.playArena();
       Sleep.seconds(20);
     }
+//    opp1.playArena();
+//    opp2.playArena();
 
     Sleep.seconds(10);
 

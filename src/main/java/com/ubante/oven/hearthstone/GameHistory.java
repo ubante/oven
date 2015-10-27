@@ -7,9 +7,17 @@ import java.util.ArrayList;
  */
 public class GameHistory {
   private ArrayList<Game> gameHistory = new ArrayList<>();
+  public ArrayList<Player> players = new ArrayList<>();
 
   public void add(Game g) {
     gameHistory.add(g);
+
+    if (! players.contains(g.winner)) {
+      players.add(g.winner);
+    }
+    if (! players.contains(g.loser)) {
+      players.add(g.loser);
+    }
   }
 
   public void printHistory() {

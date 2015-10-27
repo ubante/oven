@@ -41,24 +41,24 @@ public class ArenaFormat {
   public static void printHistory() {
     ArrayList<Player> players = new ArrayList<>();
 
-    System.out.println("\nGAME HISTORY:");
-    for (Game g: gameHistoryLocal) {
-      System.out.printf("Game #%d: %s vs %s --> %s wins\n", g.gameNumber, g.statusStartPlayerA, g.statusStartPlayerB,
-          g.winner.playerName);
-//      System.out.printf("Game #%d: %s beat %s\n", g.gameNumber, g.winner.playerName, g.loser.playerName);
-      if (! players.contains(g.winner)) {
-        players.add(g.winner);
-      }
-      if (! players.contains(g.loser)) {
-        players.add(g.loser);
-      }
-    }
+//    System.out.println("\nGAME HISTORY:");
+//    for (Game g: gameHistoryLocal) {
+//      System.out.printf("Game #%d: %s vs %s --> %s wins\n", g.gameNumber, g.statusStartPlayerA, g.statusStartPlayerB,
+//          g.winner.playerName);
+////      System.out.printf("Game #%d: %s beat %s\n", g.gameNumber, g.winner.playerName, g.loser.playerName);
+//      if (! players.contains(g.winner)) {
+//        players.add(g.winner);
+//      }
+//      if (! players.contains(g.loser)) {
+//        players.add(g.loser);
+//      }
+//    }
 
     System.out.println("\nGAME HISTORY:");
     gameHistory.printHistory();
 
     System.out.println("\nPLAYER RECORDS:");
-    for (Player p: players) {
+    for (Player p: gameHistory.players) {
       System.out.println(p.getShortArenaStatus());
     }
   }
