@@ -85,7 +85,7 @@ public class CoincidentPowers {
             ComparisionResult answer = compare(bestTwoPower,bestRatio,power,twoList);
 
             // Remember if this is better
-//            if (bestTwoPower.equals(answer)) {
+//            if (bestTwoPower.isNamed(answer)) {
             if (answer.ratio >= bestRatio) {
 //                System.out.println("not better");
             } else {

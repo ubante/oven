@@ -45,9 +45,18 @@ public class Thing {
 
   @Override
   public String toString() {
-    String out = String.format("Name: %s\nUp: %s\nDown: %s\n",
+    String out = String.format("              Name: %s\nUp: %-25s Down: %s\n",
         name, arraylistToString(upstream), arraylistToString(downstream));
 
     return out;
+  }
+
+//  @Override not needed since that method expects an Object
+  public boolean isNamed(String s) {
+    if (name.equals(s)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

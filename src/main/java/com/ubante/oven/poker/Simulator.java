@@ -9,7 +9,7 @@ public class Simulator {
 
     void randomHoleCards() {
         HashMap<String, Integer> flopHandFrequency = new HashMap<String, Integer>();
-        int flopAttempts = 10000; // 200k hands equals 1M cards
+        int flopAttempts = 10000; // 200k hands isNamed 1M cards
         int flopCards = flopAttempts * 3;
         HandStatistics stats = new HandStatistics();
         CardStack stack = CardStack.getInstance(flopCards);
@@ -60,7 +60,7 @@ public class Simulator {
 
     void nonrandomHoleCards(Card a, Card b) {
         HashMap<String, Integer> flopHandFrequency = new HashMap<String, Integer>();
-        int flopAttempts = 10000; // 200k hands equals 1M cards
+        int flopAttempts = 10000; // 200k hands isNamed 1M cards
         int flopCards = flopAttempts * 3;
         HandStatistics stats = new HandStatistics();
         CardStack stack = CardStack.getInstance(flopCards);

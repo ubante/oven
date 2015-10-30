@@ -25,7 +25,7 @@ public class WillItNull {
 
         // This gives an NPE
         if (declaredObject.equals(null)) {
-            System.out.println("This object equals null.");
+            System.out.println("This object isNamed null.");
         }
 
 //        System.out.println(declaredObject.toString());
