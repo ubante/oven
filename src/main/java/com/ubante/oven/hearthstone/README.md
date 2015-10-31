@@ -1,4 +1,5 @@
 # Simulating Arena records
+_ArenaOpponentRankSimulator has the main()._
 
 Solved the ConcurrentModificationException.  Now after 6 waves:
 
@@ -49,8 +50,8 @@ opp3(6-1193-6-0)
 opp2(1228)
 ```
 
-6 waves could produce 12 games but opp2 and Elmo dropped the tourney quickly resulting in 9 waves.
-The PLAYER RECORDS looks wierd but otherwise, looking good.
+6 waves could produce 12 games but opp2 and Elmo dropped the tourney quickly resulting in 9 games.
+The PLAYER RECORDS looks weird but otherwise, looking good.
 
 # Next
 The Player objects should decide on their own when they're ready to play instead of 
@@ -59,3 +60,5 @@ ArenaOpponentRankSimulator calling their playArena() method.
 The GameGenerator should try to match players of similar ranks instead of the first two waiting players.
 
 Get to 100+ Player threads.
+
+Need a PlayerRating object.

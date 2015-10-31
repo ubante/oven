@@ -48,9 +48,21 @@ public class GameHistory {
         }
       }
 
-      System.out.printf("Game #%d: %s vs %s --> %s wins%s\n", g.gameNumber, g.statusStartPlayerA, g.statusStartPlayerB,
-          g.winner.playerName, upsetString);
-//      System.out.printf("Game #%d: %s beat %s\n", g.gameNumber, g.winner.playerName, g.loser.playerName);
+//      System.out.printf("Game #%d: %s vs %s --> %s wins%s\n", g.gameNumber, g.statusStartPlayerA, g.statusStartPlayerB,
+//          g.winner.playerName, upsetString);
+
+      // maybe this is better; we want:
+      // Winner(record) beat Loser(record [upset]
+      // the trick is we have to find the record of the Winner and Loser at the time of the game
+      if (g.winner.equals(g.playerA)) {
+        System.out.printf("Game #%d: %8s beat %s %s\n", g.gameNumber, g.statusStartPlayerA, g.statusStartPlayerB,
+            upsetString);
+      } else {
+        System.out.printf("Game #%d: %8s beat %s %s\n", g.gameNumber, g.statusStartPlayerB, g.statusStartPlayerA,
+            upsetString);
+      }
+
+      // not sure if the below is necessary anymore
       if (! players.contains(g.winner)) {
         players.add(g.winner);
       }

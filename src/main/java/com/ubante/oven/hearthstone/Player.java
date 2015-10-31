@@ -11,6 +11,7 @@ public class Player implements Runnable {
   ArenaTournament arenaTournament = null;
   String playerName;
   GameHistory history = new GameHistory();
+  String lastArenaRecord = null;
 
   public Player() {
     this(1000); // find a library later
@@ -45,9 +46,12 @@ public class Player implements Runnable {
     if (arenaTournament != null) {
       shortArenaStatus = String.format("%s(%d-%4.0f-%d-%d)", playerName, starRating, eloRating,
           arenaTournament.winCount, arenaTournament.lossCount);
+    } else if (lastArenaRecord != null) {
+      shortArenaStatus = lastArenaRecord;
     } else {
       shortArenaStatus = String.format("%s(%4.0f)", playerName, eloRating);
     }
+
     return shortArenaStatus;
   }
 
@@ -116,6 +120,8 @@ public class Player implements Runnable {
 
     new Thread(this, playerName).start();
     if (arenaTournament.isConcluded) {
+      lastArenaRecord = String.format("%s(%d-%4.0f-%d-%d)", playerName, starRating, eloRating,
+          arenaTournament.winCount, arenaTournament.lossCount);
       arenaTournament = null;
     }
   }
