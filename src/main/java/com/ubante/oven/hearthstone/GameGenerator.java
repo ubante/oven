@@ -26,12 +26,11 @@ public class GameGenerator implements Runnable {
 
   @Override
   public void run() {
-    int counter = 3600; // in case I forget to stop the thread
+    int counter = 1800; // in case I forget to stop the thread
 
     while (counter > 0) {
       ArrayList<ArenaTournament> waitingArenaTournaments = new ArrayList<>();
       counter--;
-//      System.out.println("--> GG is looking for waiting players out of ");
       System.out.printf("(Thread-GG) --> is looking for waiting players out of the %d active arena tournaments\n",
           ArenaFormat.runningTournamentList.size());
 
@@ -48,7 +47,6 @@ public class GameGenerator implements Runnable {
           gameCounter++;
           Game game = new Game(waitingArenaTournaments.get(0).player, waitingArenaTournaments.get(1).player,
               gameCounter);
-//          System.out.printf(game.toString());
           game.play();
           ArenaFormat.addGameToHistory(game);
 

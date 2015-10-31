@@ -31,8 +31,10 @@ public class ArenaTournament {
   private void conclude() {
     System.out.println(player.playerName + " has concluded its tournament.");
     isConcluded = true;
-    ArenaFormat.removeTournament(this);
-    // dole out rewards to player
+//    ArenaFormat.removeTournament(this); // this line was causing the ConcurrentModificationException in the
+    // GameGenerator thread, instead do do some checking in that thread
+
+    // XXX dole out rewards to player
   }
 
   public String getStatus() {
@@ -61,6 +63,7 @@ public class ArenaTournament {
     } else {
       lossCount++;
     }
+    game = null;
 //    System.out.printf("Game #%d: %s played %s and the winner is %s\n", game.getGameNumber(), player.playerName,
 //        game.getOpponent(player).playerName, game.getWinner().playerName);
 

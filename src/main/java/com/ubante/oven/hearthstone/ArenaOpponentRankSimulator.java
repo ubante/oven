@@ -17,9 +17,9 @@ public class ArenaOpponentRankSimulator {
 
     Player me = new Player(1200);
     me.addGold(500);
-    me.printStatus();
+//    me.printStatus();
     me.joinArena();
-    me.printStatus();
+//    me.printStatus();
 
     Player opp1 = new Player(1100,"opp1");
     opp1.addGold(200);
@@ -35,7 +35,7 @@ public class ArenaOpponentRankSimulator {
     ArenaFormat.printStatus();
 
     // play a bunch of games
-    int waveCount = 1;
+    int waveCount = 6;
     for (int i=1; i<=waveCount; i++) {
       System.out.println("\n(Thread-Main) Wave #" + i);
       opp1.playArena();
@@ -47,14 +47,19 @@ public class ArenaOpponentRankSimulator {
 //    opp1.playArena();
 //    opp2.playArena();
 
-    Sleep.seconds(10);
+//    Sleep.seconds(10);
+//    opp1.playArena();
+//    opp2.playArena();
 
+    Sleep.seconds(10);
     opp1.printHistory();
     opp2.printHistory();
     opp3.printHistory();
     me.printHistory();
 
-    System.out.printf("\nAfter %d waves:\n", waveCount);
+    String waveWord = "waves";
+    if (waveCount == 1) {  waveWord = "wave"; }
+    System.out.printf("\nAfter %d %s:\n", waveCount, waveWord);
     ArenaFormat.printHistory();
     System.exit(1);
   }

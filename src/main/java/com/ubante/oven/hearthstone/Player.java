@@ -23,6 +23,7 @@ public class Player implements Runnable {
   public Player(int rating, String name) {
     eloRating = rating;
     playerName = name;
+    history.setSelf(this);
   }
 
   public String getStatus() {
@@ -121,6 +122,11 @@ public class Player implements Runnable {
 
   @Override
   public void run() {
+    // to prevent playing a concluded arena tournament
+    if (arenaTournament == null) {
+      System.out.println("I should never get here but I'm here");
+      return;
+    }
 
     // to prevent queueing for two games simultaneously
     if (arenaTournament.isReadyToPlay.equals(false)) {
@@ -130,7 +136,7 @@ public class Player implements Runnable {
 
   public void printHistory() {
     System.out.printf("\n%s game history:\n", playerName);
-    history.printHistory();
+    history.printMyHistory();
   }
 }
 
