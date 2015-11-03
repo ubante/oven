@@ -1,7 +1,7 @@
 package com.ubante.oven.hearthstone;
 
 /**
- * Created by J on 10/31/2015.
+ * XXX this will make it easier to pass these four fields around
  */
 public class PlayerRating {
   int starRating;

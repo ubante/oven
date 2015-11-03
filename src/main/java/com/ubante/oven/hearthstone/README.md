@@ -1,6 +1,68 @@
 # Simulating Arena records
 _ArenaOpponentRankSimulator has the main()._
 
+# Latest output
+Players are still playing after losing 3 games.  Also, losses are not recorded in the
+__PLAYER RECORDS__.  These are probably related.
+
+```
+opp0 game history:
+Game #1: opp1(0-1110-0-0) beat opp0(0-1100-0-0) 
+Game #3: opp1(1-1111-1-0) beat opp0(0-1099-0-1) 
+Game #5: opp1(2-1112-2-0) beat opp0(0-1098-0-2) 
+Game #7: opp1(3-1114-3-0) beat opp0(0-1096-0-3) 
+
+opp1 game history:
+Game #1: opp1(0-1110-0-0) beat opp0(0-1100-0-0) 
+Game #3: opp1(1-1111-1-0) beat opp0(0-1099-0-1) 
+Game #5: opp1(2-1112-2-0) beat opp0(0-1098-0-2) 
+Game #7: opp1(3-1114-3-0) beat opp0(0-1096-0-3) 
+Game #9: opp3(4-1135-4-0) beat opp1(4-1115-4-0) 
+Game #10: opp3(5-1137-5-0) beat opp1(4-1113-4-1) 
+Game #11: opp3(6-1140-6-0) beat opp1(4-1111-4-2) 
+Game #12: opp3(7-1143-7-0) beat opp1(4-1107-4-3) 
+
+opp2 game history:
+Game #2: opp3(0-1130-0-0) beat opp2(0-1120-0-0) 
+Game #4: opp3(1-1131-1-0) beat opp2(0-1119-0-1) 
+Game #6: opp3(2-1132-2-0) beat opp2(0-1118-0-2) 
+Game #8: opp3(3-1134-3-0) beat opp2(0-1116-0-3) 
+
+opp3 game history:
+Game #2: opp3(0-1130-0-0) beat opp2(0-1120-0-0) 
+Game #4: opp3(1-1131-1-0) beat opp2(0-1119-0-1) 
+Game #6: opp3(2-1132-2-0) beat opp2(0-1118-0-2) 
+Game #8: opp3(3-1134-3-0) beat opp2(0-1116-0-3) 
+Game #9: opp3(4-1135-4-0) beat opp1(4-1115-4-0) 
+Game #10: opp3(5-1137-5-0) beat opp1(4-1113-4-1) 
+Game #11: opp3(6-1140-6-0) beat opp1(4-1111-4-2) 
+Game #12: opp3(7-1143-7-0) beat opp1(4-1107-4-3) 
+
+After 9 waves:
+
+GAME HISTORY:
+Game #1: opp1(0-1110-0-0) beat opp0(0-1100-0-0) 
+Game #2: opp3(0-1130-0-0) beat opp2(0-1120-0-0) 
+Game #3: opp1(1-1111-1-0) beat opp0(0-1099-0-1) 
+Game #4: opp3(1-1131-1-0) beat opp2(0-1119-0-1) 
+Game #5: opp1(2-1112-2-0) beat opp0(0-1098-0-2) 
+Game #6: opp3(2-1132-2-0) beat opp2(0-1118-0-2) 
+Game #7: opp1(3-1114-3-0) beat opp0(0-1096-0-3) 
+Game #8: opp3(3-1134-3-0) beat opp2(0-1116-0-3) 
+Game #9: opp3(4-1135-4-0) beat opp1(4-1115-4-0) 
+Game #10: opp3(5-1137-5-0) beat opp1(4-1113-4-1) 
+Game #11: opp3(6-1140-6-0) beat opp1(4-1111-4-2) 
+Game #12: opp3(7-1143-7-0) beat opp1(4-1107-4-3) 
+
+PLAYER RECORDS:
+opp1(4-1107-4-3)
+opp0(0-1096-0-3)
+opp3(8-1146-8-0)
+opp2(0-1116-0-3)
+```
+
+# Previous output
+
 Solved the ConcurrentModificationException.  Now after 6 waves:
 
 ```

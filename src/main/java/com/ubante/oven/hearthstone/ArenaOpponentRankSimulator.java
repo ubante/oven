@@ -1,5 +1,7 @@
 package com.ubante.oven.hearthstone;
 
+import java.util.ArrayList;
+
 /**
  * Assuming a normal distribution of player Elo rating, how will a given player do.
  *
@@ -11,51 +13,41 @@ public class ArenaOpponentRankSimulator {
 
 
   public static void main(String[] args) {
+    int waveCount = 13;
+    int numPlayers = 10;
+    int waveSleepSeconds = 20;
+    ArrayList<Player> players = new ArrayList<>();
+
+    System.out.printf("Simulating %d waves with %d players.\n", waveCount, numPlayers);
+    System.out.printf("Expect this simulation run to take %3.1f minutes.\n",
+        ((waveCount-1)*waveSleepSeconds)/60.0);
 
     // start Arena's game generator
     ArenaFormat.startGameGenerator();
 
-    Player me = new Player(1200);
-    me.addGold(500);
-//    me.printStatus();
-    me.joinArena();
-//    me.printStatus();
+    // make the players
+    Player p;
+    String playerName;
+    for (int i=0; i<numPlayers; i++) {
+      playerName = "opp"+i;
+      System.out.println("Creating player: " + playerName);
+      p = new Player(1100+10*i, playerName);
+      p.addGold(500);
+      p.joinArena();
+      players.add(p);
+    }
 
-    Player opp1 = new Player(1100,"opp1");
-    opp1.addGold(200);
-    opp1.joinArena();
-
-    Player opp2 = new Player(1250,"opp2");
-    opp2.addGold(200);
-    opp2.joinArena();
-
-    Player opp3 = new Player(1150,"opp3");
-    opp3.addGold(200);
-    opp3.joinArena();
     ArenaFormat.printStatus();
 
     // play a bunch of games
-    int waveCount = 9;
-    for (int i=1; i<=waveCount; i++) {
-      System.out.println("\n(Thread-Main) Wave #" + i);
-      opp1.playArena();
-      opp2.playArena();
-      opp3.playArena();
-      me.playArena();
-      Sleep.seconds(20);
+    for (int waveCounter=0; waveCounter<waveCount; waveCounter++) {
+      System.out.println("\n(Thread-Main) WAVE #" + waveCounter);
+      for (Player pp: players) { pp.playArena(); }
+      Sleep.seconds(waveSleepSeconds);
     }
-//    opp1.playArena();
-//    opp2.playArena();
-
-//    Sleep.seconds(10);
-//    opp1.playArena();
-//    opp2.playArena();
 
     Sleep.seconds(10);
-    opp1.printHistory();
-    opp2.printHistory();
-    opp3.printHistory();
-    me.printHistory();
+    for (Player pp: players) { pp.printHistory(); }
 
     String waveWord = "waves";
     if (waveCount == 1) {  waveWord = "wave"; }

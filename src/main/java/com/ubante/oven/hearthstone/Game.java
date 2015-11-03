@@ -31,14 +31,6 @@ public class Game {
     return winner;
   }
 
-  public int getGameNumber() {
-    return gameNumber;
-  }
-
-//  public void setGameNumber(int gameNumber) {
-//    this.gameNumber = gameNumber;
-//  }
-
   public void play() {
 
     int randomFactor = ((int) Math.random() * 5) - 2; // range of -2..2

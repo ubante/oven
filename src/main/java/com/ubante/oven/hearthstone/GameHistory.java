@@ -40,16 +40,10 @@ public class GameHistory {
     for (Game g: gameHistory) {
       // includeMe is set when the caller is a player and wants to know if a game was an upset victory
       if (includeMe) {
-//        if (g.winner.eloRating < g.loser.eloRating) {
-//          upsetString = String.format(" (upset) %4.0f beat %4.0f", g.winner.eloRating, g.loser.eloRating);
-//        }
         if (g.winner.starRating < g.loser.starRating) {
           upsetString = String.format(" (upset) %d beat %d", g.winner.starRating, g.loser.starRating);
         }
       }
-
-//      System.out.printf("Game #%d: %s vs %s --> %s wins%s\n", g.gameNumber, g.statusStartPlayerA, g.statusStartPlayerB,
-//          g.winner.playerName, upsetString);
 
       // maybe this is better; we want:
       // Winner(record) beat Loser(record [upset]

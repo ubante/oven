@@ -55,18 +55,6 @@ public class Player implements Runnable {
     return shortArenaStatus;
   }
 
-  public int getGoldAmount() {
-    return goldAmount;
-  }
-
-  public void printStatus() {
-    System.out.println(getStatus());
-  }
-
-  public double getEloRating() {
-    return eloRating;
-  }
-
   public int getStarRating() {
     return starRating;
   }
