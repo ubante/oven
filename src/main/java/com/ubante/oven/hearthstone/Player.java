@@ -55,6 +55,10 @@ public class Player implements Runnable {
     return shortArenaStatus;
   }
 
+  void pprint(String s) {
+    System.out.printf("%s: %s\n", playerName, s);
+  }
+
   public int getStarRating() {
     return starRating;
   }
