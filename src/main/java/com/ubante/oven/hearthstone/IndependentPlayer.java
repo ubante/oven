@@ -1,4 +1,4 @@
-package com.ubante.oven.hearthstone2;
+package com.ubante.oven.hearthstone;
 
 /**
  * Created by J on 10/18/2015.
@@ -30,7 +30,7 @@ public class IndependentPlayer implements Runnable {
     for (int i=1; i<=10; i++) {
       int ms = (int) (Math.random() * 1000 * maxSeconds);
 
-      pprint("entering game #" + i);
+      pprint(String.format("entering game #%d in %d ms", i, ms));
 
       try {
         Thread.sleep(ms);
@@ -38,6 +38,7 @@ public class IndependentPlayer implements Runnable {
         e.printStackTrace();
       }
 
+      arenaTournament.play();
     }
   }
 

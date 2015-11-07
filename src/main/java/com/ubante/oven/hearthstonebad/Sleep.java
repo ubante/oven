@@ -1,4 +1,4 @@
-package com.ubante.oven.hearthstone;
+package com.ubante.oven.hearthstonebad;
 
 /**
  * Annoyed by try/catch blocks.  XXX must be a better way.

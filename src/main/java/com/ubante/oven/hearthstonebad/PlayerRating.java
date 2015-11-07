@@ -1,4 +1,4 @@
-package com.ubante.oven.hearthstone;
+package com.ubante.oven.hearthstonebad;
 
 /**
  * XXX this will make it easier to pass these four fields around

@@ -1,4 +1,4 @@
-package com.ubante.oven.hearthstone;
+package com.ubante.oven.hearthstonebad;
 
 /**
  * Created by J on 10/25/2015.

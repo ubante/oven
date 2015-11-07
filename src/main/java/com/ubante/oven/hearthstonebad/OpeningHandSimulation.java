@@ -1,4 +1,4 @@
-package com.ubante.oven.hearthstone;
+package com.ubante.oven.hearthstonebad;
 
 /**
  * How often can I expect to get card X in my opening hand?  After mulliganning?  Playing second?
