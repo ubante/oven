@@ -13,7 +13,9 @@ import java.util.concurrent.BlockingQueue;
 public class IndependentPlayerSimulator {
   int playerCount;
   ArrayList<IndependentPlayer> players = new ArrayList<>();
-  private BlockingQueue<Game> queue = new ArrayBlockingQueue<Game>(10);
+  private BlockingQueue<Game> gameQueue = new ArrayBlockingQueue<Game>(10);
+  private BlockingQueue<IndependentPlayer> playerQueue =
+      new ArrayBlockingQueue<IndependentPlayer>(100);
 
   IndependentPlayerSimulator(int count) {
     playerCount = count;
@@ -21,14 +23,16 @@ public class IndependentPlayerSimulator {
     for (int i=1; i<=playerCount; i++) {
       String name = "ip" + i;
       IndependentPlayer ip = new IndependentPlayer(name);
-      ip.setQueue(queue);
+      ip.setGameQueue(gameQueue);
+      ip.setPlayerQueue(playerQueue);
       players.add(ip);
     }
   }
 
-  void start() {
+  void begin() {
     GameGenerator gg = new GameGenerator();
-    gg.setQueue(queue);
+    gg.setGameQueue(gameQueue);
+    gg.setPlayerQueue(playerQueue);
     gg.start();
 
     for (IndependentPlayer ip: players) {
@@ -38,8 +42,8 @@ public class IndependentPlayerSimulator {
 
 
   public static void main(String[] args) {
-    IndependentPlayerSimulator ips = new IndependentPlayerSimulator(4);
-    ips.start();
+    IndependentPlayerSimulator ips = new IndependentPlayerSimulator(50);
+    ips.begin();
   }
 
 }
