@@ -6,6 +6,9 @@ package com.ubante.oven.hearthstone;
 public class ArenaTournament {
   public IndependentPlayer player;
   Boolean isReadyToPlay = false;
+  public int winCount = 0;
+  public int lossCount = 0;
+  public int gamesPlayed = 0;
 
   public ArenaTournament(IndependentPlayer ip) {
     player = ip;
@@ -18,8 +21,5 @@ public class ArenaTournament {
     return arenaTournament;
   }
 
-  void play(){
-    isReadyToPlay = true;
-    player.pprint("waiting for an opponent");
-  }
+
 }
