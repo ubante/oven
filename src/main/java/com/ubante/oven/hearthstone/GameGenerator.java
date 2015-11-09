@@ -1,6 +1,8 @@
 package com.ubante.oven.hearthstone;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -39,7 +41,7 @@ public class GameGenerator implements Runnable {
 
     while (true) {
       loopCounter++;
-      pprint("Looking to create a game");
+//      pprint("Looking to create a game");
       IndependentPlayer p1 = null;
       IndependentPlayer p2 = null;
       try {
@@ -65,6 +67,15 @@ public class GameGenerator implements Runnable {
       if (5*loopCounter/divisor*divisor == 5*loopCounter) {
         pprint("");
         pprint("Summary: loop " + loopCounter);
+
+        Hashtable<Integer, Integer> wins = ArenaTournament.getWins();
+        Enumeration<Integer> Keys = wins.keys();
+        while (Keys.hasMoreElements()) {
+          Integer v = Keys.nextElement();
+          pprint(String.format("%2d win -> %3d occurences", v,
+              wins.get(v)));
+        }
+
         pprint("");
       }
     }

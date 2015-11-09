@@ -36,13 +36,13 @@ public class IndependentPlayer implements Runnable {
 
   @Override
   public void run() {
-    pprint("beginning");
+//    pprint("beginning");
     arenaTournament = new ArenaTournament(this);
     int gameCounter = 0;
 //    for (int i=1; i<=20; i++) {
     while (! arenaTournament.isConcluded) {
       gameCounter++;
-      pprint(String.format("entering game #%d", gameCounter));
+//      pprint(String.format("entering game #%d", gameCounter));
       try {
         playerQueue.put(this);
       } catch (InterruptedException e) {
@@ -53,13 +53,13 @@ public class IndependentPlayer implements Runnable {
         Game g = gameQueue.take();
         arenaTournament.addGame(g);
 
-        if (g.winner.equals(this)) {
-          pprint(String.format("%s won game against %s",
-              arenaTournament.getRecord(), g.getLoser().playerName));
-        } else {
-          pprint(String.format("%s lost game against %s",
-              arenaTournament.getRecord(), g.getWinner().playerName));
-        }
+//        if (g.winner.equals(this)) {
+//          pprint(String.format("%s won game against %s",
+//              arenaTournament.getRecord(), g.getLoser().playerName));
+//        } else {
+//          pprint(String.format("%s lost game against %s",
+//              arenaTournament.getRecord(), g.getWinner().playerName));
+//        }
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
@@ -73,7 +73,7 @@ public class IndependentPlayer implements Runnable {
       }
     }
 
-    pprint("arena tournament is concluded with a record of " + arenaTournament.getRecord());
+//    pprint("arena tournament is concluded with a record of " + arenaTournament.getRecord());
   }
 
 }

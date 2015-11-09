@@ -1,5 +1,8 @@
 package com.ubante.oven.hearthstone;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 /**
  * Created by J on 11/5/2015.
  */
@@ -11,8 +14,24 @@ public class ArenaTournament {
   public int starRanking = 0;
   Boolean lastGameWin = false;
   Boolean isConcluded = false;
+  static ArrayList<String> completionRecord = new ArrayList<>();
+  static Hashtable<Integer, Integer> wins = new Hashtable();
 
   ArenaTournament(IndependentPlayer p) { player = p; }
+
+  void conclude() {
+    isConcluded = true;
+    completionRecord.add(getRecord());
+    if (wins.containsKey(winCount)) {
+      wins.put(winCount, wins.get(winCount) + 1);
+    } else {
+      wins.put(winCount, 1);
+    }
+  }
+
+  public static Hashtable<Integer, Integer> getWins() {
+    return wins;
+  }
 
   void addGame(Game g){
     gamesPlayed++;
@@ -35,7 +54,7 @@ public class ArenaTournament {
     }
 
     if ((lossCount == 3) || (winCount == 12)) {
-      isConcluded = true;
+      conclude();
     }
   }
 
@@ -43,4 +62,15 @@ public class ArenaTournament {
     return String.format("[%d:%d-%d-%d]", starRanking, winCount, lossCount, gamesPlayed);
   }
 
+  static String getCompletionRecord() {
+    String results = null;
+
+
+    for (String record : completionRecord) {
+      results += record + "\n";
+    }
+
+
+    return results;
+  }
 }
