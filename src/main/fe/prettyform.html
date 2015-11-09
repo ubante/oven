@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- http://cssbutton.com/forms/ -->
+
+
+<html>
+<style>
+    .input2 {     border: 1px solid #006; }
+    .input3 {
+        border: 1px solid #006;
+        background: #ffc;
+    }
+    .button3 {
+        border: 1px solid #006;
+        background: #9cf;
+    }
+    .input4 {
+        border: 1px solid #006;
+        background: #ffc;
+    }
+    .button4 {
+        border: 1px solid #006;
+        background: #9cf;
+    }
+    .input5 {
+        border: 1px solid #006;
+        background: #ffc;
+    }
+    .input5:hover {
+        border: 1px solid #f00;
+        background: #ff6;
+    }
+    .button5 {
+        border: 1px solid #006;
+        background: #ccf;
+    }
+    .button5:hover {
+        border: 1px solid #f00;
+        background: #eef;
+    }
+    .input6 {
+        border: 1px solid #006;
+        background: #ffc;
+    }
+    .input6:hover {
+        border: 1px solid #f00;
+        background: #ff6;
+    }
+    .button6 {
+        border: none;
+        background: url('up.png') no-repeat top left;
+        padding: 2px 8px;
+    }
+    .button6:hover {
+        border: none;
+        background: url('down.png') no-repeat top left;
+        padding: 2px 8px;
+    }
+    .input7 {
+        border: 1px solid #006;
+        background: #ffc;
+    }
+    .input7:hover {
+        border: 1px solid #f00;
+        background: #ff6;
+    }
+    .button7 {
+        border: none;
+        background: url('up.png') no-repeat top left;
+        padding: 2px 8px;
+    }
+    .button7:hover {
+        border: none;
+        background: url('down.png') no-repeat top left;
+        padding: 2px 8px;
+    }
+    label {
+        display: block;
+        width: 150px;
+        float: left;
+        margin: 2px 4px 6px 4px;
+        text-align: right;
+    }
+    br { clear: left; }
+</style>
+
+
+<body>
+
+<h2>First</h2>
+<form action="">
+    Name: <input type="text" /><br />
+    Password: <input type="password" /><br />
+    <input type="submit" value="Submit" />
+</form>
+
+<h2>Second</h2>
+<form action="">
+    Name: <input type="text" class="input2" /><br />
+    Password: <input type="password" class="input2" /><br />
+    <input type="submit" value="Submit" class="input2" />
+</form>
+
+<h2>Third</h2>
+<form action="">
+    Name: <input type="text" class="input3" /><br />
+    Password: <input type="password" class="input3" /><br />
+    <input type="submit" value="Submit" class="button3" />
+</form>
+
+<h2>Fourth</h2>
+<form action="">
+    <label for="name4">Name: </label> <input type="text" id="name4" class="input4" /><br />
+    <label for="password4">Password: </label> <input type="password" id="password4" class="input4" /><br />
+    <label>&nbsp; </label> <input type="submit" value="Submit" class="button4" />
+</form>
+
+<h2>Fifth</h2>
+<form action="">
+    <label for="name5">Name: </label> <input type="text" id="name5" class="input5" /><br />
+    <label for="password5">Password: </label> <input type="password" id="password5" class="input5" /><br />
+    <label>&nbsp; </label> <input type="submit" value="Submit" class="button5" />
+</form>
+
+<h2>Sixth</h2>
+<form action="">
+    <label for="name6">Name: </label> <input type="text" id="name6" class="input6" /><br />
+    <label for="password6">Password: </label> <input type="password" id="password6" class="input6" /><br />
+    <label>&nbsp; </label> <input type="submit" value="Submit" class="button6" /> <input type="submit" value="Cancel" class="button6" />
+</form>
+
+<h2>Seventh</h2>
+<form action="">
+    <fieldset>
+        <legend>My awesome form</legend>
+        <label for="name">Name: </label> <input type="text" id="name" class="input7" /><br />
+        <label for="password">Password: </label> <input type="password" id="password" class="input7" /><br />
+        <label>&nbsp; </label> <input type="submit" value="Submit" class="button7" /> <input type="submit" value="Cancel" class="button7" />
+    </fieldset>
+</form>
+
+</body>
+</html>
+
+

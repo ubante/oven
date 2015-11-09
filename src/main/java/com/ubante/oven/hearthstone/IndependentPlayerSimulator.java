@@ -29,8 +29,8 @@ public class IndependentPlayerSimulator {
     }
   }
 
-  void begin() {
-    GameGenerator gg = new GameGenerator();
+  void begin(int pollDelay) {
+    GameGenerator gg = new GameGenerator(pollDelay);
     gg.setGameQueue(gameQueue);
     gg.setPlayerQueue(playerQueue);
     gg.start();
@@ -43,11 +43,12 @@ public class IndependentPlayerSimulator {
 
   public static void main(String[] args) {
     int playerCount = 500;
+    int pollDelay = 60; // in seconds
 
     System.out.printf("Starting %d player threads.\n\n", playerCount);
 
     IndependentPlayerSimulator ips = new IndependentPlayerSimulator(playerCount);
-    ips.begin();
+    ips.begin(pollDelay);
   }
 
 }

@@ -21,7 +21,7 @@ public class ArenaTournament {
 
   void conclude() {
     isConcluded = true;
-    completionRecord.add(getRecord());
+    completionRecord.add(getRecordString());
     if (wins.containsKey(winCount)) {
       wins.put(winCount, wins.get(winCount) + 1);
     } else {
@@ -58,7 +58,7 @@ public class ArenaTournament {
     }
   }
 
-  String getRecord() {
+  String getRecordString() {
     return String.format("[%d:%d-%d-%d]", starRanking, winCount, lossCount, gamesPlayed);
   }
 
