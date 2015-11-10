@@ -20,6 +20,10 @@ public class ArenaTournament {
 
   ArenaTournament(IndependentPlayer p) { player = p; }
 
+  public static Hashtable<Integer, Integer> getWins() {
+    return wins;
+  }
+
   void conclude() {
     isConcluded = true;
     completionRecord.add(getRecordString());
@@ -30,17 +34,8 @@ public class ArenaTournament {
     }
   }
 
-  public static Hashtable<Integer, Integer> getWins() {
-    return wins;
-  }
-
-  public static Boolean hasCompletedGames() {
-    if (wins.size() > 0) { return true; }
-    else { return false; }
-  }
-
-  public static int getCompletedGamesCount() {
-    return completionRecord.size();
+  public int getWinCount() {
+    return winCount;
   }
 
   void addGame(Game g){

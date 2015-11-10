@@ -3,6 +3,7 @@ package com.ubante.oven.hearthstone;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -37,8 +38,41 @@ public class GameGenerator implements Runnable {
     Game g = new Game();
     g.setPlayer1(p1);
     g.setPlayer2(p2);
-    g.setLoser(p1);
-    g.setWinner(p2);
+
+    // Decide on the winner
+    // Give the player with a better record a greater chance of winning.
+    // [ lower / (lower + higher) ]^2
+    IndependentPlayer strongerPlayer;
+    IndependentPlayer weakerPlayer;
+
+    if ( p1.arenaTournament.getWinCount() > p2.arenaTournament.getWinCount()) {
+      strongerPlayer = p1;
+      weakerPlayer = p2;
+    } else {
+      strongerPlayer = p2;
+      weakerPlayer = p1;
+    }
+
+    Integer strongerWins = strongerPlayer.arenaTournament.getWinCount();
+    Integer weakerWins = weakerPlayer.arenaTournament.getWinCount();
+    Random r = new Random();
+    Float roll = r.nextFloat();
+
+    // handle the case of a zero denominator
+    Float ratio;
+    if ((weakerWins+strongerWins) == 0) {
+      ratio = 0.0f;
+    } else {
+      ratio = (float) ( weakerWins / (weakerWins+strongerWins) );
+    }
+
+    if ( roll > Math.pow(ratio, 2)) {
+      g.setWinner(strongerPlayer);
+      g.setLoser(weakerPlayer);
+    } else {
+      g.setWinner(weakerPlayer);
+      g.setLoser(strongerPlayer);
+    }
 
     return g;
   }

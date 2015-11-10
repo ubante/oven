@@ -8,7 +8,8 @@ import java.util.concurrent.BlockingQueue;
  * This improves on ArenaOpponentRankSimulator by letting the IndependentPlayer run on its own
  * and fix the off-by-one errors.
  *
- * XXX needs logging
+ * XXX needs logging and verbosity setting
+ * XXX needs to match players with similar records
  */
 public class IndependentPlayerSimulator {
   int playerCount;
