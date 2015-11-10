@@ -1,6 +1,7 @@
 package com.ubante.oven.hearthstone;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by J on 10/18/2015.
@@ -49,7 +50,12 @@ public class IndependentPlayer implements Runnable {
       }
 
       try {
-        Game g = gameQueue.take();
+        Game g = gameQueue.poll(90, TimeUnit.SECONDS);
+        // If you are the last player, then you will find no games so give up
+        if (g == null) {
+          pprint("Been in queue too long; done for the day");
+          return;
+        }
         arenaTournament.addGame(g);
 
 //        if (g.winner.equals(this)) {
