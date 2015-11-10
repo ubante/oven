@@ -9,20 +9,10 @@ public class Game {
   IndependentPlayer winner;
   IndependentPlayer loser;
 
-  Game() {
-
-  }
-
-  public IndependentPlayer getPlayer1() {
-    return player1;
-  }
+  Game() {}
 
   public void setPlayer1(IndependentPlayer player1) {
     this.player1 = player1;
-  }
-
-  public IndependentPlayer getPlayer2() {
-    return player2;
   }
 
   public void setPlayer2(IndependentPlayer player2) {
@@ -35,10 +25,6 @@ public class Game {
 
   public void setWinner(IndependentPlayer winner) {
     this.winner = winner;
-  }
-
-  public IndependentPlayer getLoser() {
-    return loser;
   }
 
   public void setLoser(IndependentPlayer loser) {

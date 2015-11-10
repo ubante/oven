@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by J on 10/18/2015.
+ * This is a thread that simulates a Player.
  */
 public class IndependentPlayer implements Runnable {
   double eloRating;
@@ -53,7 +53,8 @@ public class IndependentPlayer implements Runnable {
         Game g = gameQueue.poll(90, TimeUnit.SECONDS);
         // If you are the last player, then you will find no games so give up
         if (g == null) {
-          pprint("Been in queue too long; done for the day");
+          pprint("Been in queue too long; done for the day.  Finished with a record of " +
+              arenaTournament.getRecordString());
           return;
         }
         arenaTournament.addGame(g);

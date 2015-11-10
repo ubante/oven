@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
- * Created by J on 11/5/2015.
+ * Each player will have an ArenaTournament object to represent that players arena tournament.  This will track games
+ * won, lost and will decide when the arena tournament ends.
  */
 public class ArenaTournament {
   public IndependentPlayer player;
@@ -33,10 +34,20 @@ public class ArenaTournament {
     return wins;
   }
 
+  public static Boolean hasCompletedGames() {
+    if (wins.size() > 0) { return true; }
+    else { return false; }
+  }
+
+  public static int getCompletedGamesCount() {
+    return completionRecord.size();
+  }
+
   void addGame(Game g){
     gamesPlayed++;
 
-    if (g.winner.equals(player)) {
+//    if (g.winner.equals(player)) {
+    if (g.getWinner().equals(player)) {
       winCount++;
 
       // Account for win streaks
@@ -65,11 +76,9 @@ public class ArenaTournament {
   static String getCompletionRecord() {
     String results = null;
 
-
     for (String record : completionRecord) {
       results += record + "\n";
     }
-
 
     return results;
   }

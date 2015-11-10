@@ -7,7 +7,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by J on 11/7/2015.
+ * This thread creates the games and decides their winner.  Players put themselves into the playerQueue, this thread
+ * will block until there are two players and creates a game, decides the winner and puts the game into the gameQueue
+ * for the players to find.  Eventually, all the threads will finish.
  */
 public class GameGenerator implements Runnable {
   private BlockingQueue<Game> gameQueue;
