@@ -85,8 +85,8 @@ public class GameGenerator implements Runnable {
     Enumeration<Integer> Keys = wins.keys();
     while (Keys.hasMoreElements()) {
       Integer v = Keys.nextElement();
-      pprint(String.format("%2d win -> %3d occurences", v,
-              wins.get(v)));
+      pprint(String.format("%2d win -> %3d occurrences (%4.1f%% of %d players)", v,
+              wins.get(v), (float) 100*wins.get(v)/knownPlayers.size(), knownPlayers.size()));
     }
   }
 
