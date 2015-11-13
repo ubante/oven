@@ -1,4 +1,4 @@
-package com.ubante.oven.hearthstonebad;
+package com.ubante.oven.hearthstone.hearthstonebad;
 
 import java.util.ArrayList;
 

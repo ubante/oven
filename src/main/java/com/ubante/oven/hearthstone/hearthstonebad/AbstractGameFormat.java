@@ -1,4 +1,4 @@
-package com.ubante.oven.hearthstonebad;
+package com.ubante.oven.hearthstone.hearthstonebad;
 
 /**
  * I'm assuming for each format, there's precisely one universe for that format.  Here are the known formats:
