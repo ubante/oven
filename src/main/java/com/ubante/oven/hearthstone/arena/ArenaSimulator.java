@@ -1,4 +1,7 @@
-package com.ubante.oven.hearthstone;
+package com.ubante.oven.hearthstone.arena;
+
+import com.ubante.oven.hearthstone.Game;
+import com.ubante.oven.hearthstone.IndependentPlayer;
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -11,14 +14,14 @@ import java.util.concurrent.BlockingQueue;
  * XXX needs logging and verbosity setting
  * XXX needs to match players with similar records
  */
-public class IndependentPlayerSimulator {
+public class ArenaSimulator {
   int playerCount;
   ArrayList<IndependentPlayer> players = new ArrayList<>();
   private BlockingQueue<Game> gameQueue = new ArrayBlockingQueue<>(10);
   private BlockingQueue<IndependentPlayer> playerQueue =
       new ArrayBlockingQueue<>(1000);
 
-  IndependentPlayerSimulator(int count) {
+  ArenaSimulator(int count) {
     playerCount = count;
 
     for (int i=1; i<=playerCount; i++) {
@@ -31,7 +34,7 @@ public class IndependentPlayerSimulator {
   }
 
   void begin(int pollDelay) {
-    GameGenerator gg = new GameGenerator(pollDelay);
+    ArenaGameGenerator gg = new ArenaGameGenerator(pollDelay);
     gg.setGameQueue(gameQueue);
     gg.setPlayerQueue(playerQueue);
     gg.start();
@@ -48,7 +51,7 @@ public class IndependentPlayerSimulator {
 
     System.out.printf("Starting %d player threads.\n\n", playerCount);
 
-    IndependentPlayerSimulator ips = new IndependentPlayerSimulator(playerCount);
+    ArenaSimulator ips = new ArenaSimulator(playerCount);
     ips.begin(pollDelay);
   }
 

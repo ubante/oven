@@ -1,4 +1,7 @@
-package com.ubante.oven.hearthstone;
+package com.ubante.oven.hearthstone.arena;
+
+import com.ubante.oven.hearthstone.Game;
+import com.ubante.oven.hearthstone.IndependentPlayer;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -14,11 +17,11 @@ public class ArenaTournament {
   public int gamesPlayed = 0;
   public int starRanking = 0;
   Boolean lastGameWin = false;
-  Boolean isConcluded = false;
+  public Boolean isConcluded = false;
   static ArrayList<String> completionRecord = new ArrayList<>();
   static Hashtable<Integer, Integer> wins = new Hashtable();
 
-  ArenaTournament(IndependentPlayer p) { player = p; }
+  public ArenaTournament(IndependentPlayer p) { player = p; }
 
   public static Hashtable<Integer, Integer> getWins() {
     return wins;
@@ -38,7 +41,7 @@ public class ArenaTournament {
     return winCount;
   }
 
-  void addGame(Game g){
+  public void addGame(Game g){
     gamesPlayed++;
 
 //    if (g.winner.equals(player)) {
@@ -64,7 +67,7 @@ public class ArenaTournament {
     }
   }
 
-  String getRecordString() {
+  public String getRecordString() {
     return String.format("[%d:%d-%d-%d]", starRanking, winCount, lossCount, gamesPlayed);
   }
 

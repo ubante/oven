@@ -1,5 +1,7 @@
 package com.ubante.oven.hearthstone;
 
+import com.ubante.oven.hearthstone.arena.ArenaTournament;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -8,8 +10,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class IndependentPlayer implements Runnable {
   double eloRating;
-  String playerName;
-  ArenaTournament arenaTournament = null;
+  public String playerName;
+  public ArenaTournament arenaTournament = null;
   int maxSeconds = 20;
   BlockingQueue<Game> gameQueue;
   BlockingQueue<IndependentPlayer> playerQueue;

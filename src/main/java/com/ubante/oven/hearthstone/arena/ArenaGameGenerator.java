@@ -1,4 +1,8 @@
-package com.ubante.oven.hearthstone;
+package com.ubante.oven.hearthstone.arena;
+
+import com.ubante.oven.hearthstone.Game;
+import com.ubante.oven.hearthstone.IndependentPlayer;
+import com.ubante.oven.hearthstone.arena.ArenaTournament;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -12,17 +16,17 @@ import java.util.concurrent.TimeUnit;
  * will block until there are two players and creates a game, decides the winner and puts the game into the gameQueue
  * for the players to find.  Eventually, all the threads will finish.
  */
-public class GameGenerator implements Runnable {
+public class ArenaGameGenerator implements Runnable {
   private BlockingQueue<Game> gameQueue;
   private BlockingQueue<IndependentPlayer> playerQueue;
   ArrayList<IndependentPlayer> knownPlayers = new ArrayList<>();
   int pollDelay;
 
-  GameGenerator(int delay) {
+  public ArenaGameGenerator(int delay) {
     pollDelay = delay;
   }
 
-  void setGameQueue(BlockingQueue<Game> q) {
+  public void setGameQueue(BlockingQueue<Game> q) {
     gameQueue = q;
   }
 
@@ -144,7 +148,7 @@ public class GameGenerator implements Runnable {
     printSummary(loopCounter);
   }
 
-  void start() {
+  public void start() {
     pprint("Starting the game generator.");
     Thread t = new Thread(this, "GG");
     t.start();
