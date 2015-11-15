@@ -9,7 +9,7 @@ public class Game {
   IndependentPlayer winner;
   IndependentPlayer loser;
 
-  Game() {}
+  public Game() {}
 
   public void setPlayer1(IndependentPlayer player1) {
     this.player1 = player1;
