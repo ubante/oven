@@ -1,5 +1,9 @@
 package com.ubante.oven.hearthstone.hearthstonebad;
 
+import com.ubante.oven.hearthstone.common.Card;
+import com.ubante.oven.hearthstone.common.Deck;
+import com.ubante.oven.hearthstone.common.Hand;
+
 /**
  * How often can I expect to get card X in my opening hand?  After mulliganning?  Playing second?
  *
@@ -37,7 +41,7 @@ public class OpeningHandSimulation {
 
   void initializeDeck() {
     deck = new Deck();
-    deck.addCard(specialCard);
+    deck.addCardPair(specialCard);
     deck.createRandomTwoDeck();
     deck.shuffle();
   }

@@ -1,4 +1,6 @@
-package com.ubante.oven.hearthstone.hearthstonebad;
+package com.ubante.oven.hearthstone.common;
+
+import com.ubante.oven.hearthstone.common.Card;
 
 import java.util.ArrayList;
 
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 public class Hand {
   ArrayList<Card> hand = new ArrayList<>();
 
-  void add(Card c) {
+  public void add(Card c) {
     hand.add(c);
   }
 
@@ -17,13 +19,13 @@ public class Hand {
   public String toString() {
     String returnString = "";
     for (Card c: hand) {
-      returnString += c.name + " ";
+      returnString += c.getName() + " ";
     }
 
     return returnString;
   }
 
-  boolean containsCard(Card c) {
+  public boolean containsCard(Card c) {
     if (hand.contains(c)) {
       return true;
     }
@@ -31,7 +33,7 @@ public class Hand {
     return false;
   }
 
-  void clear() {
+  public void clear() {
     hand.clear();
   }
 }

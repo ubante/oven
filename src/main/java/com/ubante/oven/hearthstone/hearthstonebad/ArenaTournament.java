@@ -1,6 +1,6 @@
 package com.ubante.oven.hearthstone.hearthstonebad;
 
-import com.ubante.oven.hearthstone.IndependentPlayer;
+import com.ubante.oven.hearthstone.arena.ArenaPlayer;
 
 /**
  * This is the personal arena tournament that each player may have.  A player may have no more than one.
@@ -11,7 +11,7 @@ public class ArenaTournament {
   public int lossCount = 0;
   public int gamesPlayed = 0;
   public Player player;
-  IndependentPlayer independentPlayer;
+  ArenaPlayer arenaPlayer;
   Boolean isReadyToPlay = false;
   Boolean isConcluded = false;
   Game game = null;
@@ -20,8 +20,8 @@ public class ArenaTournament {
     player = p;
   }
 
-  public ArenaTournament(IndependentPlayer ip) {
-    independentPlayer = ip;
+  public ArenaTournament(ArenaPlayer ip) {
+    arenaPlayer = ip;
   }
 
   public static int getGoldCost() {
@@ -35,7 +35,7 @@ public class ArenaTournament {
     return arenaTournament;
   }
 
-  public static ArenaTournament joinTournament(IndependentPlayer ip) {
+  public static ArenaTournament joinTournament(ArenaPlayer ip) {
     ArenaTournament arenaTournament = new ArenaTournament(ip);
     ArenaFormat.addTournament(arenaTournament);
 

@@ -1,7 +1,6 @@
 package com.ubante.oven.hearthstone.arena;
 
-import com.ubante.oven.hearthstone.Game;
-import com.ubante.oven.hearthstone.IndependentPlayer;
+import com.ubante.oven.hearthstone.common.Game;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -11,7 +10,7 @@ import java.util.Hashtable;
  * won, lost and will decide when the arena tournament ends.
  */
 public class ArenaTournament {
-  public IndependentPlayer player;
+  public ArenaPlayer player;
   public int winCount = 0;
   public int lossCount = 0;
   public int gamesPlayed = 0;
@@ -21,7 +20,7 @@ public class ArenaTournament {
   static ArrayList<String> completionRecord = new ArrayList<>();
   static Hashtable<Integer, Integer> wins = new Hashtable();
 
-  public ArenaTournament(IndependentPlayer p) { player = p; }
+  public ArenaTournament(ArenaPlayer p) { player = p; }
 
   public static Hashtable<Integer, Integer> getWins() {
     return wins;

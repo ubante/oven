@@ -1,26 +1,27 @@
-package com.ubante.oven.hearthstone;
+package com.ubante.oven.hearthstone.arena;
 
-import com.ubante.oven.hearthstone.arena.ArenaTournament;
+import com.ubante.oven.hearthstone.common.Game;
+import com.ubante.oven.hearthstone.common.Player;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
- * This is a thread that simulates a Player.
+ * This is a thread that simulates an Arena Player.
  */
-public class IndependentPlayer implements Runnable {
+public class ArenaPlayer extends Player implements Runnable {
   double eloRating;
   public String playerName;
   public ArenaTournament arenaTournament = null;
   int maxSeconds = 20;
   BlockingQueue<Game> gameQueue;
-  BlockingQueue<IndependentPlayer> playerQueue;
+  BlockingQueue<ArenaPlayer> playerQueue;
 
-  public IndependentPlayer(String name) {
+  public ArenaPlayer(String name) {
     this(1000, name);
   }
 
-  public IndependentPlayer(int rating, String name) {
+  public ArenaPlayer(int rating, String name) {
     eloRating = rating;
     playerName = name;
   }
@@ -29,7 +30,7 @@ public class IndependentPlayer implements Runnable {
     this.gameQueue = gameQueue;
   }
 
-  public void setPlayerQueue(BlockingQueue<IndependentPlayer> playerQueue) {
+  public void setPlayerQueue(BlockingQueue<ArenaPlayer> playerQueue) {
     this.playerQueue = playerQueue;
   }
 
