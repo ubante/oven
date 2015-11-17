@@ -1,6 +1,7 @@
 package com.ubante.oven.hearthstone.arena;
 
 import com.ubante.oven.hearthstone.common.Game;
+import com.ubante.oven.hearthstone.common.Player;
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -17,26 +18,26 @@ public class ArenaSimulator {
   int playerCount;
   ArrayList<ArenaPlayer> players = new ArrayList<>();
   private BlockingQueue<Game> gameQueue = new ArrayBlockingQueue<>(10);
-  private BlockingQueue<ArenaPlayer> playerQueue =
-      new ArrayBlockingQueue<>(1000);
+  private BlockingQueue<Player> playerQueue = new ArrayBlockingQueue<>(1000);
+//  private BlockingQueue<ArenaPlayer> playerQueue = new ArrayBlockingQueue<>(1000);
 
   ArenaSimulator(int count) {
     playerCount = count;
 
     for (int i=1; i<=playerCount; i++) {
       String name = "ip" + i;
-      ArenaPlayer ip = new ArenaPlayer(name);
-      ip.setGameQueue(gameQueue);
-      ip.setPlayerQueue(playerQueue);
-      players.add(ip);
+      ArenaPlayer ap = new ArenaPlayer(name);
+      ap.setGameQueue(gameQueue);
+      ap.setPlayerQueue(playerQueue);
+      players.add(ap);
     }
   }
 
   void begin(int pollDelay) {
-    ArenaGameGenerator gg = new ArenaGameGenerator(pollDelay);
-    gg.setGameQueue(gameQueue);
-    gg.setPlayerQueue(playerQueue);
-    gg.start();
+    ArenaGameGenerator agg = new ArenaGameGenerator(pollDelay);
+    agg.setGameQueue(gameQueue);
+    agg.setPlayerQueue(playerQueue);
+    agg.start();
 
     for (ArenaPlayer ip: players) {
       new Thread(ip, ip.playerName).start();

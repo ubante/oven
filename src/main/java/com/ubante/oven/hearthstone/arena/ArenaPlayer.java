@@ -15,7 +15,7 @@ public class ArenaPlayer extends Player implements Runnable {
   public ArenaTournament arenaTournament = null;
   int maxSeconds = 20;
   BlockingQueue<Game> gameQueue;
-  BlockingQueue<ArenaPlayer> playerQueue;
+//  BlockingQueue<ArenaPlayer> playerQueue;
 
   public ArenaPlayer(String name) {
     this(1000, name);
@@ -30,9 +30,12 @@ public class ArenaPlayer extends Player implements Runnable {
     this.gameQueue = gameQueue;
   }
 
-  public void setPlayerQueue(BlockingQueue<ArenaPlayer> playerQueue) {
-    this.playerQueue = playerQueue;
+  public void setPlayerQueue(BlockingQueue<Player> pq) {
+    playerQueue = pq;
   }
+//  public void setPlayerQueue(BlockingQueue<ArenaPlayer> pq) {
+//    playerQueue = pq;
+//  }
 
   void pprint(String s) {
     System.out.printf("Thread %4s: %s\n", playerName, s);

@@ -1,6 +1,5 @@
 package com.ubante.oven.hearthstone.common;
 
-import com.ubante.oven.hearthstone.arena.ArenaPlayer;
 import com.ubante.oven.hearthstone.arena.ArenaTournament;
 
 import java.util.ArrayList;
@@ -14,11 +13,13 @@ import java.util.concurrent.TimeUnit;
  * This thread creates the games and decides their winner.  Players put themselves into the playerQueue, this thread
  * will block until there are two players and creates a game, decides the winner and puts the game into the gameQueue
  * for the players to find.  Eventually, all the threads will finish.
+ *
+ * This will be extended in the arena and ladder packages.  Caveat emptor.
  */
 public class GameGenerator implements Runnable {
   private BlockingQueue<Game> gameQueue;
-  private BlockingQueue<ArenaPlayer> playerQueue;
-  ArrayList<ArenaPlayer> knownPlayers = new ArrayList<>();
+  private BlockingQueue<Player> playerQueue;
+  ArrayList<Player> knownPlayers = new ArrayList<>();
   int pollDelay;
 
   public GameGenerator() {}
@@ -31,7 +32,7 @@ public class GameGenerator implements Runnable {
     gameQueue = q;
   }
 
-  public void setPlayerQueue(BlockingQueue<ArenaPlayer> playerQueue) {
+  public void setPlayerQueue(BlockingQueue<Player> playerQueue) {
     this.playerQueue = playerQueue;
   }
 
@@ -39,7 +40,7 @@ public class GameGenerator implements Runnable {
     System.out.printf("Thread %4s: %s\n", "GG", s);
   }
 
-  Game makeGame(ArenaPlayer p1, ArenaPlayer p2) {
+  Game makeGame(Player p1, Player p2) {
     Game g = new Game();
     g.setPlayer1(p1);
     g.setPlayer2(p2);
@@ -47,8 +48,8 @@ public class GameGenerator implements Runnable {
     // Decide on the winner
     // Give the player with a better record a greater chance of winning.
     // [ lower / (lower + higher) ]^2
-    ArenaPlayer strongerPlayer;
-    ArenaPlayer weakerPlayer;
+    Player strongerPlayer;
+    Player weakerPlayer;
 
     if ( p1.arenaTournament.getWinCount() > p2.arenaTournament.getWinCount()) {
       strongerPlayer = p1;
@@ -103,8 +104,8 @@ public class GameGenerator implements Runnable {
     while (keepLooking) {
       loopCounter++;
 //      pprint("Looking to create a game");
-      ArenaPlayer p1 = null;
-      ArenaPlayer p2 = null;
+      Player p1 = null;
+      Player p2 = null;
       try {
         /**
          * If we find one person in queue, then wait a while for a second person.  Otherwise, we're done.

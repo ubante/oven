@@ -2,6 +2,7 @@ package com.ubante.oven.hearthstone.arena;
 
 import com.ubante.oven.hearthstone.common.Game;
 import com.ubante.oven.hearthstone.common.GameGenerator;
+import com.ubante.oven.hearthstone.common.Player;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -17,8 +18,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class ArenaGameGenerator extends GameGenerator implements Runnable {
   private BlockingQueue<Game> gameQueue;
-  private BlockingQueue<ArenaPlayer> playerQueue;
-  ArrayList<ArenaPlayer> knownPlayers = new ArrayList<>();
+  private BlockingQueue<Player> playerQueue;
+//  private BlockingQueue<ArenaPlayer> playerQueue;
+  ArrayList<Player> knownPlayers = new ArrayList<>();
   int pollDelay;
 
   public ArenaGameGenerator(int delay) {
@@ -29,15 +31,18 @@ public class ArenaGameGenerator extends GameGenerator implements Runnable {
     gameQueue = q;
   }
 
-  public void setPlayerQueue(BlockingQueue<ArenaPlayer> playerQueue) {
-    this.playerQueue = playerQueue;
-  }
+//  public void setPlayerQueue(BlockingQueue<Player> pq) {
+//    playerQueue = pq;
+//  }
+//  public void setPlayerQueue(BlockingQueue<ArenaPlayer> playerQueue) {
+//    this.playerQueue = playerQueue;
+//  }
 
   void pprint(String s) {
     System.out.printf("Thread %4s: %s\n", "GG", s);
   }
 
-  Game makeGame(ArenaPlayer p1, ArenaPlayer p2) {
+  Game makeGame(Player p1, Player p2) {
     Game g = new Game();
     g.setPlayer1(p1);
     g.setPlayer2(p2);
@@ -45,8 +50,8 @@ public class ArenaGameGenerator extends GameGenerator implements Runnable {
     // Decide on the winner
     // Give the player with a better record a greater chance of winning.
     // [ lower / (lower + higher) ]^2
-    ArenaPlayer strongerPlayer;
-    ArenaPlayer weakerPlayer;
+    Player strongerPlayer;
+    Player weakerPlayer;
 
     if ( p1.arenaTournament.getWinCount() > p2.arenaTournament.getWinCount()) {
       strongerPlayer = p1;
@@ -101,8 +106,8 @@ public class ArenaGameGenerator extends GameGenerator implements Runnable {
     while (keepLooking) {
       loopCounter++;
 //      pprint("Looking to create a game");
-      ArenaPlayer p1 = null;
-      ArenaPlayer p2 = null;
+      Player p1 = null;
+      Player p2 = null;
       try {
         /**
          * If we find one person in queue, then wait a while for a second person.  Otherwise, we're done.

@@ -1,35 +1,33 @@
 package com.ubante.oven.hearthstone.common;
 
-import com.ubante.oven.hearthstone.arena.ArenaPlayer;
-
 /**
  * Created by J on 11/7/2015.
  */
 public class Game {
-  ArenaPlayer player1;
-  ArenaPlayer player2;
-  ArenaPlayer winner;
-  ArenaPlayer loser;
+  Player player1;
+  Player player2;
+  Player winner;
+  Player loser;
 
   public Game() {}
 
-  public void setPlayer1(ArenaPlayer player1) {
+  public void setPlayer1(Player player1) {
     this.player1 = player1;
   }
 
-  public void setPlayer2(ArenaPlayer player2) {
+  public void setPlayer2(Player player2) {
     this.player2 = player2;
   }
 
-  public ArenaPlayer getWinner() {
+  public Player getWinner() {
     return winner;
   }
 
-  public void setWinner(ArenaPlayer winner) {
+  public void setWinner(Player winner) {
     this.winner = winner;
   }
 
-  public void setLoser(ArenaPlayer loser) {
+  public void setLoser(Player loser) {
     this.loser = loser;
   }
 }

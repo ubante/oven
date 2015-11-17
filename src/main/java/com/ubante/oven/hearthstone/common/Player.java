@@ -12,9 +12,9 @@ public class Player implements Runnable {
   double eloRating;
   public String playerName;
   public ArenaTournament arenaTournament = null;
-  int maxSeconds = 20;
-  BlockingQueue<Game> gameQueue;
-  BlockingQueue<Player> playerQueue;
+  public int maxSeconds = 20;
+  public BlockingQueue<Game> gameQueue;
+  public BlockingQueue<Player> playerQueue;
 
   public Player() {}
 
@@ -31,9 +31,9 @@ public class Player implements Runnable {
     this.gameQueue = gameQueue;
   }
 
-//  public void setPlayerQueue(BlockingQueue<Player> playerQueue) {
-//    this.playerQueue = playerQueue;
-//  }
+  public void setPlayerQueue(BlockingQueue<Player> playerQueue) {
+    this.playerQueue = playerQueue;
+  }
 
   void pprint(String s) {
     System.out.printf("Thread %4s: %s\n", playerName, s);
