@@ -30,8 +30,6 @@ public class Simulator {
 
     System.out.println("Starting the GG thread.");
     new Thread(gg).start();
-
-
   }
 
   public static void main(String[] args) {

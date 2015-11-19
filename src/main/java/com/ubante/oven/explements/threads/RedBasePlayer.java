@@ -5,6 +5,8 @@ package com.ubante.oven.explements.threads;
  */
 public class RedBasePlayer extends BasePlayer {
 
+  public String getSpecialSauce() { return "Tampico"; }
+
   @Override
   public void run() {
     System.out.println("PP: putting player into gameQueue.");

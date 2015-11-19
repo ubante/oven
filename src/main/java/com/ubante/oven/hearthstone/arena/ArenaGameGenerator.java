@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Random;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
  * This thread creates the games and decides their winner.  Players put themselves into the playerQueue, this thread
  * will block until there are two players and creates a game, decides the winner and puts the game into the gameQueue
- * for the players to find.  Eventually, all the threads will finish.
+ * for the players to find.
  */
 public class ArenaGameGenerator extends GameGenerator {
   ArrayList<Player> knownPlayers = new ArrayList<>();
@@ -24,22 +23,7 @@ public class ArenaGameGenerator extends GameGenerator {
     pollDelay = delay;
   }
 
-  public void setGameQueue(BlockingQueue<Game> q) {
-    gameQueue = q;
-  }
-
-//  public void setPlayerQueue(BlockingQueue<Player> pq) {
-//    playerQueue = pq;
-//  }
-//  public void setPlayerQueue(BlockingQueue<ArenaPlayer> playerQueue) {
-//    this.playerQueue = playerQueue;
-//  }
-
-  void pprint(String s) {
-    System.out.printf("Thread %4s: %s\n", "GG", s);
-  }
-
-  Game makeGame(Player p1, Player p2) {
+  Game makeGame(ArenaPlayer p1, ArenaPlayer p2) {
     Game g = new Game();
     g.setPlayer1(p1);
     g.setPlayer2(p2);
@@ -47,8 +31,8 @@ public class ArenaGameGenerator extends GameGenerator {
     // Decide on the winner
     // Give the player with a better record a greater chance of winning.
     // [ lower / (lower + higher) ]^2
-    Player strongerPlayer;
-    Player weakerPlayer;
+    ArenaPlayer strongerPlayer = null;
+    ArenaPlayer weakerPlayer = null;
 
     if ( p1.arenaTournament.getWinCount() > p2.arenaTournament.getWinCount()) {
       strongerPlayer = p1;
@@ -102,7 +86,6 @@ public class ArenaGameGenerator extends GameGenerator {
 
     while (keepLooking) {
       loopCounter++;
-      pprint("Looking to create a game");
       Player p1 = null;
       Player p2 = null;
 
@@ -111,7 +94,6 @@ public class ArenaGameGenerator extends GameGenerator {
          * If we find one person in queue, then wait a while for a second person.  Otherwise, we're done.
          */
 
-        pprint(String.format("remaining: %d", playerQueue.remainingCapacity()));
         p1 = playerQueue.poll(pollDelay, TimeUnit.SECONDS);
         if (p1 == null) {
           keepLooking = false;
@@ -131,8 +113,15 @@ public class ArenaGameGenerator extends GameGenerator {
       if (! knownPlayers.contains(p1)) { knownPlayers.add(p1); }
       if (! knownPlayers.contains(p2)) { knownPlayers.add(p2); }
 
+      /**
+       * Since there is no arenaTournament field in the base Player class and since the playerQueue is defined in the base
+       * GameGenerator class, we have to put ArenaPlayers in that queue as Players.  Then when we poll() them off, we have
+       * to cast them back to ArenaPlayers so we have access to the arenaTournament field.
+       */
+      ArenaPlayer ap1 = (ArenaPlayer) p1;
+      ArenaPlayer ap2 = (ArenaPlayer) p2;
       try {
-        Game g = makeGame(p1, p2);
+        Game g = makeGame(ap1, ap2);
         gameQueue.put(g);
         gameQueue.put(g);
       } catch (InterruptedException e) {
@@ -153,7 +142,7 @@ public class ArenaGameGenerator extends GameGenerator {
   }
 
   public void start() {
-    pprint("Starting the game generator.");
+    pprint("Starting the arena game generator.");
     Thread t = new Thread(this, "GG");
     t.start();
   }

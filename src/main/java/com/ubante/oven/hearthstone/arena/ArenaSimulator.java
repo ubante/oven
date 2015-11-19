@@ -45,10 +45,8 @@ public class ArenaSimulator {
 
 
   public static void main(String[] args) {
-    int playerCount = 20;
-//    int playerCount = 500;
-    int pollDelay = 6; // in seconds
-//    int pollDelay = 60; // in seconds
+    int playerCount = 500;
+    int pollDelay = 60; // in seconds
 
     System.out.printf("Starting %d player threads.\n\n", playerCount);
 

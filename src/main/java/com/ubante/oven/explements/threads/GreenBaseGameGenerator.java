@@ -11,14 +11,17 @@ public class GreenBaseGameGenerator extends BaseGameGenerator {
   public void run() {
     System.out.println("GG: waiting for player in gameQueue.");
     BasePlayer bp = null;
+    RedBasePlayer rbp = null;
 
     try {
       bp = playerQueue.poll(10000, TimeUnit.MILLISECONDS);
+      rbp = (RedBasePlayer) bp;
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
 
-    System.out.printf("GG: found %s in queue.\n", bp.getName());
+    System.out.printf("GG: found %s in queue.\n", rbp.getName());
+    System.out.printf("GG: special red sauce: %s.\n", rbp.getSpecialSauce());
 
 
   }

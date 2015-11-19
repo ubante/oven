@@ -1,18 +1,13 @@
 package com.ubante.oven.hearthstone.common;
 
-import com.ubante.oven.hearthstone.arena.ArenaTournament;
-
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 /**
- * This is a thread that simulates a Player.
+ * This is a base class that simulates a Player thread.  It should be subclassed.
  */
 public class Player implements Runnable {
   double eloRating;
   public String playerName;
-  public ArenaTournament arenaTournament = null;
-  public int maxSeconds = 20;
   public BlockingQueue<Game> gameQueue;
   public BlockingQueue<Player> playerQueue;
 
@@ -35,7 +30,7 @@ public class Player implements Runnable {
     this.playerQueue = playerQueue;
   }
 
-  void pprint(String s) {
+  public void pprint(String s) {
     System.out.printf("Thread %4s: %s\n", playerName, s);
   }
 

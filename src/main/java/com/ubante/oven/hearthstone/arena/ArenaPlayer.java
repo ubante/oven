@@ -3,7 +3,6 @@ package com.ubante.oven.hearthstone.arena;
 import com.ubante.oven.hearthstone.common.Game;
 import com.ubante.oven.hearthstone.common.Player;
 
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -11,11 +10,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class ArenaPlayer extends Player {
   double eloRating;
-  public String playerName;
   public ArenaTournament arenaTournament = null;
   int maxSeconds = 20;
-  BlockingQueue<Game> gameQueue;
-//  BlockingQueue<ArenaPlayer> playerQueue;
 
   public ArenaPlayer(String name) {
     this(1000, name);
@@ -24,21 +20,6 @@ public class ArenaPlayer extends Player {
   public ArenaPlayer(int rating, String name) {
     eloRating = rating;
     playerName = name;
-  }
-
-  public void setGameQueue(BlockingQueue<Game> gameQueue) {
-    this.gameQueue = gameQueue;
-  }
-
-  public void setPlayerQueue(BlockingQueue<Player> pq) {
-    playerQueue = pq;
-  }
-//  public void setPlayerQueue(BlockingQueue<ArenaPlayer> pq) {
-//    playerQueue = pq;
-//  }
-
-  void pprint(String s) {
-    System.out.printf("Thread %4s: %s\n", playerName, s);
   }
 
   @Override
@@ -51,7 +32,7 @@ public class ArenaPlayer extends Player {
       pprint(String.format("entering game #%d", gameCounter));
       try {
         playerQueue.put(this);
-        pprint(String.format("Player-Queue has %d elements", playerQueue.size()));
+//        pprint(String.format("Player-Queue has %d elements", playerQueue.size()));
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
