@@ -16,10 +16,7 @@ import java.util.concurrent.TimeUnit;
  * will block until there are two players and creates a game, decides the winner and puts the game into the gameQueue
  * for the players to find.  Eventually, all the threads will finish.
  */
-public class ArenaGameGenerator extends GameGenerator implements Runnable {
-  private BlockingQueue<Game> gameQueue;
-  private BlockingQueue<Player> playerQueue;
-//  private BlockingQueue<ArenaPlayer> playerQueue;
+public class ArenaGameGenerator extends GameGenerator {
   ArrayList<Player> knownPlayers = new ArrayList<>();
   int pollDelay;
 
@@ -105,13 +102,16 @@ public class ArenaGameGenerator extends GameGenerator implements Runnable {
 
     while (keepLooking) {
       loopCounter++;
-//      pprint("Looking to create a game");
+      pprint("Looking to create a game");
       Player p1 = null;
       Player p2 = null;
+
       try {
         /**
          * If we find one person in queue, then wait a while for a second person.  Otherwise, we're done.
          */
+
+        pprint(String.format("remaining: %d", playerQueue.remainingCapacity()));
         p1 = playerQueue.poll(pollDelay, TimeUnit.SECONDS);
         if (p1 == null) {
           keepLooking = false;

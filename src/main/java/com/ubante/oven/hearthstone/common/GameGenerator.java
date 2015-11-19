@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  * This will be extended in the arena and ladder packages.  Caveat emptor.
  */
 public class GameGenerator implements Runnable {
-  private BlockingQueue<Game> gameQueue;
-  private BlockingQueue<Player> playerQueue;
+  public BlockingQueue<Game> gameQueue;
+  public BlockingQueue<Player> playerQueue;
   ArrayList<Player> knownPlayers = new ArrayList<>();
   int pollDelay;
 
@@ -96,58 +96,10 @@ public class GameGenerator implements Runnable {
     }
   }
 
+  // This should be overriden by subclass.
   @Override
   public void run() {
-    int loopCounter = 0;
-    Boolean keepLooking = true;
-
-    while (keepLooking) {
-      loopCounter++;
-//      pprint("Looking to create a game");
-      Player p1 = null;
-      Player p2 = null;
-      try {
-        /**
-         * If we find one person in queue, then wait a while for a second person.  Otherwise, we're done.
-         */
-        p1 = playerQueue.poll(pollDelay, TimeUnit.SECONDS);
-        if (p1 == null) {
-          keepLooking = false;
-          pprint("Exiting because there is no one in queue.");
-          continue;
-        }
-        p2 = playerQueue.poll(pollDelay, TimeUnit.SECONDS);
-        if (p2 == null) {
-          keepLooking = false;
-          pprint("Exiting because there has been just one player in queue for " + pollDelay + " seconds");
-          continue;
-        }
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-
-      if (! knownPlayers.contains(p1)) { knownPlayers.add(p1); }
-      if (! knownPlayers.contains(p2)) { knownPlayers.add(p2); }
-
-      try {
-        Game g = makeGame(p1, p2);
-        gameQueue.put(g);
-        gameQueue.put(g);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-
-      int divisor = knownPlayers.size();
-      if (5*loopCounter/divisor*divisor == 5*loopCounter) {
-        printSummary(loopCounter);
-      }
-    }
-
-    // final summary
-    pprint("");
-    pprint("");
-    pprint("----- FINAL -----");
-    printSummary(loopCounter);
+    System.out.println("You are in the base Game Generator run method.  Something is wrong.");
   }
 
   public void start() {

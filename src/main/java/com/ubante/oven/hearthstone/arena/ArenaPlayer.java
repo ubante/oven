@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * This is a thread that simulates an Arena Player.
  */
-public class ArenaPlayer extends Player implements Runnable {
+public class ArenaPlayer extends Player {
   double eloRating;
   public String playerName;
   public ArenaTournament arenaTournament = null;
@@ -48,9 +48,10 @@ public class ArenaPlayer extends Player implements Runnable {
 //    for (int i=1; i<=20; i++) {
     while (! arenaTournament.isConcluded) {
       gameCounter++;
-//      pprint(String.format("entering game #%d", gameCounter));
+      pprint(String.format("entering game #%d", gameCounter));
       try {
         playerQueue.put(this);
+        pprint(String.format("Player-Queue has %d elements", playerQueue.size()));
       } catch (InterruptedException e) {
         e.printStackTrace();
       }

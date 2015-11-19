@@ -19,7 +19,6 @@ public class ArenaSimulator {
   ArrayList<ArenaPlayer> players = new ArrayList<>();
   private BlockingQueue<Game> gameQueue = new ArrayBlockingQueue<>(10);
   private BlockingQueue<Player> playerQueue = new ArrayBlockingQueue<>(1000);
-//  private BlockingQueue<ArenaPlayer> playerQueue = new ArrayBlockingQueue<>(1000);
 
   ArenaSimulator(int count) {
     playerCount = count;
@@ -39,15 +38,17 @@ public class ArenaSimulator {
     agg.setPlayerQueue(playerQueue);
     agg.start();
 
-    for (ArenaPlayer ip: players) {
-      new Thread(ip, ip.playerName).start();
+    for (ArenaPlayer ap: players) {
+      new Thread(ap, ap.playerName).start();
     }
   }
 
 
   public static void main(String[] args) {
-    int playerCount = 500;
-    int pollDelay = 60; // in seconds
+    int playerCount = 20;
+//    int playerCount = 500;
+    int pollDelay = 6; // in seconds
+//    int pollDelay = 60; // in seconds
 
     System.out.printf("Starting %d player threads.\n\n", playerCount);
 
