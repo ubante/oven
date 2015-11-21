@@ -55,25 +55,6 @@ Process finished with exit code 0
 ```
 
 # Current Output
-```
-Starting 99 player threads with each playing 100 games.
-<snip>
-Thread   GG: lp88 (Rank 20) beat lp84 (Rank 17)
-Thread lp18: entering game #31
-Thread  lp7: entering game #24
-Thread   GG: lp18 (Rank 23) beat lp7 (Rank 22)
-Thread lp65: entering game #32
-Thread lp52: entering game #28
-Thread   GG: lp65 (Rank 25) beat lp52 (Rank 19)
-Thread  lp6: entering game #31
-Thread lp51: entering game #32
-Thread   GG: lp6 (Rank 20) beat lp51 (Rank 19)
-Thread lp60: entering game #24
-Thread lp79: entering game #30
-<snip>
-```
-
-# Previous Output
 After adding percentages.
 ```
 Starting 500 player threads.

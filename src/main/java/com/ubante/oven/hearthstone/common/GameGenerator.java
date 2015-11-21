@@ -1,5 +1,6 @@
 package com.ubante.oven.hearthstone.common;
 
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -12,6 +13,8 @@ public class GameGenerator implements Runnable {
   public BlockingQueue<Game> gameQueue;
   public BlockingQueue<Player> playerQueue;
   public int pollDelay;
+  public ArrayList<Player> knownPlayers = new ArrayList<>();
+
 
   public GameGenerator() {}
 

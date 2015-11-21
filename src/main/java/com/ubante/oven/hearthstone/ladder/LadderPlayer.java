@@ -52,7 +52,13 @@ public class LadderPlayer extends Player {
     pprint("Starting the ladder player thread.");
 
     // 100 games should be enough for a season
-    for (int i=1; i<100; i++) {
+    for (int i=1; i<=gamesToPlay; i++) {
+
+      if (SeasonSimulator.isSeasonOver()) {
+        pprint("season has ended before I finished all my games");
+        break;
+      }
+
       // play a game
       gameCounter++;
       pprint(String.format("entering game #%d", gameCounter));
@@ -78,7 +84,8 @@ public class LadderPlayer extends Player {
         }
         winStreak = 0;
       } else {
-        if ( winStreak >= 2) {
+        // At ranks 1-5, win streaks do not earn additional stars.
+        if ( winStreak >= 2 && getRank() > 5) {
           starCount += 2;
         } else {
           starCount++;
@@ -94,5 +101,7 @@ public class LadderPlayer extends Player {
         e.printStackTrace();
       }
     }
+
+    pprint("done for the season");
   }
 }

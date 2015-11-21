@@ -34,6 +34,18 @@ public class LadderGameGenerator extends GameGenerator {
     return g;
   }
 
+  void printFinalSummary() {
+    int playerCount = 0;
+    pprint("------------------------");
+    pprint("----- SEASON'S END -----");
+    pprint("------------------------");
+    for (Player p : knownPlayers) {
+      playerCount++;
+    }
+
+    pprint("Found: " + playerCount + " players");
+  }
+
   @Override
   public void run() {
     Boolean keepLooking = true;
@@ -65,6 +77,8 @@ public class LadderGameGenerator extends GameGenerator {
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
+      if (! knownPlayers.contains(p1)) { knownPlayers.add(p1); }
+      if (! knownPlayers.contains(p2)) { knownPlayers.add(p2); }
 
       LadderPlayer lp1 = (LadderPlayer) p1;
       LadderPlayer lp2 = (LadderPlayer) p2;
@@ -80,10 +94,9 @@ public class LadderGameGenerator extends GameGenerator {
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-
-
-
     }
+
+    printFinalSummary();
   }
 
 

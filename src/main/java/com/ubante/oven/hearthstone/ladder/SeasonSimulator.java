@@ -10,11 +10,12 @@ import java.util.concurrent.BlockingQueue;
 /**
  * We will simulate a full season of ladder.
  */
-public class SeasonSimulator {
+public class SeasonSimulator implements Runnable {
   int playerCount;
   ArrayList<LadderPlayer> players = new ArrayList<>();
   private BlockingQueue<Game> gameQueue = new ArrayBlockingQueue<>(10);
   private BlockingQueue<Player> playerQueue = new ArrayBlockingQueue<>(1000);
+  private static boolean isSeasonOver = false;
 
   SeasonSimulator(int count) {
     this(count, 123);
@@ -46,6 +47,18 @@ public class SeasonSimulator {
     }
   }
 
+  public static boolean isSeasonOver() {
+    return isSeasonOver;
+  }
+
+  /**
+   * This thread simulates a month of real-time.
+   */
+  @Override
+  public void run() {
+    isSeasonOver = true;
+  }
+
   void begin(int pollDelay) {
     LadderGameGenerator lgg = new LadderGameGenerator(pollDelay);
     lgg.setGameQueue(gameQueue);
@@ -58,12 +71,11 @@ public class SeasonSimulator {
   }
 
   public static void main(String[] args) {
-    int playerCount = 99;
+    int playerCount = 5; int gamesToPlay = 10;
+//    int playerCount = 200; int gamesToPlay = 500;
     int pollDelay = 60; // in seconds
-    int gamesToPlay = 100;
 
     System.out.printf("Starting %d player threads with each playing %d games.\n\n", playerCount, gamesToPlay);
-
     SeasonSimulator ss = new SeasonSimulator(playerCount, gamesToPlay);
 //    ss.checkStarConversion();
     ss.begin(pollDelay);
