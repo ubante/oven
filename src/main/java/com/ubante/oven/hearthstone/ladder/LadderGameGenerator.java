@@ -62,14 +62,27 @@ public class LadderGameGenerator extends GameGenerator {
           continue;
         }
 
-        LadderPlayer lp1 = (LadderPlayer) p1;
-        LadderPlayer lp2 = (LadderPlayer) p2;
-
-
-
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
+
+      LadderPlayer lp1 = (LadderPlayer) p1;
+      LadderPlayer lp2 = (LadderPlayer) p2;
+
+      Game g = makeGame(lp1, lp2);
+      LadderPlayer winner = (LadderPlayer) g.getWinner();
+      LadderPlayer loser = (LadderPlayer) g.getLoser();
+      pprint(String.format("%s (Rank %d) beat %s (Rank %d)", winner.playerName, winner.getRank(), loser.playerName,
+          loser.getRank()));
+      try {
+        gameQueue.put(g);
+        gameQueue.put(g);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+
+
+
     }
   }
 

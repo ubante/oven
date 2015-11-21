@@ -16,13 +16,17 @@ public class SeasonSimulator {
   private BlockingQueue<Game> gameQueue = new ArrayBlockingQueue<>(10);
   private BlockingQueue<Player> playerQueue = new ArrayBlockingQueue<>(1000);
 
-
   SeasonSimulator(int count) {
+    this(count, 123);
+  }
+
+  SeasonSimulator(int count, int gamesToPlay) {
     playerCount = count;
 
     for (int i=1; i<=playerCount; i++) {
       String name = "lp" + i;
       LadderPlayer lp = new LadderPlayer(name);
+      lp.setGamesToPlay(gamesToPlay);
       lp.setGameQueue(gameQueue);
       lp.setPlayerQueue(playerQueue);
       players.add(lp);
@@ -54,13 +58,13 @@ public class SeasonSimulator {
   }
 
   public static void main(String[] args) {
-    int playerCount = 5;
-//    int pollDelay = 6; // in seconds
+    int playerCount = 99;
     int pollDelay = 60; // in seconds
+    int gamesToPlay = 100;
 
-    System.out.printf("Starting %d player threads.\n\n", playerCount);
+    System.out.printf("Starting %d player threads with each playing %d games.\n\n", playerCount, gamesToPlay);
 
-    SeasonSimulator ss = new SeasonSimulator(playerCount);
+    SeasonSimulator ss = new SeasonSimulator(playerCount, gamesToPlay);
 //    ss.checkStarConversion();
     ss.begin(pollDelay);
   }

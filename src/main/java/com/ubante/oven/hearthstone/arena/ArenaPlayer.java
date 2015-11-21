@@ -30,6 +30,8 @@ public class ArenaPlayer extends Player {
     while (! arenaTournament.isConcluded) {
       gameCounter++;
       pprint(String.format("entering game #%d", gameCounter));
+
+      // go play a game
       try {
         playerQueue.put(this);
 //        pprint(String.format("Player-Queue has %d elements", playerQueue.size()));

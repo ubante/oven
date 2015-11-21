@@ -23,6 +23,10 @@ public class Game {
     return winner;
   }
 
+  public Player getLoser() {
+    return loser;
+  }
+
   public void setWinner(Player winner) {
     this.winner = winner;
   }
