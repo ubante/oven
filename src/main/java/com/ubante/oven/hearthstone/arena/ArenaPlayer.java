@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
  * This is a thread that simulates an Arena Player.
  */
 public class ArenaPlayer extends Player {
-  double eloRating;
+//  double eloRating;
   public ArenaTournament arenaTournament = null;
-  int maxSeconds = 20;
+  int maxSleepSeconds = 20;
 
   public ArenaPlayer(String name) {
     this(1000, name);
@@ -59,7 +59,7 @@ public class ArenaPlayer extends Player {
       }
 
       // recover from all the mental strain
-      int ms = (int) (Math.random() * 1000 * maxSeconds);
+      int ms = (int) (Math.random() * 1000 * maxSleepSeconds);
       try {
         Thread.sleep(ms);
       } catch (InterruptedException e) {

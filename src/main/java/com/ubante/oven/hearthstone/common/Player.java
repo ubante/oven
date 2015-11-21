@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingQueue;
  * This is a base class that simulates a Player thread.  It should be subclassed.
  */
 public class Player implements Runnable {
-  double eloRating;
+  public double eloRating;
   public String playerName;
   public BlockingQueue<Game> gameQueue;
   public BlockingQueue<Player> playerQueue;

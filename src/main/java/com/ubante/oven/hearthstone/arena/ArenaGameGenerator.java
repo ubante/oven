@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class ArenaGameGenerator extends GameGenerator {
   ArrayList<Player> knownPlayers = new ArrayList<>();
-  int pollDelay;
 
   public ArenaGameGenerator(int delay) {
     pollDelay = delay;

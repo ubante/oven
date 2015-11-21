@@ -11,7 +11,7 @@ import java.util.concurrent.BlockingQueue;
 public class GameGenerator implements Runnable {
   public BlockingQueue<Game> gameQueue;
   public BlockingQueue<Player> playerQueue;
-  int pollDelay;
+  public int pollDelay;
 
   public GameGenerator() {}
 

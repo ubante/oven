@@ -12,7 +12,7 @@ import java.util.concurrent.BlockingQueue;
  */
 public class SeasonSimulator {
   int playerCount;
-  ArrayList<Player> players = new ArrayList<>();
+  ArrayList<LadderPlayer> players = new ArrayList<>();
   private BlockingQueue<Game> gameQueue = new ArrayBlockingQueue<>(10);
   private BlockingQueue<Player> playerQueue = new ArrayBlockingQueue<>(1000);
 
@@ -29,16 +29,39 @@ public class SeasonSimulator {
     }
   }
 
+  /**
+   * This method will validate  LadderPlayer.getRank()
+   */
+  void checkStarConversion() {
+    LadderPlayer lp = new LadderPlayer("test");
+
+    for (int i=0; i<96; i++) {
+      lp.setStarCount(i);
+      int rank = lp.getRank();
+      System.out.printf("With %3d stars, you have are rank %d.\n", i, rank);
+    }
+  }
+
   void begin(int pollDelay) {
+    LadderGameGenerator lgg = new LadderGameGenerator(pollDelay);
+    lgg.setGameQueue(gameQueue);
+    lgg.setPlayerQueue(playerQueue);
+    lgg.start();
+
+    for (LadderPlayer lp: players) {
+      new Thread(lp, lp.playerName).start();
+    }
   }
 
   public static void main(String[] args) {
     int playerCount = 5;
+//    int pollDelay = 6; // in seconds
     int pollDelay = 60; // in seconds
 
     System.out.printf("Starting %d player threads.\n\n", playerCount);
 
     SeasonSimulator ss = new SeasonSimulator(playerCount);
+//    ss.checkStarConversion();
     ss.begin(pollDelay);
   }
 }
