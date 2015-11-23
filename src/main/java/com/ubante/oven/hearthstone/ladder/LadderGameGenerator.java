@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
  * Created by J on 11/15/2015.
  */
 public class LadderGameGenerator extends GameGenerator {
+  int gameCount = 0;
 
   public LadderGameGenerator(int delay) {
     pollDelay = delay;
@@ -19,6 +20,7 @@ public class LadderGameGenerator extends GameGenerator {
 
   Game makeGame(LadderPlayer p1, LadderPlayer p2) {
     Game g = new Game();
+    gameCount++;
     g.setPlayer1(p1);
     g.setPlayer2(p2);
 
@@ -47,12 +49,12 @@ public class LadderGameGenerator extends GameGenerator {
     pprint("------------------------");
     pprint("----- SEASON'S END -----");
     pprint("------------------------");
+    pprint("");
     for (Player p : knownPlayers) {
       playerCount++;
       LadderPlayer lp = (LadderPlayer) p;
       int rank = lp.getRank();
 
-      pprint("found player:" + lp.playerName + " with Rank " + rank);
       if (rankFrequency.containsKey(rank)) {
         int currentCount = rankFrequency.get(rank);
         rankFrequency.put(rank, currentCount+1);
@@ -60,19 +62,37 @@ public class LadderGameGenerator extends GameGenerator {
         rankFrequency.put(rank, 1);
       }
     }
+    pprint("After " + playerCount + " players played " + gameCount + " total games.");
 
+    // Print what exists
     Enumeration<Integer> keys = rankFrequency.keys();
     String toPrint = "";
-    while (keys.hasMoreElements()) {
-      int key = keys.nextElement();
-      int freq = rankFrequency.get(key);
-      if (toPrint.equals("")) {
-        toPrint = String.format("Rank %d: %.0f%%", key, (float) 100 * freq / playerCount);
+
+    // Print by groups of five ranks
+    int freq;
+    for (int i=0; i<=25; i++) {
+
+      if (rankFrequency.get(i) == null) {
+        freq = 0;
       } else {
-        toPrint = String.format("%s, R %d: %.0f%%", toPrint, key, (float) 100 * freq / playerCount);
+        freq = rankFrequency.get(i);
+      }
+      if (toPrint.equals("")) {
+        toPrint = String.format("Rank %2d: %2.0f%%", i, (float) 100 * freq / playerCount);
+      } else {
+        toPrint = String.format("%s, R %2d: %2.0f%%", toPrint, i, (float) 100 * freq / playerCount);
+      }
+
+      // Special line for legends
+      if (i == 0) {
+        toPrint = String.format("Rank LEGEND: %2.0f%%", (float) 100 * freq / playerCount);
+      }
+
+      if (i/5*5 == i) {
+        pprint(toPrint);
+        toPrint = "";
       }
     }
-    pprint(toPrint);
 
   }
 

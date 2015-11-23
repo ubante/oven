@@ -4,17 +4,19 @@ import com.ubante.oven.hearthstone.common.Game;
 import com.ubante.oven.hearthstone.common.Player;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This is a dude that lurvs the ladder.
  */
 public class LadderPlayer extends Player {
   int starCount = 0;
-  int maxSleepSeconds = 20;
+  int maxSleepSeconds = 10;
   int gameCounter = 0;
   int winStreak = 0;
   int gamesToPlay;
   int starsToLegend = 95;
+  int waitForGameIntervalSeconds = 30;
 
   public LadderPlayer(String s) {
     playerName = s;
@@ -83,7 +85,12 @@ public class LadderPlayer extends Player {
 
       Game g = null;
       try {
-        g = gameQueue.take();
+//        g = gameQueue.take();
+        g = gameQueue.poll(waitForGameIntervalSeconds, TimeUnit.SECONDS);
+        if (g == null) {
+          pprint("Waiting too long for a game; done for the season.");
+          return;
+        }
       } catch (InterruptedException e) {
         e.printStackTrace();
         pprint("Problems so quitting");

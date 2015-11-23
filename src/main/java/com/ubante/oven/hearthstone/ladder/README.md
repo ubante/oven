@@ -14,21 +14,22 @@ XXX in LadderPlayer, we can replace the for loop with a check to static SeasonSi
 # Current Output
 ```
 <snip>
-Thread   GG: Found: 6 players
-Thread   GG:  Rank 25: 4 (66.7%) Rank 24: 2 (33.3%)
-Thread   GG:  Rank 22: 1 ( 0.5%) Rank 21: 1 ( 0.5%) Rank 20: 1 ( 0.5%) Rank -1: 4 ( 2.0%) Rank 19: 1 ( 0.5%) 
-Rank -3: 1 ( 0.5%) Rank 18: 3 ( 1.5%) Rank 17: 2 ( 1.0%) Rank 16: 5 ( 2.5%) Rank 15: 3 ( 1.5%) Rank 14: 5 ( 2.5%) 
-Rank 13: 6 ( 3.0%) Rank 12: 6 ( 3.0%) Rank 11: 7 ( 3.5%) Rank 10: 13 ( 6.5%) Rank 9: 12 ( 6.0%) Rank 8: 15 ( 7.5%) 
-Rank 7: 24 (12.0%) Rank 6: 15 ( 7.5%) Rank 5: 33 (16.5%) Rank 4: 20 (10.0%) Rank 3: 7 ( 3.5%) Rank 2: 8 ( 4.0%) 
-Rank 1: 5 ( 2.5%) Rank 0: 2 ( 1.0%)
-
-Thread   GG: Rank 22: 3 (15%), , R 21: 1 ( 5%), , R 20: 4 (20%), , R 19: 4 (20%), , R 18: 2 (10%), , R 16: 1 ( 5%), , R 14: 1 ( 5%), , R 25: 3 (15%), , R 24: 1 ( 5%), 
-
-Thread   GG: Rank 22: 2 (10%), R 21:  5%, R 20: 20%, R 19:  5%, R 18: 10%, R 17: 15%, R 15:  5%, R 25: 20%, R 24:  5%, R 23:  5%
-
-Thread   GG: Rank 22: 10%, R 21: 15%, R 20: 20%, R 19: 20%, R 17: 5%, R 15: 5%, R 25: 10%, 
-R 24: 5%, R 23: 10%
-
+Thread   GG: lp124 (Rank 10) beat lp188 (Rank 1)
+Thread lp188: done for the season
+Thread lp124: entering game #497
+Thread lp124: Waiting too long for a game; done for the season.
+Thread   GG: Exiting because there has been just one player in queue for 60 seconds
+Thread   GG: ------------------------
+Thread   GG: ----- SEASON'S END -----
+Thread   GG: ------------------------
+Thread   GG: 
+Thread   GG: After 200 players played 49998 total games.
+Thread   GG: Rank LEGEND:  5%
+Thread   GG: Rank  1:  2%, R  2:  5%, R  3:  5%, R  4: 13%, R  5: 13%
+Thread   GG: Rank  6:  9%, R  7:  7%, R  8:  7%, R  9:  6%, R 10:  6%
+Thread   GG: Rank 11:  4%, R 12:  5%, R 13:  4%, R 14:  2%, R 15:  5%
+Thread   GG: Rank 16:  2%, R 17:  3%, R 18:  1%, R 19:  1%, R 20:  0%
+Thread   GG: Rank 21:  1%, R 22:  0%, R 23:  1%, R 24:  0%, R 25:  0%
 ```
 
 # Previous Output
