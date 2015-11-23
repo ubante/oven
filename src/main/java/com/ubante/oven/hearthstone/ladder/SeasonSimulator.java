@@ -35,15 +35,23 @@ public class SeasonSimulator implements Runnable {
   }
 
   /**
-   * This method will validate  LadderPlayer.getRank()
+   * This method will validate LadderPlayer.getRank()
+   * With  94 stars, you have are rank 1.
+   * With  95 stars, you have are rank 0.
    */
   void checkStarConversion() {
     LadderPlayer lp = new LadderPlayer("test");
 
-    for (int i=0; i<96; i++) {
+    for (int i=0; i<100; i++) {
       lp.setStarCount(i);
       int rank = lp.getRank();
-      System.out.printf("With %3d stars, you have are rank %d.\n", i, rank);
+      System.out.printf("With %3d stars, you have are rank %d", i, rank);
+      if (lp.isLegend()) {
+        System.out.println(" and a legend.");
+      } else {
+        System.out.println(".");
+      }
+
     }
   }
 
@@ -71,7 +79,8 @@ public class SeasonSimulator implements Runnable {
   }
 
   public static void main(String[] args) {
-    int playerCount = 5; int gamesToPlay = 10;
+//    int playerCount = 6; int gamesToPlay = 2;
+    int playerCount = 20; int gamesToPlay = 50;
 //    int playerCount = 200; int gamesToPlay = 500;
     int pollDelay = 60; // in seconds
 

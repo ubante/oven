@@ -4,6 +4,8 @@ import com.ubante.oven.hearthstone.common.Game;
 import com.ubante.oven.hearthstone.common.GameGenerator;
 import com.ubante.oven.hearthstone.common.Player;
 
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,16 +36,44 @@ public class LadderGameGenerator extends GameGenerator {
     return g;
   }
 
+  /**
+   * This should look like:
+   * Rank 13: 2%, Rank 14: 5%, Rank 15: 12%, Rank 16: 23%, Rank 17:41%, Rank 18+: 17%
+   */
   void printFinalSummary() {
     int playerCount = 0;
+    Hashtable<Integer, Integer> rankFrequency = new Hashtable<>();
+
     pprint("------------------------");
     pprint("----- SEASON'S END -----");
     pprint("------------------------");
     for (Player p : knownPlayers) {
       playerCount++;
+      LadderPlayer lp = (LadderPlayer) p;
+      int rank = lp.getRank();
+
+      pprint("found player:" + lp.playerName + " with Rank " + rank);
+      if (rankFrequency.containsKey(rank)) {
+        int currentCount = rankFrequency.get(rank);
+        rankFrequency.put(rank, currentCount+1);
+      } else {
+        rankFrequency.put(rank, 1);
+      }
     }
 
-    pprint("Found: " + playerCount + " players");
+    Enumeration<Integer> keys = rankFrequency.keys();
+    String toPrint = "";
+    while (keys.hasMoreElements()) {
+      int key = keys.nextElement();
+      int freq = rankFrequency.get(key);
+      if (toPrint.equals("")) {
+        toPrint = String.format("Rank %d: %.0f%%", key, (float) 100 * freq / playerCount);
+      } else {
+        toPrint = String.format("%s, R %d: %.0f%%", toPrint, key, (float) 100 * freq / playerCount);
+      }
+    }
+    pprint(toPrint);
+
   }
 
   @Override

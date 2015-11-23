@@ -12,6 +12,26 @@ I'll need to improve the game-matching.  And logging to make it easier to filter
 XXX in LadderPlayer, we can replace the for loop with a check to static SeasonSimulator.isSeasonOver().
 
 # Current Output
+```
+<snip>
+Thread   GG: Found: 6 players
+Thread   GG:  Rank 25: 4 (66.7%) Rank 24: 2 (33.3%)
+Thread   GG:  Rank 22: 1 ( 0.5%) Rank 21: 1 ( 0.5%) Rank 20: 1 ( 0.5%) Rank -1: 4 ( 2.0%) Rank 19: 1 ( 0.5%) 
+Rank -3: 1 ( 0.5%) Rank 18: 3 ( 1.5%) Rank 17: 2 ( 1.0%) Rank 16: 5 ( 2.5%) Rank 15: 3 ( 1.5%) Rank 14: 5 ( 2.5%) 
+Rank 13: 6 ( 3.0%) Rank 12: 6 ( 3.0%) Rank 11: 7 ( 3.5%) Rank 10: 13 ( 6.5%) Rank 9: 12 ( 6.0%) Rank 8: 15 ( 7.5%) 
+Rank 7: 24 (12.0%) Rank 6: 15 ( 7.5%) Rank 5: 33 (16.5%) Rank 4: 20 (10.0%) Rank 3: 7 ( 3.5%) Rank 2: 8 ( 4.0%) 
+Rank 1: 5 ( 2.5%) Rank 0: 2 ( 1.0%)
+
+Thread   GG: Rank 22: 3 (15%), , R 21: 1 ( 5%), , R 20: 4 (20%), , R 19: 4 (20%), , R 18: 2 (10%), , R 16: 1 ( 5%), , R 14: 1 ( 5%), , R 25: 3 (15%), , R 24: 1 ( 5%), 
+
+Thread   GG: Rank 22: 2 (10%), R 21:  5%, R 20: 20%, R 19:  5%, R 18: 10%, R 17: 15%, R 15:  5%, R 25: 20%, R 24:  5%, R 23:  5%
+
+Thread   GG: Rank 22: 10%, R 21: 15%, R 20: 20%, R 19: 20%, R 17: 5%, R 15: 5%, R 25: 10%, 
+R 24: 5%, R 23: 10%
+
+```
+
+# Previous Output
 Brownian motion is happening but I need a cleaner way to present the results.
 
 ```
@@ -48,7 +68,7 @@ Thread lp98: done for the season
 Thread   GG: Exiting because there is no one in queue.
 ```
 
-# Previous Output
+# Previous Previous Output
 ```
 Starting 99 player threads with each playing 100 games.
 <snip>

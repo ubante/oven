@@ -14,13 +14,17 @@ public class LadderPlayer extends Player {
   int gameCounter = 0;
   int winStreak = 0;
   int gamesToPlay;
+  int starsToLegend = 95;
 
   public LadderPlayer(String s) {
     playerName = s;
   }
 
-  public void setStarCount(int starCount) {
-    this.starCount = starCount;
+  public void setStarCount(int stars) {
+    starCount = stars;
+    if (starCount > starsToLegend ) {
+      starCount = starsToLegend;
+    }
   }
 
   public void setGamesToPlay(int gamesToPlay) {
@@ -41,6 +45,15 @@ public class LadderPlayer extends Player {
     }
 
     return 25 - invertedRank;
+  }
+
+  public boolean isLegend() {
+    boolean isLegend;
+
+    if (starCount == starsToLegend) { isLegend = true; }
+    else { isLegend = false; }
+
+    return isLegend;
   }
 
   public void setPlayerQueue(BlockingQueue<Player> pq) {
@@ -77,20 +90,22 @@ public class LadderPlayer extends Player {
         return;
       }
 
-      // do something with the game
-      if (g.getLoser().equals(this)) {
-        if (starCount > 0) {
-          starCount--;
-        }
-        winStreak = 0;
-      } else {
-        // At ranks 1-5, win streaks do not earn additional stars.
-        if ( winStreak >= 2 && getRank() > 5) {
-          starCount += 2;
+      // At 95 stars, you are a legend and can no longer lose stars or rank
+      if (isLegend() == false) {
+        if (g.getLoser().equals(this)) {
+          if (starCount > 0) {
+            starCount--;
+          }
+          winStreak = 0;
         } else {
-          starCount++;
+          // At ranks 1-5, win streaks do not earn additional stars.
+          if (winStreak >= 2 && getRank() > 5) {
+            starCount += 2;
+          } else {
+            starCount++;
+          }
+          winStreak++;
         }
-        winStreak++;
       }
 
       // recover from all the mental strain
