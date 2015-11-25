@@ -61,6 +61,8 @@ public class SeasonSimulator implements Runnable {
 
   /**
    * This thread simulates a month of real-time.
+   *
+   * XXX or maybe it will one day
    */
   @Override
   public void run() {
@@ -79,9 +81,10 @@ public class SeasonSimulator implements Runnable {
   }
 
   public static void main(String[] args) {
-//    int playerCount = 6; int gamesToPlay = 2;
-//    int playerCount = 20; int gamesToPlay = 50;
-    int playerCount = 200; int gamesToPlay = 500;
+//    int playerCount = 6; int gamesToPlay = 2; // smoke-test
+//    int playerCount = 20; int gamesToPlay = 50; // more data
+//    int playerCount = 200; int gamesToPlay = 500; // full test
+    int playerCount = 2000; int gamesToPlay = 400; // full simulation
     int pollDelay = 60; // in seconds
 
     System.out.printf("Starting %d player threads with each playing %d games.\n\n", playerCount, gamesToPlay);

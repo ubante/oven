@@ -4,7 +4,6 @@ import com.ubante.oven.hearthstone.common.Game;
 import com.ubante.oven.hearthstone.common.GameGenerator;
 import com.ubante.oven.hearthstone.common.Player;
 
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +12,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class LadderGameGenerator extends GameGenerator {
   int gameCount = 0;
+  int playerCount = 0;
+  Hashtable<Integer, Integer> rankFrequency = new Hashtable<>();
 
   public LadderGameGenerator(int delay) {
     pollDelay = delay;
@@ -38,18 +39,7 @@ public class LadderGameGenerator extends GameGenerator {
     return g;
   }
 
-  /**
-   * This should look like:
-   * Rank 13: 2%, Rank 14: 5%, Rank 15: 12%, Rank 16: 23%, Rank 17:41%, Rank 18+: 17%
-   */
-  void printFinalSummary() {
-    int playerCount = 0;
-    Hashtable<Integer, Integer> rankFrequency = new Hashtable<>();
-
-    pprint("------------------------");
-    pprint("----- SEASON'S END -----");
-    pprint("------------------------");
-    pprint("");
+  void computeSummary() {
     for (Player p : knownPlayers) {
       playerCount++;
       LadderPlayer lp = (LadderPlayer) p;
@@ -57,20 +47,32 @@ public class LadderGameGenerator extends GameGenerator {
 
       if (rankFrequency.containsKey(rank)) {
         int currentCount = rankFrequency.get(rank);
-        rankFrequency.put(rank, currentCount+1);
+        rankFrequency.put(rank, currentCount + 1);
       } else {
         rankFrequency.put(rank, 1);
       }
     }
+  }
+
+  /**
+   * This should look like:
+   * Rank 13: 2%, Rank 14: 5%, Rank 15: 12%, Rank 16: 23%, Rank 17:41%, Rank 18+: 17%
+   */
+  void printFinalSummary() {
+    computeSummary();
+
+    pprint("------------------------");
+    pprint("----- SEASON'S END -----");
+    pprint("------------------------");
+    pprint("");
     pprint("After " + playerCount + " players played " + gameCount + " total games.");
 
     // Print what exists
-    Enumeration<Integer> keys = rankFrequency.keys();
     String toPrint = "";
 
     // Print by groups of five ranks
     int freq;
-    for (int i=0; i<=25; i++) {
+    for (int i = 0; i <= 25; i++) {
 
       if (rankFrequency.get(i) == null) {
         freq = 0;
@@ -88,12 +90,35 @@ public class LadderGameGenerator extends GameGenerator {
         toPrint = String.format("Rank LEGEND: %2.0f%%", (float) 100 * freq / playerCount);
       }
 
-      if (i/5*5 == i) {
+      if (i / 5 * 5 == i) {
         pprint(toPrint);
         toPrint = "";
       }
     }
+  }
 
+  /**
+   *
+   */
+  void printCsvSummary() {
+    computeSummary();
+
+    pprint("------------------------");
+    pprint("---------- CSV ---------");
+    pprint("------------------------");
+    pprint("");
+    System.out.println("Rank,Frequency %");
+
+    int freq;
+    for (int i=0; i<=25; i++) {
+      if (rankFrequency.get(i) == null) {
+        freq = 0;
+      } else {
+        freq = rankFrequency.get(i);
+      }
+
+      System.out.printf("%d,%4.1f\n", i, (float) 100 * freq / playerCount);
+    }
   }
 
   @Override
@@ -147,6 +172,7 @@ public class LadderGameGenerator extends GameGenerator {
     }
 
     printFinalSummary();
+    printCsvSummary();
   }
 
 
