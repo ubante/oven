@@ -4,7 +4,6 @@ import com.ubante.oven.hearthstone.common.Game;
 import com.ubante.oven.hearthstone.common.GameGenerator;
 import com.ubante.oven.hearthstone.common.Player;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Random;
@@ -16,7 +15,6 @@ import java.util.concurrent.TimeUnit;
  * for the players to find.
  */
 public class ArenaGameGenerator extends GameGenerator {
-//  ArrayList<Player> knownPlayers = new ArrayList<>();
 
   public ArenaGameGenerator(int delay) {
     pollDelay = delay;

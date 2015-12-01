@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
  * This is a thread that simulates an Arena Player.
  */
 public class ArenaPlayer extends Player {
-//  double eloRating;
   public ArenaTournament arenaTournament = null;
   int maxSleepSeconds = 20;
 
@@ -26,7 +25,6 @@ public class ArenaPlayer extends Player {
   public void run() {
     arenaTournament = new ArenaTournament(this);
     int gameCounter = 0;
-//    for (int i=1; i<=20; i++) {
     while (! arenaTournament.isConcluded) {
       gameCounter++;
       pprint(String.format("entering game #%d", gameCounter));
