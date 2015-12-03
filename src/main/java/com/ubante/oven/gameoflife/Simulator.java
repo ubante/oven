@@ -22,11 +22,11 @@ public class Simulator {
   }
 
   /**
-   *   .......
-   *   ...X...
-   *   ....X..
-   *   ..XXX..
-   *   .......
+   *   .......  .......  .......  .......
+   *   ...X...  ..X.X..  ....X..  ..X....
+   *   ....X..  ...XX..  ..X.X..  ...XX..
+   *   ..XXX..  ...X...  ...XX..  ..XX...
+   *   .......  .......  .......  .......
    */
   void setGlider(int startX, int startY) {
     currentBoard.activatePoint(startX+1, startY+0);
@@ -36,10 +36,38 @@ public class Simulator {
     currentBoard.activatePoint(startX+2, startY+2);
   }
 
+  /**
+   *    .....   .....
+   *    ..X..   .....
+   *    ..X..   .XXX.
+   *    ..X..   .....
+   *    .....   .....
+   *
+   * @param startX
+   * @param startY
+   */
   void setBlinker(int startX, int startY) {
     currentBoard.activatePoint(startX+0, startY+1);
     currentBoard.activatePoint(startX+1, startY+1);
     currentBoard.activatePoint(startX+2, startY+1);
+  }
+
+  /**
+   *    ......  ...X..
+   *    ..XXX.  .X..X.
+   *    .XXX..  .X..X.
+   *    ......  ..X...
+   *
+   * @param startX
+   * @param startY
+   */
+  void setToad(int startX, int startY) {
+    currentBoard.activatePoint(startX+1, startY+1);
+    currentBoard.activatePoint(startX+2, startY+1);
+    currentBoard.activatePoint(startX+3, startY+1);
+    currentBoard.activatePoint(startX+0, startY+2);
+    currentBoard.activatePoint(startX+1, startY+2);
+    currentBoard.activatePoint(startX+2, startY+2);
   }
 
   void go() {
@@ -63,6 +91,7 @@ public class Simulator {
     sim2.setBoardSize(80, 20);
     sim2.setGlider(2, 1);
     sim2.setBlinker(10,0);
+    sim2.setToad(20,1);
     sim2.go();
   }
 }
