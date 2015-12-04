@@ -70,7 +70,138 @@ public class Simulator {
     currentBoard.activatePoint(startX+2, startY+2);
   }
 
-  void go() {
+  /**
+   *   ......  ......
+   *   .XX...  .XX...
+   *   .XX...  .X....
+   *   ...XX.  ....X.
+   *   ...XX.  ...XX.
+   *   ......  ......
+   * @param startX
+   * @param startY
+   */
+  void setBeacon(int startX, int startY) {
+    currentBoard.activatePoint(startX+0, startY+0);
+    currentBoard.activatePoint(startX+1, startY+0);
+    currentBoard.activatePoint(startX+0, startY+1);
+    currentBoard.activatePoint(startX+3, startY+2);
+    currentBoard.activatePoint(startX+2, startY+3);
+    currentBoard.activatePoint(startX+3, startY+3);
+  }
+
+  /**
+   *  .................  .....X.....X.....  .................
+   *  ....XXX...XXX....  .....X.....X.....  .................
+   *  .................  .....XX...XX.....  .................
+   *  ..X....X.X....X..  .................  .................
+   *  ..X....X.X....X..  .XXX..XX.XX..XXX.  .................
+   *  ..X....X.X....X..  ...X.X.X.X.X.X...  .................
+   *  ....XXX...XXX....  .....XX...XX.....  .................
+   *  .................  .................  .................
+   *  ....XXX...XXX....  .....XX...XX.....  .................
+   *  ..X....X.X....X..  ...X.X.X.X.X.X...  .................
+   *  ..X....X.X....X..  .XXX..XX.XX..XXX.  .................
+   *  ..X....X.X....X..  .................  .................
+   *  .................  .....XX...XX.....  .................
+   *  ....XXX...XXX....  .....X.....X.....  .................
+   *  .................  .....X.....X.....  .................
+   *
+   * @param startX
+   * @param startY
+   */
+  void setPulsar(int startX, int startY) {
+    currentBoard.activatePoint(startX+2, startY+0);
+    currentBoard.activatePoint(startX+3, startY+0);
+    currentBoard.activatePoint(startX+4, startY+0);
+    currentBoard.activatePoint(startX+8, startY+0);
+    currentBoard.activatePoint(startX+9, startY+0);
+    currentBoard.activatePoint(startX+10, startY+0);
+    currentBoard.activatePoint(startX+0, startY+2);
+    currentBoard.activatePoint(startX+5, startY+2);
+    currentBoard.activatePoint(startX+7, startY+2);
+    currentBoard.activatePoint(startX+12, startY+2);
+    currentBoard.activatePoint(startX+0, startY+3);
+    currentBoard.activatePoint(startX+5, startY+3);
+    currentBoard.activatePoint(startX+7, startY+3);
+    currentBoard.activatePoint(startX+12, startY+3);
+    currentBoard.activatePoint(startX+0, startY+4);
+    currentBoard.activatePoint(startX+5, startY+4);
+    currentBoard.activatePoint(startX+7, startY+4);
+    currentBoard.activatePoint(startX+12, startY+4);
+    currentBoard.activatePoint(startX+2, startY+5);
+    currentBoard.activatePoint(startX+3, startY+5);
+    currentBoard.activatePoint(startX+4, startY+5);
+    currentBoard.activatePoint(startX+8, startY+5);
+    currentBoard.activatePoint(startX+9, startY+5);
+    currentBoard.activatePoint(startX+10, startY+5);
+    currentBoard.activatePoint(startX+2, startY+7);
+    currentBoard.activatePoint(startX+3, startY+7);
+    currentBoard.activatePoint(startX+4, startY+7);
+    currentBoard.activatePoint(startX+8, startY+7);
+    currentBoard.activatePoint(startX+9, startY+7);
+    currentBoard.activatePoint(startX+10, startY+7);
+    currentBoard.activatePoint(startX+0, startY+8);
+    currentBoard.activatePoint(startX+5, startY+8);
+    currentBoard.activatePoint(startX+7, startY+8);
+    currentBoard.activatePoint(startX+12, startY+8);
+    currentBoard.activatePoint(startX+0, startY+9);
+    currentBoard.activatePoint(startX+5, startY+9);
+    currentBoard.activatePoint(startX+7, startY+9);
+    currentBoard.activatePoint(startX+12, startY+9);
+    currentBoard.activatePoint(startX+0, startY+10);
+    currentBoard.activatePoint(startX+5, startY+10);
+    currentBoard.activatePoint(startX+7, startY+10);
+    currentBoard.activatePoint(startX+12, startY+10);
+    currentBoard.activatePoint(startX+2, startY+12);
+    currentBoard.activatePoint(startX+3, startY+12);
+    currentBoard.activatePoint(startX+4, startY+12);
+    currentBoard.activatePoint(startX+8, startY+12);
+    currentBoard.activatePoint(startX+9, startY+12);
+    currentBoard.activatePoint(startX+10, startY+12);
+  }
+
+  /**
+   * .........................................
+   * .XXXXXXXX.XXXXX...XXX......XXXXXXX.XXXXX.
+   * .........................................
+   *
+   * @param startX
+   * @param startY
+   */
+  void setGun(int startX, int startY) {
+    currentBoard.activatePoint(startX+1, startY+1);
+    currentBoard.activatePoint(startX+2, startY+1);
+    currentBoard.activatePoint(startX+3, startY+1);
+    currentBoard.activatePoint(startX+4, startY+1);
+    currentBoard.activatePoint(startX+5, startY+1);
+    currentBoard.activatePoint(startX+6, startY+1);
+    currentBoard.activatePoint(startX+7, startY+1);
+    currentBoard.activatePoint(startX+8, startY+1);
+    currentBoard.activatePoint(startX+10, startY+1);
+    currentBoard.activatePoint(startX+11, startY+1);
+    currentBoard.activatePoint(startX+12, startY+1);
+    currentBoard.activatePoint(startX+13, startY+1);
+    currentBoard.activatePoint(startX+14, startY+1);
+    currentBoard.activatePoint(startX+18, startY+1);
+    currentBoard.activatePoint(startX+19, startY+1);
+    currentBoard.activatePoint(startX+20, startY+1);
+    currentBoard.activatePoint(startX+27, startY+1);
+    currentBoard.activatePoint(startX+28, startY+1);
+    currentBoard.activatePoint(startX+29, startY+1);
+    currentBoard.activatePoint(startX+30, startY+1);
+    currentBoard.activatePoint(startX+31, startY+1);
+    currentBoard.activatePoint(startX+32, startY+1);
+    currentBoard.activatePoint(startX+33, startY+1);
+    currentBoard.activatePoint(startX+35, startY+1);
+    currentBoard.activatePoint(startX+36, startY+1);
+    currentBoard.activatePoint(startX+37, startY+1);
+    currentBoard.activatePoint(startX+38, startY+1);
+    currentBoard.activatePoint(startX+39, startY+1);
+  }
+
+  void go(Boolean printNum) {
+    currentBoard.setDoPrintNumeric(printNum);
+
     for (int i = 0; i < 100; i++) {
       currentBoard.print();
       futureBoard = currentBoard.getNextGeneration();
@@ -87,11 +218,36 @@ public class Simulator {
   public static void main(String[] args) {
     System.out.println("Let the life begin.");
 
-    Simulator sim2 = new Simulator();
-    sim2.setBoardSize(80, 20);
-    sim2.setGlider(2, 1);
-    sim2.setBlinker(10,0);
-    sim2.setToad(20,1);
-    sim2.go();
+    Simulator sim = new Simulator();
+    sim.setBoardSize(80, 60);
+    sim.setGlider(2, 1);
+    sim.setBlinker(10, 0);
+    sim.setToad(20, 1);
+    sim.setBeacon(30, 1);
+    sim.setPulsar(40, 2);
+    sim.setGun(10,40);
+    Boolean printNumeric = false;
+    sim.go(printNumeric);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

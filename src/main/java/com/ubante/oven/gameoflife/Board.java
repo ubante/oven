@@ -7,6 +7,7 @@ public class Board {
   Cell[][] cellBoard;
   int sizeX;
   int sizeY;
+  Boolean doPrintNumeric = false;
 
   Board (int squareSize) {
     this(squareSize, squareSize);
@@ -156,6 +157,10 @@ public class Board {
     }
   }
 
+  public void setDoPrintNumeric(Boolean doPrintNumeric) {
+    this.doPrintNumeric = doPrintNumeric;
+  }
+
   void activatePoint(int x, int y) {
     cellBoard[x][y].activate();
   }
@@ -172,8 +177,11 @@ public class Board {
         Cell c = cellBoard[width][height];
 
         if (c.isAlive) {
-//          output += "W";
-          output += c.getLivingNeighborCount();
+          if (doPrintNumeric) {
+            output += c.getLivingNeighborCount();
+          } else {
+            output += "X";
+          }
         } else {
           if (c.shouldLive()) {
             output += ".";
@@ -195,6 +203,7 @@ public class Board {
 
   Board getNextGeneration() {
     Board future = new Board(sizeX, sizeY);
+    future.setDoPrintNumeric(doPrintNumeric);
 
     for (int x = 0; x < sizeX; x++) {
       for (int y = 0; y < sizeY; y++) {
