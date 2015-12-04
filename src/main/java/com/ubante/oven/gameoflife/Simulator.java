@@ -199,6 +199,32 @@ public class Simulator {
     currentBoard.activatePoint(startX+39, startY+1);
   }
 
+  /**
+   * This creature has a period of 15.
+   *  ...................
+   *  ......X.....X......
+   *  ....XX.XXXXX.XX....
+   *  ......X.....X......
+   *  ...................
+   *
+   * @param startX
+   * @param startY
+   */
+  void setPentadecathalon(int startX, int startY) {
+    currentBoard.activatePoint(startX+6, startY+5);
+    currentBoard.activatePoint(startX+7, startY+5);
+    currentBoard.activatePoint(startX+8, startY+4);
+    currentBoard.activatePoint(startX+8, startY+6);
+    currentBoard.activatePoint(startX+9, startY+5);
+    currentBoard.activatePoint(startX+10, startY+5);
+    currentBoard.activatePoint(startX+11, startY+5);
+    currentBoard.activatePoint(startX+12, startY+5);
+    currentBoard.activatePoint(startX+13, startY+4);
+    currentBoard.activatePoint(startX+13, startY+6);
+    currentBoard.activatePoint(startX+14, startY+5);
+    currentBoard.activatePoint(startX+15, startY+5);
+  }
+
   void go(Boolean printNum) {
     currentBoard.setDoPrintNumeric(printNum);
 
@@ -226,6 +252,9 @@ public class Simulator {
     sim.setBeacon(30, 1);
     sim.setPulsar(40, 2);
     sim.setGun(10,40);
+    sim.setPentadecathalon(58,0);
+    sim.setPentadecathalon(60,11);
+    sim.setPentadecathalon(58,22);
     Boolean printNumeric = false;
     sim.go(printNumeric);
   }

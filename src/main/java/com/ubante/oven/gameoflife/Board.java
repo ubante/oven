@@ -8,6 +8,7 @@ public class Board {
   int sizeX;
   int sizeY;
   Boolean doPrintNumeric = false;
+  int generation = 1;
 
   Board (int squareSize) {
     this(squareSize, squareSize);
@@ -157,6 +158,12 @@ public class Board {
     }
   }
 
+  public void setGeneration(int generation) {
+    this.generation = generation;
+  }
+
+  public void incrementGeneration() { generation++; }
+
   public void setDoPrintNumeric(Boolean doPrintNumeric) {
     this.doPrintNumeric = doPrintNumeric;
   }
@@ -170,7 +177,7 @@ public class Board {
   }
 
   public String toString() {
-    String output = "";
+    String output = "Generation: " + generation + "\n";
 
     for (int height = 0; height < sizeY; height++) {
       for (int width = 0; width < sizeX; width++) {
@@ -203,6 +210,8 @@ public class Board {
 
   Board getNextGeneration() {
     Board future = new Board(sizeX, sizeY);
+    future.setGeneration(generation);
+    future.incrementGeneration();
     future.setDoPrintNumeric(doPrintNumeric);
 
     for (int x = 0; x < sizeX; x++) {
