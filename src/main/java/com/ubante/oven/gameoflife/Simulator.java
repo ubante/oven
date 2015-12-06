@@ -8,6 +8,7 @@ public class Simulator {
   int boardSizeY;
   Board currentBoard;
   Board futureBoard;
+  int maxAge = 100;
 
   public void setBoardSize(int boardSize) {
     boardSizeX = boardSize;
@@ -19,6 +20,10 @@ public class Simulator {
     boardSizeX = x;
     boardSizeY = y;
     currentBoard = new Board(x, y);
+  }
+
+  public void setMaxAge(int maxAge) {
+    this.maxAge = maxAge;
   }
 
   /**
@@ -228,8 +233,16 @@ public class Simulator {
   void go(Boolean printNum) {
     currentBoard.setDoPrintNumeric(printNum);
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < maxAge; i++) {
       currentBoard.print();
+      currentBoard.checkStability();
+
+      if (currentBoard.isStable) {
+        System.out.println("We have reached stability - this is the same as generation "
+            + currentBoard.repeatedGeneration);
+        return;
+      }
+
       futureBoard = currentBoard.getNextGeneration();
       currentBoard = futureBoard;
 
@@ -246,12 +259,14 @@ public class Simulator {
 
     Simulator sim = new Simulator();
     sim.setBoardSize(80, 60);
-    sim.setGlider(2, 1);
+//    sim.setBoardSize(80, 20);
+    sim.setMaxAge(1000);
+//    sim.setGlider(2, 1);
     sim.setBlinker(10, 0);
     sim.setToad(20, 1);
     sim.setBeacon(30, 1);
     sim.setPulsar(40, 2);
-    sim.setGun(10,40);
+//    sim.setGun(10,40);
     sim.setPentadecathalon(58,0);
     sim.setPentadecathalon(60,11);
     sim.setPentadecathalon(58,22);

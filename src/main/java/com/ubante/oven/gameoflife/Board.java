@@ -1,5 +1,9 @@
 package com.ubante.oven.gameoflife;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * 0,0 is the upper left corner.
  */
@@ -9,10 +13,9 @@ public class Board {
   int sizeY;
   Boolean doPrintNumeric = false;
   int generation = 1;
-
-  Board (int squareSize) {
-    this(squareSize, squareSize);
-  }
+  List<Board> boardHistory = new ArrayList(){};
+  Boolean isStable = false;
+  int repeatedGeneration = -1;
 
   Board(int sizeX, int sizeY) {
     this.sizeX = sizeX;
@@ -158,14 +161,49 @@ public class Board {
     }
   }
 
+  Board (int squareSize) {
+    this(squareSize, squareSize);
+  }
+
+  /**
+   * Make a copy of a board.
+   * @param inputBoard
+   */
+  Board (Board inputBoard) {
+    this(inputBoard.sizeX, inputBoard.sizeY);
+    setGeneration(inputBoard.getGeneration());
+    setDoPrintNumeric(inputBoard.getDoPrintNumeric());
+    setBoardHistory(inputBoard.getBoardHistory());
+  }
+
   public void setGeneration(int generation) {
     this.generation = generation;
+  }
+
+  public int getGeneration() {
+    return generation;
   }
 
   public void incrementGeneration() { generation++; }
 
   public void setDoPrintNumeric(Boolean doPrintNumeric) {
     this.doPrintNumeric = doPrintNumeric;
+  }
+
+  public Boolean getDoPrintNumeric() {
+    return doPrintNumeric;
+  }
+
+  public List<Board> getBoardHistory() {
+    return boardHistory;
+  }
+
+  public void setBoardHistory(List<Board> boardHistory) {
+    this.boardHistory = boardHistory;
+  }
+
+  public void addToHistory(Board b) {
+    boardHistory.add(b);
   }
 
   void activatePoint(int x, int y) {
@@ -176,8 +214,22 @@ public class Board {
     cellBoard[x][y].deactivate();
   }
 
+  int getLivingCellCount() {
+    int count = 0;
+
+    for (int height = 0; height < sizeY; height++) {
+      for (int width = 0; width < sizeX; width++) {
+        if (cellBoard[width][height].isAlive) {
+          count++;
+        }
+      }
+    }
+
+    return count;
+  }
+
   public String toString() {
-    String output = "Generation: " + generation + "\n";
+    String output = "";
 
     for (int height = 0; height < sizeY; height++) {
       for (int width = 0; width < sizeX; width++) {
@@ -192,7 +244,7 @@ public class Board {
         } else {
           if (c.shouldLive()) {
             output += ".";
-//            output += ":";
+//            output += ":"; // shows incipient life
           } else {
             output += ".";
           }
@@ -205,14 +257,16 @@ public class Board {
   }
 
   void print() {
+    String header = "Generation: " + generation + "\n";
+//    header += String.format("Board history count: %d\n", boardHistory.size());
+    System.out.printf(header);
     System.out.println(toString());
   }
 
   Board getNextGeneration() {
-    Board future = new Board(sizeX, sizeY);
-    future.setGeneration(generation);
+    Board future = new Board(this);
     future.incrementGeneration();
-    future.setDoPrintNumeric(doPrintNumeric);
+    future.addToHistory(this);
 
     for (int x = 0; x < sizeX; x++) {
       for (int y = 0; y < sizeY; y++) {
@@ -224,6 +278,29 @@ public class Board {
       }
     }
 
+
     return future;
+  }
+
+  void checkStability() {
+    // Test for stability by looking for repetition over the last N boards.
+    Collections.reverse(boardHistory);
+//    System.out.println("Auditing ------------------");
+//    System.out.println("My count: " + getLivingCellCount());
+
+    int boardCtr = boardHistory.size();
+    for (Board b : boardHistory) {
+//      System.out.printf(String.format("Board #%d: %d\n", boardCtr, b.getLivingCellCount()));
+      if (b.toString().equals(toString())) {
+//        System.out.println("STABLE");
+        isStable = true;
+        repeatedGeneration = boardCtr;
+      }
+      boardCtr--;
+    }
+
+//    System.out.println("---------------------------\n\n");
+
+    Collections.reverse(boardHistory);
   }
 }
