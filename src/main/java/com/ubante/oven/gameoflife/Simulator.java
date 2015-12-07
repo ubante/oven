@@ -261,12 +261,12 @@ public class Simulator {
     sim.setBoardSize(80, 60);
 //    sim.setBoardSize(80, 20);
     sim.setMaxAge(1000);
-//    sim.setGlider(2, 1);
+    sim.setGlider(2, 1);
     sim.setBlinker(10, 0);
     sim.setToad(20, 1);
     sim.setBeacon(30, 1);
     sim.setPulsar(40, 2);
-//    sim.setGun(10,40);
+    sim.setGun(10,40);
     sim.setPentadecathalon(58,0);
     sim.setPentadecathalon(60,11);
     sim.setPentadecathalon(58,22);

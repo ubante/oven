@@ -288,6 +288,8 @@ public class Board {
 //    System.out.println("Auditing ------------------");
 //    System.out.println("My count: " + getLivingCellCount());
 
+    // This approach begins to bog down as the boardHistory size gets > 100
+    // XXX need to switch to a hash maybe
     int boardCtr = boardHistory.size();
     for (Board b : boardHistory) {
 //      System.out.printf(String.format("Board #%d: %d\n", boardCtr, b.getLivingCellCount()));
