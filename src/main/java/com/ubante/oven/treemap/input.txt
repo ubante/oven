@@ -1,0 +1,27 @@
+A 7
+A B 1
+A C 2
+A D 3
+A E 4
+B F 3
+B G 2
+C H 4
+B I 5
+D K 3
+D J 2
+D K 3
+E L 4
+E M 5
+E N 6
+E O 8
+F P 3
+F Q 2
+F R 3
+F S 9
+G T 8
+G U 2
+G V 0
+G W 4
+H X 2
+H Y 4
+H Z 6
