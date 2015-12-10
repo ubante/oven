@@ -13,6 +13,7 @@ import java.util.List;
 public class Simulator {
   String inputFile;
   List<Thing> knownThings = new ArrayList<>();
+  Thing root = null;
 
   public void setInputFile(String inputFile) {
     this.inputFile = inputFile;
@@ -40,22 +41,22 @@ public class Simulator {
     if ( parts.length == 2) {
       // Handle root case
       Thing t = new Thing(parts[0], Integer.parseInt(parts[1]));
-      System.out.println("Found the root: " + t.getName());
+      System.out.println("---- Found the root: " + t.getName());
       knownThings.add(t);
       t.setRoot();
+      root = t;
     } else {
       // Otherwise this is a child
       Thing t = new Thing(parts[1], Integer.parseInt(parts[2]));
       t.setParent(findThing(parts[0]));
       knownThings.add(t);
-      System.out.println("Adding thing: " + t.getName());
+      System.out.println("---- Adding thing: " + t.getName());
 
     }
-
   }
 
   void readFile() {
-    BufferedReader br = null;
+    BufferedReader br;
 
     String line;
     try {
@@ -72,9 +73,17 @@ public class Simulator {
     }
   }
 
+  void print() {
+    System.out.println();
+
+    System.out.println(root.getName());
+    root.printChildren(2);
+//    root.printChildrenSimple();
+  }
+
   void run() {
     readFile();
-
+    print();
   }
 
   public static void main(String[] args) {
@@ -83,7 +92,6 @@ public class Simulator {
     Simulator sim = new Simulator();
     sim.setInputFile("src\\main\\java\\com\\ubante\\oven\\treemap\\input.txt");
     sim.run();
-
 
   }
 }

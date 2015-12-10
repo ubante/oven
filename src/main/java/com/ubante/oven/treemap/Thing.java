@@ -37,4 +37,15 @@ public class Thing {
     this.parent = parent;
     parent.addChild(this);
   }
+
+  public void printChildren(int indentSize) {
+    for (Thing child : children) {
+      for (int i=0; i < indentSize; i++) {
+        System.out.printf("-");
+      }
+      System.out.println(" " + child.getName());
+      child.printChildren(indentSize+1);
+    }
+  }
 }
+
