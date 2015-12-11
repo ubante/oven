@@ -10,19 +10,25 @@ public class Thing {
   String name;
   Thing parent;
   int value;
+  int groupValue;
   List<Thing> children = new ArrayList<>();
 
   Thing(String n, int v) {
     name = n;
     value = v;
+    groupValue = v;
   }
 
   public String getName() {
     return name;
   }
 
-  public Thing getParent() {
-    return parent;
+  public int getValue() {
+    return value;
+  }
+
+  public int getGroupValue() {
+    return groupValue;
   }
 
   public void addChild(Thing child) {
@@ -38,14 +44,32 @@ public class Thing {
     parent.addChild(this);
   }
 
-  public void printChildren(int indentSize) {
+  public String toString() {
+    String outputString;
+
+    if (children.isEmpty()) {
+      outputString = String.format("%s (%d)\n", name, value);
+    } else {
+      outputString = String.format("%s (%d | %d)\n", name, value, groupValue);
+    }
+
+    return outputString;
+  }
+
+  public int printChildren(int indentSize) {
+    int valueSum = 0;
+
     for (Thing child : children) {
+      child.printChildren(indentSize + 1);
+      valueSum += child.getGroupValue();
       for (int i=0; i < indentSize; i++) {
         System.out.printf("-");
       }
-      System.out.println(" " + child.getName());
-      child.printChildren(indentSize+1);
+      System.out.printf(" " + child.toString());
     }
+
+    groupValue = value + valueSum;
+    return valueSum;
   }
 }
 

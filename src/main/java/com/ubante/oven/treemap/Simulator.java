@@ -33,7 +33,6 @@ public class Simulator {
   }
 
   void processLine(String line) {
-    System.out.println("working on: " + line);
 
     String[] parts = line.split(" ");
 
@@ -50,8 +49,6 @@ public class Simulator {
       Thing t = new Thing(parts[1], Integer.parseInt(parts[2]));
       t.setParent(findThing(parts[0]));
       knownThings.add(t);
-      System.out.println("---- Adding thing: " + t.getName());
-
     }
   }
 
@@ -76,9 +73,8 @@ public class Simulator {
   void print() {
     System.out.println();
 
-    System.out.println(root.getName());
-    root.printChildren(2);
-//    root.printChildrenSimple();
+    root.printChildren(1);
+    System.out.printf(root.toString());
   }
 
   void run() {

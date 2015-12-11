@@ -28,6 +28,75 @@ Once that graph is created, we'll output a CSV that can be used to make a Treema
 # Current output
 ```
 Doing it.
+---- Found the root: A
+
+--- P (3)
+--- Q (2)
+--- R (3)
+--- S (9)
+-- F (3 | 20)
+--- T (8)
+--- U (2)
+--- V (0)
+--- W (4)
+-- G (2 | 16)
+-- I (5)
+- B (1 | 42)
+--- X (2)
+--- Y (4)
+--- Z (6)
+-- H (4 | 16)
+- C (2 | 18)
+-- K (3)
+-- J (2)
+-- K (3)
+- D (3 | 11)
+-- L (4)
+-- M (5)
+-- N (6)
+-- O (8)
+- E (4 | 27)
+A (7 | 105)
+```
+# Previous output
+
+```
+Doing it.
+---- Found the root: A
+
+A
+- B (1)
+-- F (3)
+--- P (3)
+--- Q (2)
+--- R (3)
+--- S (9)
+-- G (2)
+--- T (8)
+--- U (2)
+--- V (0)
+--- W (4)
+-- I (5)
+- C (2)
+-- H (4)
+--- X (2)
+--- Y (4)
+--- Z (6)
+- D (3)
+-- K (3)
+-- J (2)
+-- K (3)
+- E (4)
+-- L (4)
+-- M (5)
+-- N (6)
+-- O (8)
+```
+
+# Previouser output
+
+```
+Doing it.
 working on: A 7
 Found the root: A
 working on: A B 1
@@ -84,6 +153,4 @@ working on: H Z 6
 Adding thing: Z
 ```
 
-# Previous output
 
-# Previouser output
