@@ -75,7 +75,7 @@ public class Thing {
   public void printTreeMap() {
     for (Thing child :  children) {
       child.printTreeMap();
-      System.out.printf("%s,%s,%s,1\n", getName(), child.getName(), child.getGroupValue());
+      System.out.printf("%s,%s,%s,1\n", child.getName(), getName(), child.getGroupValue());
     }
   }
 }
