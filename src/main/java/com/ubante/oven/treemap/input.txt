@@ -9,7 +9,6 @@ C H 4
 B I 5
 D K 3
 D J 2
-D K 3
 E L 4
 E M 5
 E N 6

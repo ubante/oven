@@ -82,6 +82,11 @@ public class Simulator {
     print();
   }
 
+  void printTreemap() {
+    root.printTreeMap();
+    System.out.printf("%s, , ,1\n",root.getName());
+  }
+
   public static void main(String[] args) {
     System.out.println("Doing it.");
 
@@ -89,5 +94,7 @@ public class Simulator {
     sim.setInputFile("src\\main\\java\\com\\ubante\\oven\\treemap\\input.txt");
     sim.run();
 
+    System.out.println("\n\n------------- TREEMAP -------------");
+    sim.printTreemap();
   }
 }
