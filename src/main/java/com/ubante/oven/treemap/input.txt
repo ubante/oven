@@ -1,3 +1,4 @@
+# In this sample, each node has a value.
 A 7
 A B 1
 A C 2

@@ -36,6 +36,11 @@ public class Simulator {
 
     String[] parts = line.split(" ");
 
+    // Allow comments
+    if ( parts[0].equals("#")) {
+      return;
+    }
+
     // XXX There's got to be a better way to make a tree
     if ( parts.length == 2) {
       // Handle root case
