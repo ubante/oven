@@ -11,7 +11,8 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Created by J on 5/5/2014.
+ * This will use five different ways to write to a file.
+ * Becuase one way is never enough.
  */
 public class FileCreator {
     String outputDirectory;
@@ -19,31 +20,55 @@ public class FileCreator {
     String outputFilename;
     Random r = new Random();
     String content = getContent();
+    String os;
 
-    FileCreator(String dir) {
+    FileCreator(String dir, String os) {
         this.outputDirectory = dir;
+        this.os = os;
 
-        outputFileBasename = String.format("%s\\outputfile_%s",outputDirectory,
+        if ( os.equals("Darwin") ) {
+            outputFileBasename = String.format("%s/outputfile_%s",outputDirectory,
+                    Integer.toString(r.nextInt(90000)+10000));
+        } else if ( os.equals("Windows") ) {
+            outputFileBasename = String.format("%s\\outputfile_%s",outputDirectory,
+                    Integer.toString(r.nextInt(90000)+10000));
+        } else {
+            System.err.println("You did not choose a valid OS [Darwin|Windows].");
+            System.err.println("You chose " + os + ".  Exiting.");
+            System.exit(1);
+        }
+    }
+
+    void resetOutputFilename() {
+        outputFilename = String.format("%s-%s",outputFileBasename,
                 Integer.toString(r.nextInt(90000)+10000));
     }
 
-    void chooseOutputFilename() {
-//        Calendar takenTime = Calendar.getInstance();
-        outputFilename = String.format("%s-%s",outputFileBasename,
-                Integer.toString(r.nextInt(90000)+10000));
+    void resetOutputFilename(String suffix) {
+//        outputFilename = String.format("%s-%s-%s",outputFileBasename,
+//                Integer.toString(r.nextInt(90000)+10000), suffix);
+        resetOutputFilename();
+        outputFilename = String.format("%s-%s", outputFilename, suffix);
     }
 
     String getContent() {
         return "ajwl3fjal2jdalk2j3f4lka2fj4lkajw34flkawj3fl4ajwf4lawj34lfjalw3jaw34gawjl3kfj4al3wk4\n";
     }
 
+    /**
+     * See http://www.roseindia.net/java/beginners/java-write-to-file.shtml
+     */
     void writeWithFile() {
-        chooseOutputFilename();
+        resetOutputFilename("File");
         System.out.println("Writing with File to: "+outputFilename);
 
         File file = new File(outputFilename);
         try {
             file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,7 +76,7 @@ public class FileCreator {
     }
 
     void writeWithIOStreams() {
-        chooseOutputFilename();
+        resetOutputFilename("IOStream");
         System.out.println("Writing with I/O Streams to: "+outputFilename);
 
         File file = new File(outputFilename); // file should exist
@@ -59,6 +84,7 @@ public class FileCreator {
 
         try {
             stream = new FileOutputStream(outputFilename);
+            stream.write(content.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(2);
@@ -72,7 +98,7 @@ public class FileCreator {
     }
 
     void writeWithRandomAccessFile() {
-        chooseOutputFilename();
+        resetOutputFilename();
         System.out.println("Writing with RandomAccessFile to: "+outputFilename);
 
         // This does not actually create a file
@@ -94,7 +120,7 @@ public class FileCreator {
     }
 
     void writeWithNIO() {
-        chooseOutputFilename();
+        resetOutputFilename();
         System.out.println("Writing with NIO to: "+outputFilename);
 
         try {
@@ -106,7 +132,7 @@ public class FileCreator {
     }
 
     void writeWithPosix() {
-        chooseOutputFilename();
+        resetOutputFilename();
         System.out.println("Writing with POSIX to: "+outputFilename);
 
 //        Set perms = PosixFilePermissions.fromString("rw-r--r--");
@@ -122,17 +148,18 @@ public class FileCreator {
     }
 
     public static void main(String[] args) {
-        String tempDir = "C:\\Users\\J\\Desktop\\tmp";
+//        FileCreator fc = new FileCreator(tempDir, "fu");
+//        FileCreator fc = new FileCreator("C:\\Users\\J\\Desktop\\tmp", "Windows");
+        FileCreator fc = new FileCreator("/Users/ubante/tmp", "Darwin");
 
-        FileCreator fc = new FileCreator(tempDir);
-
-        System.out.println("Files will be written to directory: " + fc.outputFileBasename + "\n");
+        System.out.println("Files will be written to the temp directory with a basename of: \n" +
+                fc.outputFileBasename + "\n");
 
         fc.writeWithFile();
         fc.writeWithIOStreams();
         fc.writeWithRandomAccessFile();
         fc.writeWithNIO();
-        fc.writeWithPosix();
+//        fc.writeWithPosix();
 
     }
 
