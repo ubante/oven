@@ -1,14 +1,18 @@
 package com.ubante.oven.makefiles;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
-import java.nio.file.attribute.PosixFilePermission;
-import java.nio.file.attribute.PosixFilePermissions;
+import java.nio.file.StandardOpenOption;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * This will use five different ways to write to a file.
@@ -45,8 +49,6 @@ public class FileCreator {
     }
 
     void resetOutputFilename(String suffix) {
-//        outputFilename = String.format("%s-%s-%s",outputFileBasename,
-//                Integer.toString(r.nextInt(90000)+10000), suffix);
         resetOutputFilename();
         outputFilename = String.format("%s-%s", outputFilename, suffix);
     }
@@ -57,6 +59,7 @@ public class FileCreator {
 
     /**
      * See http://www.roseindia.net/java/beginners/java-write-to-file.shtml
+     * and http://www.javacodex.com/Files/Write-To-A-File
      */
     void writeWithFile() {
         resetOutputFilename("File");
@@ -79,9 +82,7 @@ public class FileCreator {
         resetOutputFilename("IOStream");
         System.out.println("Writing with I/O Streams to: "+outputFilename);
 
-        File file = new File(outputFilename); // file should exist
         OutputStream stream = null;
-
         try {
             stream = new FileOutputStream(outputFilename);
             stream.write(content.getBytes());
@@ -98,15 +99,16 @@ public class FileCreator {
     }
 
     void writeWithRandomAccessFile() {
-        resetOutputFilename();
+        resetOutputFilename("RandomAccessFile");
         System.out.println("Writing with RandomAccessFile to: "+outputFilename);
 
-        // This does not actually create a file
         File file = new File(outputFilename);
-        RandomAccessFile randomAccessFile =null;
+        RandomAccessFile randomAccessFile = null;
 
         try {
             randomAccessFile = new RandomAccessFile(file,"rw");
+//            randomAccessFile.writeChars(content); // this adds non-printable characters
+            randomAccessFile.writeBytes(content);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(3);
@@ -120,36 +122,34 @@ public class FileCreator {
     }
 
     void writeWithNIO() {
-        resetOutputFilename();
+        resetOutputFilename("NIO");
         System.out.println("Writing with NIO to: "+outputFilename);
 
         try {
-            Path path = Files.createFile(Paths.get(outputFilename));
+            Files.write(Paths.get(outputFilename), content.getBytes("utf-8"), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    void writeWithPosix() {
-        resetOutputFilename();
-        System.out.println("Writing with POSIX to: "+outputFilename);
+    /**
+     * From http://www.javacodex.com/Files/Write-To-A-File-Using-A-PrintWriter
+     *
+     * Note that this adds a trailing newline.
+     */
+    void writeWithPrintWriter() {
+        resetOutputFilename("PrinterWriter");
+        System.out.println("Writing with PrintWriter to: "+outputFilename);
 
-//        Set perms = PosixFilePermissions.fromString("rw-r--r--");
-        Set perms = null;
-        FileAttribute<Set<PosixFilePermission>> fileAttrs = PosixFilePermissions.asFileAttribute(perms);
-
-        try {
-            Path path = Files.createFile(Paths.get(outputFilename),fileAttrs);
-        } catch (IOException e) {
+        try (PrintWriter pw = new PrintWriter(outputFilename)) {
+            pw.println(content);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void main(String[] args) {
-//        FileCreator fc = new FileCreator(tempDir, "fu");
-//        FileCreator fc = new FileCreator("C:\\Users\\J\\Desktop\\tmp", "Windows");
         FileCreator fc = new FileCreator("/Users/ubante/tmp", "Darwin");
 
         System.out.println("Files will be written to the temp directory with a basename of: \n" +
@@ -159,7 +159,7 @@ public class FileCreator {
         fc.writeWithIOStreams();
         fc.writeWithRandomAccessFile();
         fc.writeWithNIO();
-//        fc.writeWithPosix();
+        fc.writeWithPrintWriter();
 
     }
 
