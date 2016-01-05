@@ -42,7 +42,9 @@ public class ImageLover {
         System.out.println("Reading the dog from a file.");
         try {
             String current = new File( "." ).getCanonicalPath();
-            System.out.println("Current dir:"+current);
+            String currentDir = System.getProperty("user.dir");
+
+            System.out.println("Current dir:" + current + " and " + currentDir);
             image = ImageIO.read(dogFile);
         } catch (IOException e) {
             e.printStackTrace();
