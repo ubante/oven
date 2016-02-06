@@ -1,9 +1,5 @@
 package com.ubante.oven.halflife;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * Look for the stable mean age when elements decay and are replaced.
  *
@@ -15,94 +11,52 @@ import java.util.List;
  * https://docs.google.com/spreadsheets/d/12_5TjAfx9Lkh1hnlQz0JrogDOfQ291r29t_cIcLeF4U/edit#gid=0
  */
 public class Simulator {
-    List<ElementalSubstance> things = new ArrayList<>();
-    int minInitAge = 0;
-    int maxInitAge = 10;
+    final int FINALGENERATIONYEAR = 49;
+    final int SAMPLESIZE = 10;
     int generationalYear = 0;
-    int finalGenerationalYear = 99;
+    int maxInitAge = 10;
+    History history;
 
-    void populate(int count) {
-        for (int i=0; i<count; i++) {
-            int initAge = (int) (Math.random()*maxInitAge);
-            things.add(new ElementalSubstance(initAge));
+    void generateInitialClass(int SAMPLESIZE) {
+
+        ElementalSubstanceClass generation = new ElementalSubstanceClass();
+        for (int i=0; i<SAMPLESIZE; i++) {
+            int initAge = (int) (Math.random() * maxInitAge);
+            generation.add(new ElementalSubstance(initAge));
         }
+
+        history = new History();
+        history.add(generation);
     }
 
-    void displayIndividually() {
-        for (ElementalSubstance thing : things) {
-            System.out.println(thing.display());
-        }
-    }
+    void displayClassStats() {}
 
-    void ageThings() {
-        for (ElementalSubstance thing : things) {
-            thing.age();
-        }
-    }
+    void ageThings() {}
 
-    void decayThings() {
-        double odds;
-        int dropCount = 0;
 
-        Iterator<ElementalSubstance> itr = things.iterator();
-        while (itr.hasNext()) {
-            ElementalSubstance es = itr.next();
-            odds = Math.random();
-
-            if (odds < es.decayRatePerYear) {
-                itr.remove();
-                dropCount++;
-            }
-        }
-
-        for (int i=0; i<dropCount; i++) {
-            things.add(new ElementalSubstance());
-        }
-    }
-
-    void displayRow() {
-        System.out.println("Generation: " + generationalYear);
-
-        for (ElementalSubstance thing : things) {
-            System.out.print(String.format("%2d ", thing.age));
-        }
-
-        System.out.println("\n");
-    }
-
-    void displayStats() {
-        int size = things.size();
-        int sum = 0;
-
-        for (ElementalSubstance thing : things) {
-            sum = sum + thing.age;
-        }
-
-        System.out.println(String.format("The average time is %4.1f years.\n", sum/(float) size));
-    }
 
     void begin() {
-        populate(100);
-        displayRow();
-        displayStats();
+        generateInitialClass(SAMPLESIZE);
+        displayClassStats();
 
-        while (generationalYear < finalGenerationalYear) {
+        while (generationalYear <= FINALGENERATIONYEAR) {
             generationalYear++;
             ageThings();
-            decayThings();
-            displayRow();
-            displayStats();
+
+//            decayThings();
+//            rememberThings();
+//            displayRow();
+//            displayStats();
         }
 
-//        displayIndividually();
+
     }
 
     public static void main(String[] args) {
-        System.out.println("Half lives!\n");
+        System.out.println("Second half life!");
 
         Simulator s = new Simulator();
         s.begin();
-
     }
 
 }

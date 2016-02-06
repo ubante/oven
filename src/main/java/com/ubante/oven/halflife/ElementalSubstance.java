@@ -1,7 +1,7 @@
 package com.ubante.oven.halflife;
 
 /**
- * Created by ubante on 2/2/16.
+ * Think uranium.
  */
 public class ElementalSubstance {
     int age;
