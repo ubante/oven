@@ -4,12 +4,20 @@ package com.ubante.oven.halflife;
  * Think uranium.
  */
 public class ElementalSubstance {
-    int age;
-    double decayRatePerYear;
+    private int age;
+    private double decayRatePerYear;
 
     ElementalSubstance(int a, double d) {
         age = a;
         decayRatePerYear = d;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getDecayRatePerYear() {
+        return decayRatePerYear;
     }
 
     ElementalSubstance(int a) {

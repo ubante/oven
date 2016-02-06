@@ -19,7 +19,7 @@ public class OldSimulator {
     final int SAMPLESIZE = 100;
 //    final int SAMPLESIZE = 10;
     int FINALGENERATIONYEAR = 49;
-    //    int FINALGENERATIONYEAR = 4;
+//    int FINALGENERATIONYEAR = 4;
     int OLDESTPOSSIBLEAGE = 80;
     int minInitAge = 0;
     int maxInitAge = 10;
@@ -54,7 +54,7 @@ public class OldSimulator {
             ElementalSubstance es = itr.next();
             odds = Math.random();
 
-            if (odds < es.decayRatePerYear) {
+            if (odds < es.getDecayRatePerYear()) {
                 itr.remove();
                 dropCount++;
             }
@@ -73,7 +73,7 @@ public class OldSimulator {
 
         for (ElementalSubstance thing : things) {
 //            System.out.println("year: " + generationalYear + " and counter: " + counter);
-            record[generationalYear][counter] = thing.age;
+            record[generationalYear][counter] = thing.getAge();
             counter++;
         }
     }
@@ -82,7 +82,7 @@ public class OldSimulator {
         System.out.println("Generation: " + generationalYear);
 
         for (ElementalSubstance thing : things) {
-            System.out.print(String.format("%2d ", thing.age));
+            System.out.print(String.format("%2d ", thing.getAge()));
         }
 
         System.out.println("\n");
@@ -93,7 +93,7 @@ public class OldSimulator {
         int sum = 0;
 
         for (ElementalSubstance thing : things) {
-            sum = sum + thing.age;
+            sum = sum + thing.getAge();
         }
 
         System.out.println(String.format("The average time is %4.1f years.\n", sum/(float) size));

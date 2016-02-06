@@ -11,8 +11,8 @@ package com.ubante.oven.halflife;
  * https://docs.google.com/spreadsheets/d/12_5TjAfx9Lkh1hnlQz0JrogDOfQ291r29t_cIcLeF4U/edit#gid=0
  */
 public class Simulator {
-    final int FINALGENERATIONYEAR = 49;
-    final int SAMPLESIZE = 10;
+    final int FINALGENERATIONYEAR = 4;
+    final int SAMPLESIZE = 31;
     int generationalYear = 0;
     int maxInitAge = 10;
     History history;
@@ -27,33 +27,41 @@ public class Simulator {
 
         history = new History();
         history.add(generation);
+
+        System.out.println("Initial class looks like this:");
+        history.displayCurrentGeneration();
+        System.out.println("");
     }
-
-    void displayClassStats() {}
-
-    void ageThings() {}
 
 
 
     void begin() {
         generateInitialClass(SAMPLESIZE);
-        displayClassStats();
 
         while (generationalYear <= FINALGENERATIONYEAR) {
             generationalYear++;
-            ageThings();
 
-//            decayThings();
-//            rememberThings();
-//            displayRow();
-//            displayStats();
+            // Get the newest generation
+            ElementalSubstanceClass newestClass = history.getNewestClass();
+
+            newestClass.ageMembers();
+            newestClass.decayMembers();
+
+            history.add(newestClass);
+            history.displayAll();
+//            history.displayCurrentGeneration();
         }
 
+        System.out.println();
+
+//        history.displayAll();
+
+        history.displayCSV(FINALGENERATIONYEAR+maxInitAge);
 
     }
 
     public static void main(String[] args) {
-        System.out.println("Second half life!");
+        System.out.println("Second half life!\n\n");
 
         Simulator s = new Simulator();
         s.begin();
