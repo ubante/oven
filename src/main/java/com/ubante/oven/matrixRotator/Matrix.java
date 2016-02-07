@@ -43,37 +43,35 @@ public class Matrix {
       System.out.println("Working on square layer #" + squareCounter);
 
       for (int offset=0; offset<(size-(2 * squareCounter)-1); offset++) {
-//        int firstCorner = m[squareCounter][squareCounter];
-//        m[squareCounter][squareCounter] = m[size - squareCounter - 1][squareCounter];
-//        m[size - squareCounter - 1][squareCounter] = m[size - squareCounter - 1][size - squareCounter - 1];
-//        m[size - squareCounter - 1][size - squareCounter - 1] = m[squareCounter][size - squareCounter - 1];
-//        m[squareCounter][size - squareCounter - 1] = firstCorner;
-//        display();
-
         System.out.println("- offset=" + offset);
 
-        // top to right side
-        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
-            squareCounter, squareCounter+offset, m[squareCounter][squareCounter+offset],
-            squareCounter+offset, size-1-squareCounter, m[squareCounter+offset][size-1-squareCounter]);
-
-        // right side to bottom
-        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
-            squareCounter+offset, size-squareCounter-1, m[squareCounter+offset][size-squareCounter-1],
-            size-squareCounter-1, size-1-squareCounter-offset, m[size-squareCounter-1][size-1-squareCounter-offset]);
-
-        // bottom to left side
-        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
-            size-squareCounter-1, size-squareCounter-offset-1, m[size-squareCounter-1][size-squareCounter-offset-1],
-            size-squareCounter-offset-1, squareCounter, m[size-squareCounter-offset-1][squareCounter]);
+        int rememberThis = m[squareCounter][squareCounter+offset];
 
         // left side to top
         System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
             size-squareCounter-offset-1, squareCounter, m[size-squareCounter-offset-1][squareCounter],
             squareCounter, squareCounter+offset, m[squareCounter][squareCounter+offset]);
-      }
+        m[squareCounter][squareCounter+offset] = m[size-squareCounter-offset-1][squareCounter];
 
-      System.out.println();
+        // bottom to left side
+        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
+            size-squareCounter-1, size-squareCounter-offset-1, m[size-squareCounter-1][size-squareCounter-offset-1],
+            size-squareCounter-offset-1, squareCounter, m[size-squareCounter-offset-1][squareCounter]);
+        m[size-squareCounter-offset-1][squareCounter] = m[size-squareCounter-1][size-squareCounter-offset-1];
+
+        // right side to bottom
+        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
+            squareCounter+offset, size-squareCounter-1, m[squareCounter+offset][size-squareCounter-1],
+            size-squareCounter-1, size-1-squareCounter-offset, m[size-squareCounter-1][size-1-squareCounter-offset]);
+        m[size-squareCounter-1][size-1-squareCounter-offset] = m[squareCounter+offset][size-squareCounter-1];
+
+        // top to right side
+        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
+            squareCounter, squareCounter+offset, m[squareCounter][squareCounter+offset],
+            squareCounter+offset, size-1-squareCounter, m[squareCounter+offset][size-1-squareCounter]);
+        m[squareCounter+offset][size-1-squareCounter] = rememberThis;
+
+      }
     }
   }
 }

@@ -10,7 +10,7 @@ public class Rotator {
 
 
   public static void main(String[] args) {
-    Matrix m = new Matrix(7);
+    Matrix m = new Matrix(8);
     m.display();
     m.rotate();
     m.display();
