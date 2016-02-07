@@ -42,7 +42,7 @@ public class Matrix {
     for (int squareCounter=0; squareCounter<numOfInnerSquares; squareCounter++) {
       System.out.println("Working on square layer #" + squareCounter);
 
-      for (int offset=squareCounter; offset<(size-squareCounter-1); offset++) {
+      for (int offset=0; offset<(size-(2 * squareCounter)-1); offset++) {
 //        int firstCorner = m[squareCounter][squareCounter];
 //        m[squareCounter][squareCounter] = m[size - squareCounter - 1][squareCounter];
 //        m[size - squareCounter - 1][squareCounter] = m[size - squareCounter - 1][size - squareCounter - 1];
@@ -51,10 +51,26 @@ public class Matrix {
 //        display();
 
         System.out.println("- offset=" + offset);
-        System.out.printf("Row %d, column %d\n", squareCounter, squareCounter+offset);
-        System.out.printf("Row %d, column %d\n", squareCounter+offset, size - squareCounter - 1);
-        System.out.printf("Row %d, column %d\n", size - squareCounter - 1, size - squareCounter-offset - 1);
-        System.out.printf("Row %d, column %d\n", size - squareCounter-offset - 1, squareCounter);
+
+        // top to right side
+        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
+            squareCounter, squareCounter+offset, m[squareCounter][squareCounter+offset],
+            squareCounter+offset, size-1-squareCounter, m[squareCounter+offset][size-1-squareCounter]);
+
+        // right side to bottom
+        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
+            squareCounter+offset, size-squareCounter-1, m[squareCounter+offset][size-squareCounter-1],
+            size-squareCounter-1, size-1-squareCounter-offset, m[size-squareCounter-1][size-1-squareCounter-offset]);
+
+        // bottom to left side
+        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
+            size-squareCounter-1, size-squareCounter-offset-1, m[size-squareCounter-1][size-squareCounter-offset-1],
+            size-squareCounter-offset-1, squareCounter, m[size-squareCounter-offset-1][squareCounter]);
+
+        // left side to top
+        System.out.printf("Row %d, column %d (%d) moved to row %d, column %d (%d)\n",
+            size-squareCounter-offset-1, squareCounter, m[size-squareCounter-offset-1][squareCounter],
+            squareCounter, squareCounter+offset, m[squareCounter][squareCounter+offset]);
       }
 
       System.out.println();
