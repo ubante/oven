@@ -19,7 +19,7 @@ import java.util.LinkedHashMap;
  * The first node is considered odd, the second node even and so on ...
  */
 public class P328OddEvenLinkedList {
-  public ListNode oddEvenList(ListNode head) {
+  public ListNode oddEvenListOld(ListNode head) {
     // temporary root
     ListNode even = new ListNode(-2);
     ListNode odd = new ListNode(-1);
@@ -43,10 +43,50 @@ public class P328OddEvenLinkedList {
     return odd;
   }
 
+  /**
+   * in place - learning to read
+   *
+   * in place:
+   * moving  2: 1->3->4->5->6->7->8->9->10->11->2->NULL
+   * moving  4: 1->3->5->6->7->8->9->10->11->2->4->NULL
+   * moving  6: 1->3->5->7->8->9->10->11->2->4->6->NULL
+   * moving  8: 1->3->5->7->9->10->11->2->4->6->8->NULL
+   * moving 10: 1->3->5->7->9->11->2->4->6->8->10->NULL
+   * return   1->3->5->7->9->11->2->4->6->8->10->NULL
+   *
+   * @param head
+   * @return
+   */
+  public ListNode oddEvenList(ListNode head) {
+    ListNode pointer = head;
+    ListNode endPointer = head;
+
+    // find the end
+    while (endPointer.next != null) {
+      endPointer = endPointer.next;
+    }
+
+    int greatestValue = endPointer.val;
+
+    do {
+      System.out.printf("moving %2d: ", pointer.next.val);
+      endPointer.next = pointer.next;
+      pointer.next = pointer.next.next;
+      pointer = pointer.next;
+      endPointer = endPointer.next;
+      endPointer.next = null;
+
+      head.display();
+    } while (pointer.val != greatestValue);
+
+    return head;
+  }
 
   public static void main(String[] args) {
+    final int LISTSIZE = 11;
+
     ListNode ln = new ListNode(1);
-    for (int i=2; i<=5; i++) {
+    for (int i=2; i<=LISTSIZE; i++) {
       ln.addTail(new ListNode(i));
     }
 
@@ -54,10 +94,18 @@ public class P328OddEvenLinkedList {
     ln.display();
 
     P328OddEvenLinkedList solution = new P328OddEvenLinkedList();
-    ListNode lnX = solution.oddEvenList(ln);
+    ListNode lnX = solution.oddEvenListOld(ln);
 
     System.out.printf("return ");
     lnX.display();
+
+    System.out.println("\nin place: ");
+    lnX = solution.oddEvenList(ln);
+
+    System.out.printf("return   ");
+    lnX.display();
+
+
   }
 }
 
