@@ -12,16 +12,20 @@ public class ElementalSubstance {
         decayRatePerYear = d;
     }
 
+    ElementalSubstance(int a) {
+        this(a, 0.25);
+    }
+
+    ElementalSubstance copy() {
+        return new ElementalSubstance(age, decayRatePerYear);
+    }
+
     public int getAge() {
         return age;
     }
 
     public double getDecayRatePerYear() {
         return decayRatePerYear;
-    }
-
-    ElementalSubstance(int a) {
-        this(a, 0.25);
     }
 
     ElementalSubstance() {

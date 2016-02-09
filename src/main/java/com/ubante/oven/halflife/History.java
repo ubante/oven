@@ -23,11 +23,9 @@ public class History {
      */
     ElementalSubstanceClass getNewestClass() {
         int size = history.size();
-//        return history.get(size-1);
-//        ElementalSubstanceClass currentGeneration = history.get(size-1);
-//        return currentGeneration;
-
-        return new ElementalSubstanceClass(history.get(size-1));
+//        System.out.println("size is: " + size);
+        ElementalSubstanceClass last = history.get(size-1);
+        return last.copy();
     }
 
     void displayCurrentGeneration() {
@@ -50,20 +48,25 @@ public class History {
 
     void displayCSV(int GREATESTPOSSIBLEAGE) {
         System.out.println("History in CSV format:");
+        System.out.println("generation, freq of 0, freq of 1, freq of 2,...");
 
         int generationCounter = 0;
 
         for (ElementalSubstanceClass esc : history) {
-            System.out.printf("%d,", generationCounter);
+//            System.out.printf("generation %d\n", generationCounter);
 
+            esc.display();
+            System.out.println("");
+            List<Integer> intList = esc.toIntegers();
+            System.out.printf("%2d,", generationCounter);
             for (int thisAge = 0; thisAge<= GREATESTPOSSIBLEAGE; thisAge++) {
-                System.out.printf("%d,", Collections.frequency(esc.getEsClass(), thisAge));
+//                System.out.printf("%d,", Collections.frequency(esc.getEsClass(), thisAge));
+//                System.out.printf("%d->%d,", thisAge, Collections.frequency(intList, thisAge));
+                System.out.printf("%2d,", Collections.frequency(intList, thisAge));
             }
+            System.out.println("\n");
 
             generationCounter++;
-            System.out.println();
-            esc.display();
-            System.out.println();
         }
 
     }

@@ -17,11 +17,17 @@ public class ElementalSubstanceClass {
     ElementalSubstanceClass() {}
 
     /**
-     * A deep copy constructor.
-     * @param original
+     * Deep copy method.
+     * @return
      */
-    ElementalSubstanceClass(ElementalSubstanceClass original) {
-        this.esClass = original.esClass;
+    ElementalSubstanceClass copy() {
+        ElementalSubstanceClass copy = new ElementalSubstanceClass();
+
+        for (ElementalSubstance es : esClass) {
+            copy.add(es);
+        }
+
+        return copy;
     }
 
     public List<ElementalSubstance> getEsClass() {
@@ -40,8 +46,11 @@ public class ElementalSubstanceClass {
 
     void ageMembers() {
         for (ElementalSubstance es : esClass) {
+            System.out.printf("%d->", es.getAge());
             es.age();
+            System.out.println(es.getAge());
         }
+//        System.exit(1);
     }
 
     double getMeanAge() {
@@ -71,5 +80,19 @@ public class ElementalSubstanceClass {
         for (int i=0; i<dropCount; i++) {
             esClass.add(new ElementalSubstance());
         }
+    }
+
+    /**
+     * Java Collections is easier with boxed primitives.  Because equals is hard.
+     * @return
+     */
+    List<Integer> toIntegers() {
+        List<Integer> intList = new ArrayList<>();
+
+        for (ElementalSubstance es : esClass) {
+            intList.add(es.getAge());
+        }
+
+        return intList;
     }
 }

@@ -10,12 +10,13 @@ package com.ubante.oven.halflife;
  * After 99 years, the stable mean age is 3 years. for data, see:
  * https://docs.google.com/spreadsheets/d/12_5TjAfx9Lkh1hnlQz0JrogDOfQ291r29t_cIcLeF4U/edit#gid=0
  */
-public class Simulator {
-    final int FINALGENERATIONYEAR = 4;
+public class HalflifeSimulator {
+    final int FINALGENERATIONYEAR = 3;
     final int SAMPLESIZE = 31;
     int generationalYear = 0;
     int maxInitAge = 10;
     History history;
+    boolean isOutputVerbose = false;
 
     void generateInitialClass(int SAMPLESIZE) {
 
@@ -33,37 +34,67 @@ public class Simulator {
         System.out.println("");
     }
 
-
+    public void setOutputVerbose(boolean outputVerbose) {
+        isOutputVerbose = outputVerbose;
+    }
 
     void begin() {
+        System.out.printf("Max initial age: %d, Number of generations: %d, Sample size: %d\n\n",
+                maxInitAge, FINALGENERATIONYEAR, SAMPLESIZE);
         generateInitialClass(SAMPLESIZE);
 
         while (generationalYear <= FINALGENERATIONYEAR) {
-            generationalYear++;
 
             // Get the newest generation
             ElementalSubstanceClass newestClass = history.getNewestClass();
+            System.out.println("------------------------------------------");
+            System.out.println("After the get: ");
+            history.displayAll();
+            System.out.println("The newest class:");
+            newestClass.display();
+            System.out.println();
 
             newestClass.ageMembers();
+
+            System.out.println("After the age: ");
+            history.displayAll();
+            System.out.println("The newest class:");
+            newestClass.display();
+            System.out.println();;
+
             newestClass.decayMembers();
 
-            history.add(newestClass);
+            System.out.println("After the decay: ");
             history.displayAll();
+            history.add(newestClass);
+
+            System.out.println("After the add:  ");
+            history.displayAll();
+            System.out.println();
+
 //            history.displayCurrentGeneration();
+
+            generationalYear++;
+
         }
 
         System.out.println();
 
 //        history.displayAll();
 
+        System.out.println("The history looks like:");
+        history.displayAll();
+        System.out.println();
+
         history.displayCSV(FINALGENERATIONYEAR+maxInitAge);
 
     }
 
     public static void main(String[] args) {
-        System.out.println("Second half life!\n\n");
+        System.out.println("Second half life!");
 
-        Simulator s = new Simulator();
+        HalflifeSimulator s = new HalflifeSimulator();
+        s.setOutputVerbose(true);
         s.begin();
     }
 
