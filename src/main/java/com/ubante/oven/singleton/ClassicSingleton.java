@@ -19,7 +19,7 @@ public class ClassicSingleton {
   }
 
   public void displayState() {
-    System.out.println("\nHere is the config state:");
+    System.out.println("Here is the config state:");
     System.out.println("config1: " + config1);
     System.out.println("config2: " + config2);
   }

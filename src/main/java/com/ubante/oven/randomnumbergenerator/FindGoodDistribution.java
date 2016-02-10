@@ -50,8 +50,6 @@ public class FindGoodDistribution {
         numberOfSamples++;
     }
 
-
-
     public static void main(String[] args) {
         int minValue = 2;
         int maxValue = 14;
