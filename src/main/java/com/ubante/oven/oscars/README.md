@@ -7,9 +7,13 @@ laying around, wouldn't you rather have an app?
 
 This is the model for that app.
 
+# To do
+  - Give the percentage of wins for movies with more than a single nomination
+  - Tally up scores for people but that will require a Person and a PersonList class mebbe
+  - do the thing with the Roids
+
 # Output
 ```
-"C:\Program Files\Java\jdk1.8.0_65\bin\java" -Didea.launcher.port=7533 "-Didea.launcher.bin.path=C:\Program Files (x86)\JetBrains\IntelliJ IDEA 14.1.5\bin" -Dfile.encoding=windows-1252 -classpath "C:\Program Files\Java\jdk1.8.0_65\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext\zipfs.jar;C:\Users\J\IdeaProjects\oven\target\classes;C:\Users\J\.m2\repository\org\apache\commons\commons-lang3\3.1\commons-lang3-3.1.jar;C:\Users\J\.m2\repository\javax\servlet\javax.servlet-api\3.1.0\javax.servlet-api-3.1.0.jar;C:\Users\J\.m2\repository\javax\faces\javax.faces-api\2.2\javax.faces-api-2.2.jar;C:\Users\J\.m2\repository\com\googlecode\json-simple\json-simple\1.1\json-simple-1.1.jar;C:\Users\J\.m2\repository\org\json\json\20090211\json-20090211.jar;C:\Users\J\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Program Files (x86)\JetBrains\IntelliJ IDEA 14.1.5\lib\idea_rt.jar" com.intellij.rt.execution.application.AppMain com.ubante.oven.oscars.OscarRunner
 Cannot find The Big Short; adding it
 Cannot find Bridge of Spies; adding it
 Cannot find Brooklyn; adding it
@@ -50,6 +54,25 @@ Cannot find Mustang; adding it
 Cannot find Son of Saul; adding it
 Cannot find Theeb; adding it
 Cannot find A War; adding it
+Cannot find The 100-Year-Old Man Who Climbed Out; adding it
+Cannot find The Window and Disappeared; adding it
+Cannot find Fifty Shades of Grey; adding it
+Cannot find Racing Extinction; adding it
+Cannot find Youth; adding it
+Cannot find The Hunting Ground; adding it
+Cannot find Spectre; adding it
+Cannot find Bear Story; adding it
+Cannot find Prologue; adding it
+Cannot find Sanjay's Super Team; adding it
+Cannot find We Can't Live without Cosmos; adding it
+Cannot find World of Tomorrow; adding it
+Cannot find Ave Maria; adding it
+Cannot find Day One; adding it
+Cannot find Everything Will Be Okay (Alles Wird Gut); adding it
+Cannot find Shok; adding it
+Cannot find Stutterer; adding it
+Cannot find Ex Machina; adding it
+Cannot find Straight Outta Compton; adding it
 
 Best Picture:
 - The Big Short
@@ -145,295 +168,272 @@ Foreign Language Film:
 - Theeb
 - A War
 
+Makeup and Hairstyling:
+- Mad Max: Fury Road
+- The 100-Year-Old Man Who Climbed Out
+- The Window and Disappeared
+- The Revenant
+
+Music (Original Score):
+- Bridge of Spies
+- Carol
+- The Hateful Eight
+- Sicario
+- Star Wars: The Force Awakens
+
+Music (Original Song):
+- Earned It (Fifty Shades of Grey)
+- Manta Ray (Racing Extinction)
+- Simple Song #3 (Youth)
+- Till It Happens To You (The Hunting Ground)
+- Writing's On The Wall (Spectre)
+
+Production Design:
+- Bridge of Spies
+- The Danish Girl
+- Mad Max: Fury Road
+- The Martian
+- The Revenant
+
+Short Film (Animated):
+- Bear Story
+- Prologue
+- Sanjay's Super Team
+- We Can't Live without Cosmos
+- World of Tomorrow
+
+Short Film (Live Action):
+- Ave Maria
+- Day One
+- Everything Will Be Okay (Alles Wird Gut)
+- Shok
+- Stutterer
+
+Sound Editing:
+- Mad Max: Fury Road
+- The Martian
+- The Revenant
+- Sicario
+- Star Wars: The Force Awakens
+
+Sound Mixing:
+- Bridge of Spies
+- Mad Max: Fury Road
+- The Martian
+- The Revenant
+- Star Wars: The Force Awakens
+
+Visual Effects:
+- Ex Machina
+- Mad Max: Fury Road
+- The Martian
+- The Revenant
+- Star Wars: The Force Awakens
+
+Writing (Adapted Screenplay):
+- The Big Short
+- Brooklyn
+- Carol
+- The Martian
+- Room
+
+Writing (Original Screenplay):
+- Bridge of Spies
+- Ex Machina
+- Inside Out
+- Spotlight
+- Straight Outta Compton
+
+---------------------------------------------------------
+
 Here are the stats for all the nominated movies:
-The Big Short nominated 4 times
-Bridge of Spies nominated 2 times
-Brooklyn nominated 2 times
-Mad Max: Fury Road nominated 5 times
-The Martian nominated 2 times
-The Revenant nominated 7 times
-Room nominated 3 times
-Spotlight nominated 5 times
-Trumbo nominated 1 times
-Steve Jobs nominated 2 times
-The Danish Girl nominated 2 times
-Carol nominated 4 times
-Joy nominated 1 times
-45 Years nominated 1 times
-Creed nominated 1 times
-The Hateful Eight nominated 2 times
-Anomalisa nominated 1 times
-Boy and the World nominated 1 times
-Inside Out nominated 1 times
-Shaun the Sheep Movie nominated 1 times
-When Marnie Was There nominated 1 times
-Sicario nominated 1 times
-Cinderella nominated 1 times
-The Danish Gril nominated 1 times
-Amy nominated 1 times
-Cartel Land nominated 1 times
-The Look of Silence nominated 1 times
-What Happened, Miss Simone? nominated 1 times
-Winter on Fire: Ukraine's Fight for Freedom nominated 1 times
-Body Team 12 nominated 1 times
-Chau, beyond the Lines nominated 1 times
-Claude Lanzmann: Spectres of the Shoah nominated 1 times
-A Girl in the River: The Price of Forgiveness nominated 1 times
-Last Day of Freedom nominated 1 times
-Star Wars: The Force Awakens nominated 1 times
-Embrace of the Serpent nominated 1 times
-Mustang nominated 1 times
-Son of Saul nominated 1 times
-Theeb nominated 1 times
-A War nominated 1 times
+The Big Short is nominated 5 times
+Bridge of Spies is nominated 6 times
+Brooklyn is nominated 3 times
+Mad Max: Fury Road is nominated 10 times
+The Martian is nominated 7 times
+The Revenant is nominated 12 times
+Room is nominated 4 times
+Spotlight is nominated 6 times
+Trumbo is nominated 1 times
+Steve Jobs is nominated 2 times
+The Danish Girl is nominated 3 times
+Carol is nominated 6 times
+Joy is nominated 1 times
+45 Years is nominated 1 times
+Creed is nominated 1 times
+The Hateful Eight is nominated 3 times
+Anomalisa is nominated 1 times
+Boy and the World is nominated 1 times
+Inside Out is nominated 2 times
+Shaun the Sheep Movie is nominated 1 times
+When Marnie Was There is nominated 1 times
+Sicario is nominated 3 times
+Cinderella is nominated 1 times
+The Danish Gril is nominated 1 times
+Amy is nominated 1 times
+Cartel Land is nominated 1 times
+The Look of Silence is nominated 1 times
+What Happened, Miss Simone? is nominated 1 times
+Winter on Fire: Ukraine's Fight for Freedom is nominated 1 times
+Body Team 12 is nominated 1 times
+Chau, beyond the Lines is nominated 1 times
+Claude Lanzmann: Spectres of the Shoah is nominated 1 times
+A Girl in the River: The Price of Forgiveness is nominated 1 times
+Last Day of Freedom is nominated 1 times
+Star Wars: The Force Awakens is nominated 5 times
+Embrace of the Serpent is nominated 1 times
+Mustang is nominated 1 times
+Son of Saul is nominated 1 times
+Theeb is nominated 1 times
+A War is nominated 1 times
+The 100-Year-Old Man Who Climbed Out is nominated 1 times
+The Window and Disappeared is nominated 1 times
+Fifty Shades of Grey is nominated 1 times
+Racing Extinction is nominated 1 times
+Youth is nominated 1 times
+The Hunting Ground is nominated 1 times
+Spectre is nominated 1 times
+Bear Story is nominated 1 times
+Prologue is nominated 1 times
+Sanjay's Super Team is nominated 1 times
+We Can't Live without Cosmos is nominated 1 times
+World of Tomorrow is nominated 1 times
+Ave Maria is nominated 1 times
+Day One is nominated 1 times
+Everything Will Be Okay (Alles Wird Gut) is nominated 1 times
+Shok is nominated 1 times
+Stutterer is nominated 1 times
+Ex Machina is nominated 2 times
+Straight Outta Compton is nominated 1 times
 
 ---------------------------------------------------------
 
 Condo is voting now.
-Condo chose index 4 in Best Picture which is The Martian
-Condo chose index 4 in Actor in a Leading Role which is Eddie Redmayne (The Danish Girl)
-Condo chose index 1 in Actress in a Leading Role which is Brie Larson (Room)
-Condo chose index 3 in Actor in a Supporting Role which is Mark Rylance (Bridge of Spies)
-Condo chose index 0 in Actress in a Supporting Role which is Jennifer Jason Leigh (The Hateful Eight)
-Condo chose index 1 in Animated Feature Film which is Boy and the World
-Condo chose index 4 in Cinematography which is Sicario
-Condo chose index 2 in Costume Design which is The Danish Gril
-Condo chose index 4 in Directing which is Spotlight
-Condo chose index 4 in Documentary (Feature)) which is Winter on Fire: Ukraine's Fight for Freedom
-Condo chose index 4 in Documentary (Short Subject) which is Last Day of Freedom
-Condo chose index 3 in Film Editing which is Spotlight
-Condo chose index 0 in Foreign Language Film which is Embrace of the Serpent
 Bugger is voting now.
-Bugger chose index 7 in Best Picture which is Spotlight
-Bugger chose index 3 in Actor in a Leading Role which is Michael Fassbender (Steve Jobs)
-Bugger chose index 2 in Actress in a Leading Role which is Jennifer Lawrence (Joy)
-Bugger chose index 3 in Actor in a Supporting Role which is Mark Rylance (Bridge of Spies)
-Bugger chose index 4 in Actress in a Supporting Role which is Kate Winslet (Steve Jobs)
-Bugger chose index 2 in Animated Feature Film which is Inside Out
-Bugger chose index 3 in Cinematography which is The Revenant
-Bugger chose index 0 in Costume Design which is Carol
-Bugger chose index 1 in Directing which is Mad Max: Fury Road
-Bugger chose index 4 in Documentary (Feature)) which is Winter on Fire: Ukraine's Fight for Freedom
-Bugger chose index 1 in Documentary (Short Subject) which is Chau, beyond the Lines
-Bugger chose index 2 in Film Editing which is The Revenant
-Bugger chose index 4 in Foreign Language Film which is A War
 ?oarece is voting now.
-?oarece chose index 2 in Best Picture which is Brooklyn
-?oarece chose index 2 in Actor in a Leading Role which is Leonardo DiCaprio (The Revenant)
-?oarece chose index 1 in Actress in a Leading Role which is Brie Larson (Room)
-?oarece chose index 1 in Actor in a Supporting Role which is Tom Hardy (The Revenant)
-?oarece chose index 0 in Actress in a Supporting Role which is Jennifer Jason Leigh (The Hateful Eight)
-?oarece chose index 3 in Animated Feature Film which is Shaun the Sheep Movie
-?oarece chose index 4 in Cinematography which is Sicario
-?oarece chose index 1 in Costume Design which is Cinderella
-?oarece chose index 0 in Directing which is The Big Short
-?oarece chose index 1 in Documentary (Feature)) which is Cartel Land
-?oarece chose index 1 in Documentary (Short Subject) which is Chau, beyond the Lines
-?oarece chose index 0 in Film Editing which is The Big Short
-?oarece chose index 3 in Foreign Language Film which is Theeb
 Condootz is voting now.
-Condootz chose index 2 in Best Picture which is Brooklyn
-Condootz chose index 2 in Actor in a Leading Role which is Leonardo DiCaprio (The Revenant)
-Condootz chose index 3 in Actress in a Leading Role which is Charlotte Rampling (45 Years)
-Condootz chose index 3 in Actor in a Supporting Role which is Mark Rylance (Bridge of Spies)
-Condootz chose index 4 in Actress in a Supporting Role which is Kate Winslet (Steve Jobs)
-Condootz chose index 4 in Animated Feature Film which is When Marnie Was There
-Condootz chose index 1 in Cinematography which is The Hateful Eight
-Condootz chose index 4 in Costume Design which is The Revenant
-Condootz chose index 4 in Directing which is Spotlight
-Condootz chose index 4 in Documentary (Feature)) which is Winter on Fire: Ukraine's Fight for Freedom
-Condootz chose index 1 in Documentary (Short Subject) which is Chau, beyond the Lines
-Condootz chose index 3 in Film Editing which is Spotlight
-Condootz chose index 2 in Foreign Language Film which is Son of Saul
 Slobonog is voting now.
-Slobonog chose index 6 in Best Picture which is Room
-Slobonog chose index 0 in Actor in a Leading Role which is Bryan Cranston (Trumbo)
-Slobonog chose index 3 in Actress in a Leading Role which is Charlotte Rampling (45 Years)
-Slobonog chose index 3 in Actor in a Supporting Role which is Mark Rylance (Bridge of Spies)
-Slobonog chose index 4 in Actress in a Supporting Role which is Kate Winslet (Steve Jobs)
-Slobonog chose index 3 in Animated Feature Film which is Shaun the Sheep Movie
-Slobonog chose index 4 in Cinematography which is Sicario
-Slobonog chose index 3 in Costume Design which is Mad Max: Fury Road
-Slobonog chose index 0 in Directing which is The Big Short
-Slobonog chose index 0 in Documentary (Feature)) which is Amy
-Slobonog chose index 4 in Documentary (Short Subject) which is Last Day of Freedom
-Slobonog chose index 3 in Film Editing which is Spotlight
-Slobonog chose index 4 in Foreign Language Film which is A War
 Mus Musculus is voting now.
-Mus Musculus chose index 3 in Best Picture which is Mad Max: Fury Road
-Mus Musculus chose index 4 in Actor in a Leading Role which is Eddie Redmayne (The Danish Girl)
-Mus Musculus chose index 2 in Actress in a Leading Role which is Jennifer Lawrence (Joy)
-Mus Musculus chose index 0 in Actor in a Supporting Role which is Christian Bale (The Big Short)
-Mus Musculus chose index 0 in Actress in a Supporting Role which is Jennifer Jason Leigh (The Hateful Eight)
-Mus Musculus chose index 3 in Animated Feature Film which is Shaun the Sheep Movie
-Mus Musculus chose index 0 in Cinematography which is Carol
-Mus Musculus chose index 0 in Costume Design which is Carol
-Mus Musculus chose index 2 in Directing which is The Revenant
-Mus Musculus chose index 3 in Documentary (Feature)) which is What Happened, Miss Simone?
-Mus Musculus chose index 2 in Documentary (Short Subject) which is Claude Lanzmann: Spectres of the Shoah
-Mus Musculus chose index 4 in Film Editing which is Star Wars: The Force Awakens
-Mus Musculus chose index 2 in Foreign Language Film which is Son of Saul
 Diagonal is voting now.
-Diagonal chose index 6 in Best Picture which is Room
-Diagonal chose index 3 in Actor in a Leading Role which is Michael Fassbender (Steve Jobs)
-Diagonal chose index 0 in Actress in a Leading Role which is Cate Blanchett (Carol)
-Diagonal chose index 2 in Actor in a Supporting Role which is Mark Ruffalo (Spotlight)
-Diagonal chose index 1 in Actress in a Supporting Role which is Rooney Mara (Carol)
-Diagonal chose index 0 in Animated Feature Film which is Anomalisa
-Diagonal chose index 0 in Cinematography which is Carol
-Diagonal chose index 4 in Costume Design which is The Revenant
-Diagonal chose index 3 in Directing which is Room
-Diagonal chose index 4 in Documentary (Feature)) which is Winter on Fire: Ukraine's Fight for Freedom
-Diagonal chose index 0 in Documentary (Short Subject) which is Body Team 12
-Diagonal chose index 0 in Film Editing which is The Big Short
-Diagonal chose index 3 in Foreign Language Film which is Theeb
 Condool is voting now.
-Condool chose index 0 in Best Picture which is The Big Short
-Condool chose index 3 in Actor in a Leading Role which is Michael Fassbender (Steve Jobs)
-Condool chose index 4 in Actress in a Leading Role which is Saoirse Ronan (Brooklyn)
-Condool chose index 1 in Actor in a Supporting Role which is Tom Hardy (The Revenant)
-Condool chose index 2 in Actress in a Supporting Role which is Rachel McAdams (Spotlight)
-Condool chose index 3 in Animated Feature Film which is Shaun the Sheep Movie
-Condool chose index 1 in Cinematography which is The Hateful Eight
-Condool chose index 0 in Costume Design which is Carol
-Condool chose index 0 in Directing which is The Big Short
-Condool chose index 4 in Documentary (Feature)) which is Winter on Fire: Ukraine's Fight for Freedom
-Condool chose index 2 in Documentary (Short Subject) which is Claude Lanzmann: Spectres of the Shoah
-Condool chose index 3 in Film Editing which is Spotlight
-Condool chose index 0 in Foreign Language Film which is Embrace of the Serpent
 Mustachele is voting now.
-Mustachele chose index 6 in Best Picture which is Room
-Mustachele chose index 4 in Actor in a Leading Role which is Eddie Redmayne (The Danish Girl)
-Mustachele chose index 0 in Actress in a Leading Role which is Cate Blanchett (Carol)
-Mustachele chose index 1 in Actor in a Supporting Role which is Tom Hardy (The Revenant)
-Mustachele chose index 2 in Actress in a Supporting Role which is Rachel McAdams (Spotlight)
-Mustachele chose index 1 in Animated Feature Film which is Boy and the World
-Mustachele chose index 0 in Cinematography which is Carol
-Mustachele chose index 3 in Costume Design which is Mad Max: Fury Road
-Mustachele chose index 0 in Directing which is The Big Short
-Mustachele chose index 1 in Documentary (Feature)) which is Cartel Land
-Mustachele chose index 1 in Documentary (Short Subject) which is Chau, beyond the Lines
-Mustachele chose index 1 in Film Editing which is Mad Max: Fury Road
-Mustachele chose index 1 in Foreign Language Film which is Mustang
 j is voting now.
-j chose index 3 in Best Picture which is Mad Max: Fury Road
-j chose index 4 in Actor in a Leading Role which is Eddie Redmayne (The Danish Girl)
-j chose index 3 in Actress in a Leading Role which is Charlotte Rampling (45 Years)
-j chose index 2 in Actor in a Supporting Role which is Mark Ruffalo (Spotlight)
-j chose index 0 in Actress in a Supporting Role which is Jennifer Jason Leigh (The Hateful Eight)
-j chose index 3 in Animated Feature Film which is Shaun the Sheep Movie
-j chose index 2 in Cinematography which is Mad Max: Fury Road
-j chose index 3 in Costume Design which is Mad Max: Fury Road
-j chose index 1 in Directing which is Mad Max: Fury Road
-j chose index 1 in Documentary (Feature)) which is Cartel Land
-j chose index 2 in Documentary (Short Subject) which is Claude Lanzmann: Spectres of the Shoah
-j chose index 2 in Film Editing which is The Revenant
-j chose index 3 in Foreign Language Film which is Theeb
 k is voting now.
-k chose index 3 in Best Picture which is Mad Max: Fury Road
-k chose index 0 in Actor in a Leading Role which is Bryan Cranston (Trumbo)
-k chose index 3 in Actress in a Leading Role which is Charlotte Rampling (45 Years)
-k chose index 0 in Actor in a Supporting Role which is Christian Bale (The Big Short)
-k chose index 2 in Actress in a Supporting Role which is Rachel McAdams (Spotlight)
-k chose index 0 in Animated Feature Film which is Anomalisa
-k chose index 1 in Cinematography which is The Hateful Eight
-k chose index 1 in Costume Design which is Cinderella
-k chose index 0 in Directing which is The Big Short
-k chose index 1 in Documentary (Feature)) which is Cartel Land
-k chose index 3 in Documentary (Short Subject) which is A Girl in the River: The Price of Forgiveness
-k chose index 1 in Film Editing which is Mad Max: Fury Road
-k chose index 3 in Foreign Language Film which is Theeb
 l is voting now.
-l chose index 3 in Best Picture which is Mad Max: Fury Road
-l chose index 3 in Actor in a Leading Role which is Michael Fassbender (Steve Jobs)
-l chose index 3 in Actress in a Leading Role which is Charlotte Rampling (45 Years)
-l chose index 1 in Actor in a Supporting Role which is Tom Hardy (The Revenant)
-l chose index 1 in Actress in a Supporting Role which is Rooney Mara (Carol)
-l chose index 3 in Animated Feature Film which is Shaun the Sheep Movie
-l chose index 2 in Cinematography which is Mad Max: Fury Road
-l chose index 2 in Costume Design which is The Danish Gril
-l chose index 3 in Directing which is Room
-l chose index 4 in Documentary (Feature)) which is Winter on Fire: Ukraine's Fight for Freedom
-l chose index 1 in Documentary (Short Subject) which is Chau, beyond the Lines
-l chose index 1 in Film Editing which is Mad Max: Fury Road
-l chose index 1 in Foreign Language Film which is Mustang
 m is voting now.
-m chose index 4 in Best Picture which is The Martian
-m chose index 4 in Actor in a Leading Role which is Eddie Redmayne (The Danish Girl)
-m chose index 3 in Actress in a Leading Role which is Charlotte Rampling (45 Years)
-m chose index 4 in Actor in a Supporting Role which is Sylvester Stallone (Creed)
-m chose index 3 in Actress in a Supporting Role which is Alicia Vikander (The Danish Girl)
-m chose index 3 in Animated Feature Film which is Shaun the Sheep Movie
-m chose index 0 in Cinematography which is Carol
-m chose index 2 in Costume Design which is The Danish Gril
-m chose index 1 in Directing which is Mad Max: Fury Road
-m chose index 3 in Documentary (Feature)) which is What Happened, Miss Simone?
-m chose index 2 in Documentary (Short Subject) which is Claude Lanzmann: Spectres of the Shoah
-m chose index 3 in Film Editing which is Spotlight
-m chose index 2 in Foreign Language Film which is Son of Saul
 n is voting now.
-n chose index 5 in Best Picture which is The Revenant
-n chose index 4 in Actor in a Leading Role which is Eddie Redmayne (The Danish Girl)
-n chose index 1 in Actress in a Leading Role which is Brie Larson (Room)
-n chose index 1 in Actor in a Supporting Role which is Tom Hardy (The Revenant)
-n chose index 1 in Actress in a Supporting Role which is Rooney Mara (Carol)
-n chose index 0 in Animated Feature Film which is Anomalisa
-n chose index 0 in Cinematography which is Carol
-n chose index 0 in Costume Design which is Carol
-n chose index 3 in Directing which is Room
-n chose index 0 in Documentary (Feature)) which is Amy
-n chose index 0 in Documentary (Short Subject) which is Body Team 12
-n chose index 1 in Film Editing which is Mad Max: Fury Road
-n chose index 3 in Foreign Language Film which is Theeb
 o is voting now.
-o chose index 0 in Best Picture which is The Big Short
-o chose index 4 in Actor in a Leading Role which is Eddie Redmayne (The Danish Girl)
-o chose index 0 in Actress in a Leading Role which is Cate Blanchett (Carol)
-o chose index 4 in Actor in a Supporting Role which is Sylvester Stallone (Creed)
-o chose index 3 in Actress in a Supporting Role which is Alicia Vikander (The Danish Girl)
-o chose index 0 in Animated Feature Film which is Anomalisa
-o chose index 2 in Cinematography which is Mad Max: Fury Road
-o chose index 3 in Costume Design which is Mad Max: Fury Road
-o chose index 3 in Directing which is Room
-o chose index 0 in Documentary (Feature)) which is Amy
-o chose index 1 in Documentary (Short Subject) which is Chau, beyond the Lines
-o chose index 4 in Film Editing which is Star Wars: The Force Awakens
-o chose index 0 in Foreign Language Film which is Embrace of the Serpent
 ---------------------------------------------------------
 
-The winner for Best Picture is Brooklyn.
-The winner for Actor in a Leading Role is Leonardo DiCaprio (The Revenant).
+The winner for Best Picture is Room.
+The winner for Actor in a Leading Role is Eddie Redmayne (The Danish Girl).
 The winner for Actress in a Leading Role is Charlotte Rampling (45 Years).
-The winner for Actor in a Supporting Role is Mark Rylance (Bridge of Spies).
+The winner for Actor in a Supporting Role is Tom Hardy (The Revenant).
 The winner for Actress in a Supporting Role is Kate Winslet (Steve Jobs).
-The winner for Animated Feature Film is Inside Out.
-The winner for Cinematography is Mad Max: Fury Road.
-The winner for Costume Design is The Danish Gril.
-The winner for Directing is The Big Short.
-The winner for Documentary (Feature)) is Winter on Fire: Ukraine's Fight for Freedom.
-The winner for Documentary (Short Subject) is Claude Lanzmann: Spectres of the Shoah.
-The winner for Film Editing is The Big Short.
-The winner for Foreign Language Film is Mustang.
+The winner for Animated Feature Film is When Marnie Was There.
+The winner for Cinematography is Carol.
+The winner for Costume Design is The Revenant.
+The winner for Directing is Spotlight.
+The winner for Documentary (Feature)) is Cartel Land.
+The winner for Documentary (Short Subject) is Chau, beyond the Lines.
+The winner for Film Editing is Spotlight.
+The winner for Foreign Language Film is Embrace of the Serpent.
+The winner for Makeup and Hairstyling is The 100-Year-Old Man Who Climbed Out.
+The winner for Music (Original Score) is The Hateful Eight.
+The winner for Music (Original Song) is Writing's On The Wall (Spectre).
+The winner for Production Design is The Revenant.
+The winner for Short Film (Animated) is Bear Story.
+The winner for Short Film (Live Action) is Day One.
+The winner for Sound Editing is Star Wars: The Force Awakens.
+The winner for Sound Mixing is The Revenant.
+The winner for Visual Effects is The Revenant.
+The winner for Writing (Adapted Screenplay) is Carol.
+The winner for Writing (Original Screenplay) is Inside Out.
 ---------------------------------------------------------
 
-Condo had 3 correct guesses and is leading the pack
-Bugger had 4 correct guesses and is leading the pack
-?oarece had 4 correct guesses
-Condootz had 6 correct guesses and is leading the pack
-Slobonog had 4 correct guesses
+Condo had 6 correct guesses and is leading the pack
+Bugger had 3 correct guesses
+?oarece had 3 correct guesses
+Condootz had 6 correct guesses
+Slobonog had 3 correct guesses
 Mus Musculus had 1 correct guesses
-Diagonal had 2 correct guesses
+Diagonal had 8 correct guesses and is leading the pack
 Condool had 3 correct guesses
-Mustachele had 2 correct guesses
-j had 3 correct guesses
-k had 2 correct guesses
-l had 5 correct guesses
-m had 3 correct guesses
-n had 0 correct guesses
-o had 1 correct guesses
-The best guesser is Condootz.
+Mustachele had 5 correct guesses
+j had 5 correct guesses
+k had 5 correct guesses
+l had 7 correct guesses
+m had 7 correct guesses
+n had 5 correct guesses
+o had 7 correct guesses
 
-Process finished with exit code 0
+The best guesser is Diagonal with 8 correct guesses.
+---------------------------------------------------------
+
+Here are the final stats for all the nominated movies:
+The Big Short won 0 of its 5 nominations
+Bridge of Spies won 0 of its 6 nominations
+Brooklyn won 0 of its 3 nominations
+Mad Max: Fury Road won 0 of its 10 nominations
+The Martian won 0 of its 7 nominations
+The Revenant won 5 of its 12 nominations
+Room won 1 of its 4 nominations
+Spotlight won 2 of its 6 nominations
+Trumbo won 0 of its 1 nominations
+Steve Jobs won 1 of its 2 nominations
+The Danish Girl won 1 of its 3 nominations
+Carol won 2 of its 6 nominations
+Joy won 0 of its 1 nominations
+45 Years won 1 of its 1 nominations
+Creed won 0 of its 1 nominations
+The Hateful Eight won 1 of its 3 nominations
+Anomalisa won 0 of its 1 nominations
+Boy and the World won 0 of its 1 nominations
+Inside Out won 1 of its 2 nominations
+Shaun the Sheep Movie won 0 of its 1 nominations
+When Marnie Was There won 1 of its 1 nominations
+Sicario won 0 of its 3 nominations
+Cinderella won 0 of its 1 nominations
+The Danish Gril won 0 of its 1 nominations
+Amy won 0 of its 1 nominations
+Cartel Land won 1 of its 1 nominations
+The Look of Silence won 0 of its 1 nominations
+What Happened, Miss Simone? won 0 of its 1 nominations
+Winter on Fire: Ukraine's Fight for Freedom won 0 of its 1 nominations
+Body Team 12 won 0 of its 1 nominations
+Chau, beyond the Lines won 1 of its 1 nominations
+Claude Lanzmann: Spectres of the Shoah won 0 of its 1 nominations
+A Girl in the River: The Price of Forgiveness won 0 of its 1 nominations
+Last Day of Freedom won 0 of its 1 nominations
+Star Wars: The Force Awakens won 1 of its 5 nominations
+Embrace of the Serpent won 1 of its 1 nominations
+Mustang won 0 of its 1 nominations
+Son of Saul won 0 of its 1 nominations
+Theeb won 0 of its 1 nominations
+A War won 0 of its 1 nominations
+The 100-Year-Old Man Who Climbed Out won 1 of its 1 nominations
+The Window and Disappeared won 0 of its 1 nominations
+Fifty Shades of Grey won 0 of its 1 nominations
+Racing Extinction won 0 of its 1 nominations
+Youth won 0 of its 1 nominations
+The Hunting Ground won 0 of its 1 nominations
+Spectre won 1 of its 1 nominations
+Bear Story won 1 of its 1 nominations
+Prologue won 0 of its 1 nominations
+Sanjay's Super Team won 0 of its 1 nominations
+We Can't Live without Cosmos won 0 of its 1 nominations
+World of Tomorrow won 0 of its 1 nominations
+Ave Maria won 0 of its 1 nominations
+Day One won 1 of its 1 nominations
+Everything Will Be Okay (Alles Wird Gut) won 0 of its 1 nominations
+Shok won 0 of its 1 nominations
+Stutterer won 0 of its 1 nominations
+Ex Machina won 0 of its 2 nominations
+Straight Outta Compton won 0 of its 1 nominations
+
+With 5 wins, the most winning movie is The Revenant.
+
 ```
 
 
