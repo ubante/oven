@@ -15,6 +15,12 @@ public class Category {
     this.name = name;
   }
 
+  public void setWinner(Nominee winner) {
+    this.winner = winner;
+    winner.isWinner = true;
+    winner.movie.wins++;
+  }
+
   void add(String movieName) {
     Movie movie = MovieList.find(movieName);
     nominees.add(new Nominee(movie, this));

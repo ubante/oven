@@ -9,6 +9,7 @@ import java.util.List;
 public class Movie {
   String title;
   List<Category> nominatedCategories = new ArrayList<>();
+  int wins = 0;
 
   Movie(String movieName) {
     title = movieName;

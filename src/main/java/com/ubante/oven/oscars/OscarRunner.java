@@ -133,7 +133,7 @@ public class OscarRunner {
     makeupHairstyling.add("The Revenant");
     categories.add(makeupHairstyling);
 
-    Category music = new Category("Music (Original Song)");
+    Category music = new Category("Music (Original Score)");
     music.add("Bridge of Spies");
     music.add("Carol");
     music.add("The Hateful Eight");
@@ -141,7 +141,77 @@ public class OscarRunner {
     music.add("Star Wars: The Force Awakens");
     categories.add(music);
 
+    Category song = new Category("Music (Original Song)");
+    song.add("Fifty Shades of Grey", "Earned It");
+    song.add("Racing Extinction", "Manta Ray");
+    song.add("Youth", "Simple Song #3");
+    song.add("The Hunting Ground", "Till It Happens To You");
+    song.add("Spectre", "Writing's On The Wall");
+    categories.add(song);
 
+    Category productionDesign = new Category("Production Design");
+    productionDesign.add("Bridge of Spies");
+    productionDesign.add("The Danish Girl");
+    productionDesign.add("Mad Max: Fury Road");
+    productionDesign.add("The Martian");
+    productionDesign.add("The Revenant");
+    categories.add(productionDesign);
+
+    Category shortFilmAnimated = new Category("Short Film (Animated)");
+    shortFilmAnimated.add("Bear Story");
+    shortFilmAnimated.add("Prologue");
+    shortFilmAnimated.add("Sanjay's Super Team");
+    shortFilmAnimated.add("We Can't Live without Cosmos");
+    shortFilmAnimated.add("World of Tomorrow");
+    categories.add(shortFilmAnimated);
+
+    Category shortFilmLive = new Category("Short Film (Live Action)");
+    shortFilmLive.add("Ave Maria");
+    shortFilmLive.add("Day One");
+    shortFilmLive.add("Everything Will Be Okay (Alles Wird Gut)");
+    shortFilmLive.add("Shok");
+    shortFilmLive.add("Stutterer");
+    categories.add(shortFilmLive);
+
+    Category soundEditing = new Category("Sound Editing");
+    soundEditing.add("Mad Max: Fury Road");
+    soundEditing.add("The Martian");
+    soundEditing.add("The Revenant");
+    soundEditing.add("Sicario");
+    soundEditing.add("Star Wars: The Force Awakens");
+    categories.add(soundEditing);
+
+    Category soundMixing = new Category("Sound Mixing");
+    soundMixing.add("Bridge of Spies");
+    soundMixing.add("Mad Max: Fury Road");
+    soundMixing.add("The Martian");
+    soundMixing.add("The Revenant");
+    soundMixing.add("Star Wars: The Force Awakens");
+    categories.add(soundMixing);
+
+    Category visualEffects = new Category("Visual Effects");
+    visualEffects.add("Ex Machina");
+    visualEffects.add("Mad Max: Fury Road");
+    visualEffects.add("The Martian");
+    visualEffects.add("The Revenant");
+    visualEffects.add("Star Wars: The Force Awakens");
+    categories.add(visualEffects);
+
+    Category writing = new Category("Writing (Adapted Screenplay)");
+    writing.add("The Big Short");
+    writing.add("Brooklyn");
+    writing.add("Carol");
+    writing.add("The Martian");
+    writing.add("Room");
+    categories.add(writing);
+
+    Category writingOriginal = new Category("Writing (Original Screenplay)");
+    writingOriginal.add("Bridge of Spies");
+    writingOriginal.add("Ex Machina");
+    writingOriginal.add("Inside Out");
+    writingOriginal.add("Spotlight");
+    writingOriginal.add("Straight Outta Compton");
+    categories.add(writingOriginal);
   }
 
   void displayCategoryNominees() {
@@ -166,8 +236,8 @@ public class OscarRunner {
       for (Category category : categories) {
         int index = (int) (Math.random() * category.nominees.size());
         Nominee chosenNominee = category.nominees.get(index);
-        System.out.printf("%s chose index %d in %s which is %s\n", voter.name, index, category.name,
-            chosenNominee.toString());
+//        System.out.printf("%s chose index %d in %s which is %s\n", voter.name, index, category.name,
+//            chosenNominee.toString());
 
         voter.vote(chosenNominee);
       }
@@ -181,12 +251,10 @@ public class OscarRunner {
     for (Category category : categories) {
       int index = (int) (Math.random() * category.nominees.size());
       Nominee winner = category.nominees.get(index);
-      category.winner = winner;
-      winner.isWinner = true;
+      category.setWinner(winner);
       System.out.printf("The winner for %s is %s.\n", category.name, winner.toString());
     }
   }
-
 
   void displayVoterScores() {
     Voter bestGuesser = null;
@@ -213,23 +281,27 @@ public class OscarRunner {
       System.out.println();
     }
 
-    System.out.printf("The best guesser is %s.\n", bestGuesser.name);
+    System.out.printf("\nThe best guesser is %s with %d correct guesses.\n", bestGuesser.name,
+        bestGuesser.correctGuesses);
   }
 
-
-  void displayMovieScores() {}
+  void displayMovieStats() {
+    MovieList.displayMovieStats();
+  }
 
   void printPageBreak() {
     System.out.println("---------------------------------------------------------\n");
   }
 
   void run() {
-//    initializeMovies();
+    printPageBreak();
     initializeVoters();
     initializeCategories();
     System.out.println();
 
     displayCategoryNominees();
+    printPageBreak();
+
     displayMoviePreshowStats();
     printPageBreak();
 
@@ -240,9 +312,10 @@ public class OscarRunner {
     printPageBreak();
 
     displayVoterScores();
+    printPageBreak();
 
-
-    displayMovieScores();
+    displayMovieStats();
+    printPageBreak();
 
   }
 

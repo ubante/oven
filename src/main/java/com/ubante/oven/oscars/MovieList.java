@@ -37,7 +37,29 @@ public class MovieList {
   static void displayPreshowStats() {
     System.out.println("Here are the stats for all the nominated movies:");
     for (Movie movie : list) {
-      System.out.printf("%s nominated %d times\n", movie.title, movie.nominatedCategories.size());
+      System.out.printf("%s is nominated %d times\n", movie.title, movie.nominatedCategories.size());
     }
+  }
+
+  static void displayMovieStats() {
+    Movie mostWiningMovie = null;
+
+    System.out.println("Here are the final stats for all the nominated movies:");
+    for (Movie movie : list) {
+      int wins = movie.wins;
+
+      System.out.printf("%s won %d of its %d nominations\n", movie.title,
+          wins, movie.nominatedCategories.size());
+
+      if (mostWiningMovie == null) {
+        mostWiningMovie = movie;
+      } else {
+        if (movie.wins > mostWiningMovie.wins) {
+          mostWiningMovie = movie;
+        }
+      }
+    }
+
+    System.out.printf("\nWith %d wins, the most winning movie is %s.\n", mostWiningMovie.wins, mostWiningMovie.title);
   }
 }
