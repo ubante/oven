@@ -24,7 +24,8 @@ public class ElementalSubstanceClass {
         ElementalSubstanceClass copy = new ElementalSubstanceClass();
 
         for (ElementalSubstance es : esClass) {
-            copy.add(es);
+            ElementalSubstance esCopy = es.copy();
+            copy.add(esCopy);
         }
 
         return copy;
@@ -46,9 +47,9 @@ public class ElementalSubstanceClass {
 
     void ageMembers() {
         for (ElementalSubstance es : esClass) {
-            System.out.printf("%d->", es.getAge());
+//            System.out.printf("%d->", es.getAge());
             es.age();
-            System.out.println(es.getAge());
+//            System.out.println(es.getAge());
         }
 //        System.exit(1);
     }
@@ -60,6 +61,16 @@ public class ElementalSubstanceClass {
         }
 
         return sum/(double) esClass.size();
+    }
+
+    double getStd() {
+        double sum = 0;
+        double mean = getMeanAge();
+        for (ElementalSubstance es : esClass) {
+            sum = sum + Math.pow((es.getAge()-mean), 2);
+        }
+
+        return Math.pow((sum/esClass.size()), 0.5);
     }
 
     void decayMembers() {

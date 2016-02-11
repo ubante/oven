@@ -11,10 +11,10 @@ package com.ubante.oven.halflife;
  * https://docs.google.com/spreadsheets/d/12_5TjAfx9Lkh1hnlQz0JrogDOfQ291r29t_cIcLeF4U/edit#gid=0
  */
 public class HalflifeSimulator {
-    final int FINALGENERATIONYEAR = 3;
-    final int SAMPLESIZE = 31;
+    final int FINALGENERATIONYEAR = 100;
+    final int SAMPLESIZE = 100;
     int generationalYear = 0;
-    int maxInitAge = 10;
+    int maxInitAge = 2;
     History history;
     boolean isOutputVerbose = false;
 
@@ -47,30 +47,31 @@ public class HalflifeSimulator {
 
             // Get the newest generation
             ElementalSubstanceClass newestClass = history.getNewestClass();
-            System.out.println("------------------------------------------");
-            System.out.println("After the get: ");
-            history.displayAll();
-            System.out.println("The newest class:");
-            newestClass.display();
-            System.out.println();
+//            System.out.println("------------------------------------------");
+//            System.out.println("After the get: ");
+//            history.displayAll();
+//            System.out.println("The newest class:");
+//            newestClass.display();
+//            System.out.println();
 
             newestClass.ageMembers();
 
-            System.out.println("After the age: ");
-            history.displayAll();
-            System.out.println("The newest class:");
-            newestClass.display();
-            System.out.println();;
+//            System.out.println("After the age: ");
+//            history.displayAll();
+//            System.out.println("The newest class:");
+//            newestClass.display();
+//            System.out.println();
 
             newestClass.decayMembers();
 
-            System.out.println("After the decay: ");
-            history.displayAll();
+//            System.out.println("After the decay: ");
+//            history.displayAll();
+
             history.add(newestClass);
 
-            System.out.println("After the add:  ");
-            history.displayAll();
-            System.out.println();
+//            System.out.println("After the add:  ");
+//            history.displayAll();
+//            System.out.println();
 
 //            history.displayCurrentGeneration();
 
@@ -86,7 +87,8 @@ public class HalflifeSimulator {
         history.displayAll();
         System.out.println();
 
-        history.displayCSV(FINALGENERATIONYEAR+maxInitAge);
+//        history.displayCsv(FINALGENERATIONYEAR+maxInitAge);
+        history.displayCsvWithMeanStd(FINALGENERATIONYEAR+maxInitAge);
 
     }
 

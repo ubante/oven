@@ -46,17 +46,17 @@ public class History {
         }
     }
 
-    void displayCSV(int GREATESTPOSSIBLEAGE) {
+    void displayCsv(int GREATESTPOSSIBLEAGE) {
         System.out.println("History in CSV format:");
-        System.out.println("generation, freq of 0, freq of 1, freq of 2,...");
+        System.out.println("generation,freq of 0,freq of 1,freq of 2,...");
 
         int generationCounter = 0;
 
         for (ElementalSubstanceClass esc : history) {
 //            System.out.printf("generation %d\n", generationCounter);
 
-            esc.display();
-            System.out.println("");
+//            esc.display();
+//            System.out.println("");
             List<Integer> intList = esc.toIntegers();
             System.out.printf("%2d,", generationCounter);
             for (int thisAge = 0; thisAge<= GREATESTPOSSIBLEAGE; thisAge++) {
@@ -64,7 +64,30 @@ public class History {
 //                System.out.printf("%d->%d,", thisAge, Collections.frequency(intList, thisAge));
                 System.out.printf("%2d,", Collections.frequency(intList, thisAge));
             }
-            System.out.println("\n");
+            System.out.println("");
+
+            generationCounter++;
+        }
+
+    }
+
+    void displayCsvWithMeanStd(int GREATESTPOSSIBLEAGE) {
+        System.out.println("History in CSV format:");
+        System.out.println("generation,mean,std,freq of 0,freq of 1,freq of 2,...");
+
+        int generationCounter = 0;
+
+        for (ElementalSubstanceClass esc : history) {
+            List<Integer> intList = esc.toIntegers();
+            System.out.printf("%2d,", generationCounter);
+
+            System.out.printf("%4.2f,", esc.getMeanAge());
+            System.out.printf("%5.3f,", esc.getStd());
+
+            for (int thisAge = 0; thisAge<= GREATESTPOSSIBLEAGE; thisAge++) {
+                System.out.printf("%2d,", Collections.frequency(intList, thisAge));
+            }
+            System.out.println("");
 
             generationCounter++;
         }

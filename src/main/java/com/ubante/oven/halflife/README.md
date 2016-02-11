@@ -2,58 +2,75 @@
 
 If things keep dying and I keep backfilling them, how will the average age stabilize?
 
-# Errors
-No exceptions but I'm rewriting all the elements of the __history__ list.
+# Future questions
+   - What would happen if the half-life got shorter as a sample aged?
+   - What would happen if the half-life got shorter as a sample aged?  Could we find immortality?
+
+# Output 
+If we start with 100 samples that are no older than 2, then let the sample decay with a quarter-life of a year, then 
+after 20 years, we should have an average age of 2.90 years with a standard deviation of 3.381.  Remember that we 
+backfill decayed samples.  In the below output, you can see one particularly resilient sample that lasted until the 21st
+generation.  This is not that unusual and will occur 23.8% of the time.
 
 ```
-/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/bin/java -Didea.launcher.port=7534 "-Didea.launcher.bin.path=/Applications/IntelliJ IDEA 15.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath "/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/lib/ant-javafx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/lib/dt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/lib/javafx-mx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/lib/jconsole.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/lib/packager.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/lib/sa-jdi.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/lib/tools.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/jfxswt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/management-agent.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/plugin.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/ext/cldrdata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/ext/dnsns.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/ext/jfxrt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/ext/localedata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/ext/nashorn.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/ext/sunec.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/ext/zipfs.jar:/Users/ubante/IdeaProjects/oven/target/classes:/Users/ubante/.m2/repository/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar:/Users/ubante/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar:/Users/ubante/.m2/repository/javax/faces/javax.faces-api/2.2/javax.faces-api-2.2.jar:/Users/ubante/.m2/repository/com/googlecode/json-simple/json-simple/1.1/json-simple-1.1.jar:/Users/ubante/.m2/repository/org/json/json/20090211/json-20090211.jar:/Users/ubante/.m2/repository/commons-codec/commons-codec/1.9/commons-codec-1.9.jar:/Applications/IntelliJ IDEA 15.app/Contents/lib/idea_rt.jar" com.intellij.rt.execution.application.AppMain com.ubante.oven.halflife.HalflifeSimulator
 Second half life!
-
+Max initial age: 2, Number of generations: 21, Sample size: 100
 
 Initial class looks like this:
-Generation   0:  7  4  3  3  3  5  8  2  6  1  2  7  9  6  5  0  8  4  6  1  0  0  2  7  4  5  7  3  1  2  9 : 4.19
+Generation   0:  0  0  1  1  0  0  1  1  0  0  1  1  0  1  1  0  1  0  0  1  0  0  1  0  0  1  1  0  1  1  1  1  0  0  1  1  1  1  1  0  1  1  1  0  1  0  1  1  0  0  1  0  1  1  1  1  1  1  1  0  1  0  1  0  0  1  0  0  1  0  1  0  0  0  1  0  1  1  1  1  0  1  0  1  0  0  0  0  0  1  0  1  1  1  0  0  1  1  0  1 : 0.55
 
+
+The history looks like:
 This is a simple dump of the history of generations.
- 8  5  4  6  9  3  7  2  3  8 10  7  6  1  7  2  1  8  5  8  4  2 10  0  0  0  0  0  0  0  0 
- 8  5  4  6  9  3  7  2  3  8 10  7  6  1  7  2  1  8  5  8  4  2 10  0  0  0  0  0  0  0  0 
-This is a simple dump of the history of generations.
- 5  7  4  8  9 11  8  7  2  8  3  9  6  9  5  3 11  1  1  1  1  1  1  0  0  0  0  0  0  0  0 
- 5  7  4  8  9 11  8  7  2  8  3  9  6  9  5  3 11  1  1  1  1  1  1  0  0  0  0  0  0  0  0 
- 5  7  4  8  9 11  8  7  2  8  3  9  6  9  5  3 11  1  1  1  1  1  1  0  0  0  0  0  0  0  0 
-This is a simple dump of the history of generations.
- 8  5  9 10 12  9  8  3  9  4  7 10  6  4 12  2  2  2  2  2  1  1  1  1  1  1  1  0  0  0  0 
- 8  5  9 10 12  9  8  3  9  4  7 10  6  4 12  2  2  2  2  2  1  1  1  1  1  1  1  0  0  0  0 
- 8  5  9 10 12  9  8  3  9  4  7 10  6  4 12  2  2  2  2  2  1  1  1  1  1  1  1  0  0  0  0 
- 8  5  9 10 12  9  8  3  9  4  7 10  6  4 12  2  2  2  2  2  1  1  1  1  1  1  1  0  0  0  0 
-This is a simple dump of the history of generations.
-10 11 13 10  9 10  8 13  3  3  3  3  3  2  2  2  2  2  1  1  0  0  0  0  0  0  0  0  0  0  0 
-10 11 13 10  9 10  8 13  3  3  3  3  3  2  2  2  2  2  1  1  0  0  0  0  0  0  0  0  0  0  0 
-10 11 13 10  9 10  8 13  3  3  3  3  3  2  2  2  2  2  1  1  0  0  0  0  0  0  0  0  0  0  0 
-10 11 13 10  9 10  8 13  3  3  3  3  3  2  2  2  2  2  1  1  0  0  0  0  0  0  0  0  0  0  0 
-10 11 13 10  9 10  8 13  3  3  3  3  3  2  2  2  2  2  1  1  0  0  0  0  0  0  0  0  0  0  0 
-This is a simple dump of the history of generations.
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+ 0  0  1  1  0  0  1  1  0  0  1  1  0  1  1  0  1  0  0  1  0  0  1  0  0  1  1  0  1  1  1  1  0  0  1  1  1  1  1  0  1  1  1  0  1  0  1  1  0  0  1  0  1  1  1  1  1  1  1  0  1  0  1  0  0  1  0  0  1  0  1  0  0  0  1  0  1  1  1  1  0  1  0  1  0  0  0  0  0  1  0  1  1  1  0  0  1  1  0  1 
+ 2  2  1  1  2  2  1  1  1  2  2  1  2  1  1  2  1  2  1  2  1  2  2  2  2  1  2  2  2  2  1  2  2  2  2  1  2  2  1  1  2  2  2  2  1  2  1  1  1  1  2  1  1  1  1  1  2  1  1  1  1  1  1  2  1  2  2  2  1  2  1  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+ 3  2  3  2  2  2  3  3  2  3  2  2  3  3  2  3  3  3  3  3  2  3  3  3  2  3  3  3  2  3  2  3  3  3  2  3  2  2  2  2  2  2  2  2  2  2  2  2  3  2  3  3  2  2  3  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+ 4  3  3  3  3  4  4  4  3  4  4  3  4  4  4  3  4  3  4  4  3  4  3  4  4  4  4  3  3  3  3  3  3  3  3  4  4  4  3  3  4  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+ 4  4  5  5  5  5  4  5  5  4  5  4  5  5  5  4  5  5  5  5  4  4  4  4  4  4  5  5  4  4  5  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+ 5  5  6  6  6  5  6  5  6  5  6  6  6  5  5  5  5  5  6  6  5  5  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+ 6  7  7  7  6  6  7  6  7  7  7  6  6  6  7  7  6  6  5  5  5  5  5  5  4  4  4  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+ 7  8  8  7  8  7  8  8  7  7  7  8  7  7  6  6  6  6  6  5  5  5  5  5  5  5  5  4  4  4  4  4  4  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+ 8  9  8  9  9  9  8  8  8  7  7  7  7  7  6  6  6  6  6  6  5  5  5  5  5  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+ 9 10  9 10 10 10  9  8  8  8  7  7  7  7  7  7  6  6  6  6  6  5  5  5  5  5  4  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+10 11 10 11 11 11 10  9  9  9  8  8  8  8  8  7  7  7  7  7  6  6  6  5  5  5  5  5  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+11 12 12 12 10  9  9  8  8  8  7  7  7  6  6  6  6  6  5  5  5  5  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+12 13 13 13 11 10 10  9  9  9  8  8  8  7  7  7  7  7  6  6  6  5  5  5  5  5  5  4  4  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+13 14 14 10 10 10  9  9  8  8  7  7  7  6  6  6  5  5  5  5  5  5  5  5  4  4  4  4  4  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+14 15 11 11 11 10  9  9  8  8  8  7  7  7  6  6  6  6  6  6  5  5  5  5  5  5  5  5  5  5  4  4  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+15 16 12 12 10  9  9  8  8  7  7  7  7  7  6  6  6  6  6  6  5  5  5  5  5  5  5  5  4  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+16 17 13 13 11 10  9  9  8  8  8  7  7  7  7  6  6  6  6  6  6  5  5  5  5  5  5  4  4  4  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+17 14 14 12 11 10  9  9  9  8  8  8  7  7  7  7  7  6  6  6  6  6  6  5  5  5  5  5  5  5  5  4  4  4  4  4  4  4  4  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+18 15 15 13 11 10 10 10  9  9  9  8  8  8  8  7  7  7  7  7  6  6  6  6  6  6  5  5  5  5  5  4  4  4  4  3  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+19 16 16 14 12 10 10  9  9  9  8  8  8  8  7  7  7  7  6  6  6  6  6  5  5  5  4  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+20 17 17 11 11  9  9  9  9  8  8  8  7  7  7  6  6  6  5  5  5  5  5  5  5  4  4  4  4  4  4  4  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+21 18 12 10 10 10 10  9  9  9  8  8  7  7  7  6  6  6  6  5  5  5  5  5  4  4  4  4  3  3  3  3  3  3  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+19 11 11 11 10 10  9  9  8  8  8  7  7  7  6  6  6  6  6  5  5  5  4  4  4  4  4  4  4  4  4  4  3  3  3  3  3  3  3  3  3  2  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
 
 History in CSV format:
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-11 12 14 11 14  4  4  4  3  3  3  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+generation,mean,std,freq of 0,freq of 1,freq of 2,...
+ 0,0.55,0.497,45,55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 1,1.09,0.801,28,35,37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 2,1.57,1.134,25,20,28,27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 3,1.97,1.459,22,21,16,20,21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 4,2.28,1.772,21,19,19,10,14,17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 5,2.31,2.082,30,13,14,14, 7,12,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 6,2.53,2.398,28,19,10, 9,10, 6, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 7,2.75,2.563,24,17,18, 8, 6, 8, 5, 8, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 8,2.75,2.744,28,17,10,14, 6, 5, 6, 5, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 9,2.93,2.916,22,23,13, 8, 8, 5, 5, 6, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+10,3.27,3.212,20,18,18,10, 6, 5, 3, 5, 5, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+11,2.95,2.998,22,16,18,15, 7, 4, 5, 3, 3, 2, 1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+12,3.29,3.386,24,15,13,12, 9, 6, 3, 5, 3, 3, 2, 1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+13,3.00,3.234,26,18,10,10,12, 8, 3, 3, 2, 2, 3, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+14,3.30,3.251,18,22,12, 9, 9,10, 6, 3, 3, 2, 1, 3, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+15,3.16,3.349,27,12,13,12, 8, 8, 6, 5, 2, 2, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+16,3.17,3.617,28,19, 6,10,10, 6, 6, 4, 3, 2, 1, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
+17,3.29,3.595,24,21,12, 4, 8, 8, 6, 5, 3, 3, 1, 1, 1, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+18,3.48,3.835,26,14,14,11, 4, 5, 6, 5, 4, 3, 3, 1, 0, 1, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0,
+19,3.37,3.895,22,23,10,11, 8, 3, 5, 4, 4, 3, 2, 0, 1, 0, 1, 0, 2, 0, 0, 1, 0, 0, 0, 0,
+20,3.10,3.822,27,15,21, 5, 7, 7, 3, 3, 3, 4, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0,
+21,3.01,3.801,31,16,10,15, 4, 5, 4, 3, 2, 3, 4, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0,
+22,2.90,3.381,26,23,10, 9,10, 3, 5, 3, 3, 2, 2, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
 
-Process finished with exit code 0
+
 ```
-
-

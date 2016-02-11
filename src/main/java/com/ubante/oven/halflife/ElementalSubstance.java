@@ -16,6 +16,10 @@ public class ElementalSubstance {
         this(a, 0.25);
     }
 
+    /**
+     * Deep copy
+     * @return
+     */
     ElementalSubstance copy() {
         return new ElementalSubstance(age, decayRatePerYear);
     }
@@ -39,4 +43,5 @@ public class ElementalSubstance {
     void age() {
         age++;
     }
+
 }
