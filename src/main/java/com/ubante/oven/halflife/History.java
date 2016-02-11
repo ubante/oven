@@ -23,7 +23,6 @@ public class History {
      */
     ElementalSubstanceClass getNewestClass() {
         int size = history.size();
-//        System.out.println("size is: " + size);
         ElementalSubstanceClass last = history.get(size-1);
         return last.copy();
     }
@@ -53,15 +52,9 @@ public class History {
         int generationCounter = 0;
 
         for (ElementalSubstanceClass esc : history) {
-//            System.out.printf("generation %d\n", generationCounter);
-
-//            esc.display();
-//            System.out.println("");
             List<Integer> intList = esc.toIntegers();
             System.out.printf("%2d,", generationCounter);
             for (int thisAge = 0; thisAge<= GREATESTPOSSIBLEAGE; thisAge++) {
-//                System.out.printf("%d,", Collections.frequency(esc.getEsClass(), thisAge));
-//                System.out.printf("%d->%d,", thisAge, Collections.frequency(intList, thisAge));
                 System.out.printf("%2d,", Collections.frequency(intList, thisAge));
             }
             System.out.println("");
@@ -79,10 +72,7 @@ public class History {
 
         for (ElementalSubstanceClass esc : history) {
             List<Integer> intList = esc.toIntegers();
-            System.out.printf("%2d,", generationCounter);
-
-            System.out.printf("%4.2f,", esc.getMeanAge());
-            System.out.printf("%5.3f,", esc.getStd());
+            System.out.printf("%2d,%4.2f,%5.3f,", generationCounter, esc.getMeanAge(), esc.getStd());
 
             for (int thisAge = 0; thisAge<= GREATESTPOSSIBLEAGE; thisAge++) {
                 System.out.printf("%2d,", Collections.frequency(intList, thisAge));

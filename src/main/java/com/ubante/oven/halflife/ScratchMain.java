@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by ubante on 2/8/16.
+ * Just for testing the halflives.
  */
 public class ScratchMain {
     ElementalSubstanceClass esc = new ElementalSubstanceClass();
@@ -13,7 +13,6 @@ public class ScratchMain {
     final static int GREATESTPOSSIBLEAGE = 6;
 
     void addEsc(int num) {
-//        esc.addEsc(new ElementalSubstance(num,0.25));
         esc.add(new ElementalSubstance(num));
     }
 
@@ -35,10 +34,7 @@ public class ScratchMain {
         List list = esc.getEsClass();
         for (int thisAge = 0; thisAge<= GREATESTPOSSIBLEAGE; thisAge++) {
             System.out.printf("%d->%d,", thisAge, Collections.frequency(list, new ElementalSubstance(thisAge)));
-//            System.out.printf("%d->%d,", thisAge, Collections.frequency(esc.getEsClass(), thisAge));
         }
-
-
     }
 
     void test2() {

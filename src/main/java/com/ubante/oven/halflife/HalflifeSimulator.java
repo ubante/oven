@@ -47,47 +47,18 @@ public class HalflifeSimulator {
 
             // Get the newest generation
             ElementalSubstanceClass newestClass = history.getNewestClass();
-//            System.out.println("------------------------------------------");
-//            System.out.println("After the get: ");
-//            history.displayAll();
-//            System.out.println("The newest class:");
-//            newestClass.display();
-//            System.out.println();
-
             newestClass.ageMembers();
-
-//            System.out.println("After the age: ");
-//            history.displayAll();
-//            System.out.println("The newest class:");
-//            newestClass.display();
-//            System.out.println();
-
             newestClass.decayMembers();
-
-//            System.out.println("After the decay: ");
-//            history.displayAll();
-
             history.add(newestClass);
-
-//            System.out.println("After the add:  ");
-//            history.displayAll();
-//            System.out.println();
-
-//            history.displayCurrentGeneration();
-
             generationalYear++;
 
         }
 
         System.out.println();
-
-//        history.displayAll();
-
         System.out.println("The history looks like:");
         history.displayAll();
         System.out.println();
 
-//        history.displayCsv(FINALGENERATIONYEAR+maxInitAge);
         history.displayCsvWithMeanStd(FINALGENERATIONYEAR+maxInitAge);
 
     }

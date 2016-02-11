@@ -24,8 +24,7 @@ public class ElementalSubstanceClass {
         ElementalSubstanceClass copy = new ElementalSubstanceClass();
 
         for (ElementalSubstance es : esClass) {
-            ElementalSubstance esCopy = es.copy();
-            copy.add(esCopy);
+            copy.add(es.copy());
         }
 
         return copy;
@@ -47,11 +46,8 @@ public class ElementalSubstanceClass {
 
     void ageMembers() {
         for (ElementalSubstance es : esClass) {
-//            System.out.printf("%d->", es.getAge());
             es.age();
-//            System.out.println(es.getAge());
         }
-//        System.exit(1);
     }
 
     double getMeanAge() {
