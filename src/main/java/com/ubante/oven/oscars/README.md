@@ -11,6 +11,11 @@ This is the model for that app.
   - Give the percentage of wins for movies with more than a single nomination
   - Tally up scores for people but that will require a Person and a PersonList class mebbe
   - do the thing with the Roids
+  
+# Alternatives
+
+The analog approach is to use either [this link](http://oscar-prod-images.bls-customers.com/wp-content/uploads/2015/09/04065826/23205726c534c1565bb3820a4ae1c5bef34fc16b39514bc7e046723395302466.pdf) 
+or [this link](http://oscars.nytimes.com/2016/ballot).
 
 # Output
 ```
