@@ -39,6 +39,6 @@ public class Solution {
       System.out.println(Integer.valueOf(nums[0]) + Integer.valueOf(nums[1]));
     }
 
-
+    System.out.printf("");
   }
 }
