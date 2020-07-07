@@ -11,4 +11,12 @@ public class PlayerLogic {
     PlayerLogic(String name) {
         this.name = name;
     }
+
+    Card chooseCard(State state, Hand hand) {
+        return hand.get(0);
+    }
+
+    int chooseRow() {
+        return 0;
+    }
 }
