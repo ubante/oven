@@ -1,9 +1,12 @@
 package com.ubante.oven.sixNimmt;
 
+/**
+ * This class uses composition to represent different types of Players.
+ *
+ * The PlayerLogic is not trustworthy so it should not maintain any state.
+ */
 public class Player {
-    String name;
+    PlayerLogic logic;
 
-    Player (String name) {
-        this.name = name;
-    }
+    
 }
