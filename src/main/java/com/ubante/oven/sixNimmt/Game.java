@@ -34,15 +34,12 @@ public class Game {
             System.out.println(roundCounter + "/" + turn);
 
             State state = board.getState();
-            Card[] chosenCards = new Card[players.size()];
             HashMap<Card, Player> turnCards = new HashMap<>();
-            for (int i = 0; i < players.size(); i++) {
-                Card chosenCard = players.get(i).chooseCard(state);
-                chosenCards[i] = chosenCard;
-                turnCards.put(chosenCard, players.get(i));
+            for (Player player : players) {
+                Card chosenCard = player.chooseCard(state);
+                turnCards.put(chosenCard, player);
             }
             board.processTurn(turnCards);
-
         }
     }
 
@@ -55,7 +52,7 @@ public class Game {
 
             runRound();
 
-            if (roundCounter > 2) {
+            if (roundCounter > 1) {
                 System.out.println("Exiting because too many rounds.");
                 board.display();
                 System.exit(2);

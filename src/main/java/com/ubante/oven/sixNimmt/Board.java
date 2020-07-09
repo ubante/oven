@@ -12,7 +12,7 @@ public class Board {
     Player winner = null;
     Deck deck;
     ArrayList<Player> players = new ArrayList<>(2);
-    Row[] rows = new Row[4];
+    Row[] rows = new Row[4];  // Tempted to create a RowSet class.
     int initialHandSize = 10;
 
     Board() {
@@ -53,7 +53,7 @@ public class Board {
             if (lowestRow == null) {
                 lowestRow = r;
             } else {
-                if (lowestRow.getHighestValue().faceValue > r.getHighestValue().faceValue) {
+                if (lowestRow.getHighestValue() > r.getHighestValue()) {
                     lowestRow = r;
                 }
             }
@@ -63,30 +63,75 @@ public class Board {
     }
 
     void punishWithBeefHeads(Player p, int rowIndex, Card c) {
-        System.out.println(p.name  + " will pick up row #" + rowIndex);
+        System.out.println(p.name  + " will pick up row #" + (rowIndex+1));
 
         // Assign the rows beef head score to this player.
+        Row row = rows[rowIndex];
+        p.points -= row.beefHeadSum;
+        System.out.println("Deducting " + row.beefHeadSum + " points from " + p.name);
+        System.out.println(p.name + " now has " + p.points + " points");;
 
         // Replace the row with this card.
+        row.replaceWith(c);
     }
 
+    /**
+     * We can assume that none of these cards are lower valued than the
+     * lowest valued rows.
+     *
+     * @param sortedCards
+     */
     void appendChosenCardsToRows(TreeMap<Card, Player> sortedCards) {
-        
+        // Loop through all the cards that the player chose for this
+        // turn.
+        for (Map.Entry<Card, Player> entry: sortedCards.entrySet()) {
+            Card c = entry.getKey();
+
+            // For each card, find the correct row.
+            System.out.println("Finding a row for card: " + c.faceValue);
+            Row winningRow = null;
+            int winningIndex = -1;
+            for (int i = 0; i < rows.length; i++) {
+                if (rows[i].getHighestValue() < c.faceValue) {
+                    if (winningRow == null) {
+                        winningRow = rows[i];
+                        winningIndex = i;
+                        continue;
+                    }
+                    if (winningRow.getHighestValue() < rows[i].getHighestValue()) {
+                        winningRow = rows[i];
+                        winningIndex = i;
+                    }
+                }
+            }
+//            Row winningRow = rows[0];
+//            int winningIndex = 0;
+//            for (int i = 1; i < rows.length; i++) {
+//                if (rows[i].getHighestValue() < c.faceValue) {
+//                    if (winningRow.getHighestValue() < rows[i].getHighestValue()) {
+//                        winningRow = rows[i];
+//                        winningIndex = i;
+//                    }
+//                }
+//            }
+            if (winningRow.nearFull()) {
+                System.out.println("Found a row but it's near full.");
+                punishWithBeefHeads(entry.getValue(), winningIndex, c);
+            } else {
+                winningRow.addCard(c);
+            }
+            display();
+        }
+
     }
 
     void processTurn(HashMap<Card, Player> cards) {
-//        System.out.print("processing: ");
-//        for (Card c: cards.keySet()) {
-//            System.out.print(c + " ");
-//        }
-//        System.out.println();
-
         // Order the cards.
         TreeMap<Card, Player> sortedCards = new TreeMap<>(cards);
         Card lowestCard = sortedCards.firstKey();
         Player lowestPlayer = sortedCards.get(lowestCard);
 
-        System.out.print("-- ordered: ");
+        System.out.print("-- ordered chosen cards: ");
         for (Map.Entry<Card, Player> entry: sortedCards.entrySet()) {
             System.out.print(entry.getKey() + " ");
         }
@@ -97,10 +142,10 @@ public class Board {
         System.out.println("Lowest card: " + lowestCard);
         Row lowestRow = getLowestRow();
         System.out.println("Lowest row:" + lowestRow);
-        if (lowestCard.faceValue < lowestRow.getHighestValue().faceValue) {
+        if (lowestCard.faceValue < lowestRow.getHighestValue()) {
             int chosenRowIndex = lowestPlayer.chooseRow(getState());
             punishWithBeefHeads(lowestPlayer, chosenRowIndex, lowestCard);
-            cards.remove(lowestCard);
+            sortedCards.remove(lowestCard);
         }
 
         // Append remaining chosen cards to the appropriate rows.
@@ -113,8 +158,10 @@ public class Board {
     }
 
     void display() {
-        for (Player p: players) {
-            System.out.println(p);
+        System.out.println("=================================================");
+        for (int i = 0; i < 4; i++) {
+            System.out.println(i+1 + " " + rows[i].getColumnarRepresentation());
         }
+        System.out.println("=================================================");
     }
 }
