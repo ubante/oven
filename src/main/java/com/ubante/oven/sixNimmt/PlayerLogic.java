@@ -12,11 +12,13 @@ public class PlayerLogic {
         this.name = name;
     }
 
+    // The default card to choose is the first card in the hand.
     Card chooseCard(State state, Hand hand) {
         return hand.get(0);
     }
 
-    int chooseRow() {
+    // The default row to choose is the first row.
+    int chooseRow(State state) {
         return 0;
     }
 }

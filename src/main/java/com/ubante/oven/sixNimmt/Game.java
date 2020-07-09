@@ -1,6 +1,7 @@
 package com.ubante.oven.sixNimmt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The game controls the points that players have lost in past rounds.  Since
@@ -34,13 +35,14 @@ public class Game {
 
             State state = board.getState();
             Card[] chosenCards = new Card[players.size()];
-//            for (Player p: players) {
+            HashMap<Card, Player> turnCards = new HashMap<>();
             for (int i = 0; i < players.size(); i++) {
                 Card chosenCard = players.get(i).chooseCard(state);
                 chosenCards[i] = chosenCard;
+                turnCards.put(chosenCard, players.get(i));
             }
+            board.processTurn(turnCards);
 
-            
         }
     }
 

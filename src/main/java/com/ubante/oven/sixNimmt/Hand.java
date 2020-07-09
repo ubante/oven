@@ -11,6 +11,8 @@ public class Hand {
 
     void add(Card c) { cards.add(c); }
 
+    void remove(Card c) { cards.remove(c); }
+
     Card get(int i) { return cards.get(i); }
 
     void empty() { cards.clear(); }
