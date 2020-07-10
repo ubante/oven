@@ -31,7 +31,7 @@ public class Game {
         reset();
 
         for (int turn = 1; turn <= board.initialHandSize; turn++ ) {
-            System.out.println(roundCounter + "/" + turn);
+            System.out.println("Round #" + roundCounter + " / Turn #" + turn);
 
             State state = board.getState();
             HashMap<Card, Player> turnCards = new HashMap<>();
@@ -52,7 +52,7 @@ public class Game {
 
             runRound();
 
-            if (roundCounter > 1) {
+            if (roundCounter > 10) {
                 System.out.println("Exiting because too many rounds.");
                 board.display();
                 System.exit(2);
@@ -62,5 +62,9 @@ public class Game {
 
     public void printConclusion() {
         System.out.println("That's all, folks.");
+
+        for (Player p: players) {
+            System.out.println(p);
+        }
     }
 }

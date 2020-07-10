@@ -16,12 +16,12 @@ public class Row {
     }
 
     String getColumnarRepresentation() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (Card c: items) {
-            output = output + String.format(" %3d", c.faceValue);
+            output.append(String.format(" %3d", c.faceValue));
         }
 
-        return output;
+        return output.toString();
     }
 
     void replaceWith(Card c) {

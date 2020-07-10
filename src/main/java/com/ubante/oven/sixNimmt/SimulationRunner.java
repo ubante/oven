@@ -9,7 +9,7 @@ public class SimulationRunner {
         g.addPlayer(new PlayerLogic("P1"));
         g.addPlayer(new RandomLogic("P2"));
         g.addPlayer(new PlayerLogic("P3"));
-        g.addPlayer(new PlayerLogic("P4"));
+        g.addPlayer(new HumanLogic("TheCond"));
         g.run();
 
         g.printConclusion();
