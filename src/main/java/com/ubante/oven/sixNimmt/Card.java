@@ -13,8 +13,11 @@ public class Card implements Comparable<Card> {
         assignBeefHeads();
     }
 
+//    public String toString() {
+//        return faceValue.toString() + " & " + beefHeads.toString() + " beef heads.";
+//    }
     public String toString() {
-        return faceValue.toString() + " & " + beefHeads.toString() + " beef heads.";
+        return faceValue.toString();
     }
 
     @Override

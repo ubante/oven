@@ -24,15 +24,14 @@ public class Player {
 
     void addCard(Card c) { hand.add(c); }
 
-    Card chooseCard(State state) {
+    Card chooseCard(BoardState state) {
         Card chosenCard = logic.chooseCard(state, hand.copy());
         hand.remove(chosenCard);
         return chosenCard;
     }
 
-    int chooseRow(State state) {
-        int chosenRow = logic.chooseRow(state);
+    int chooseRow(BoardState state) {
 
-        return chosenRow;
+        return logic.chooseRow(state);
     }
 }

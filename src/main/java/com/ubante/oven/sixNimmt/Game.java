@@ -33,7 +33,7 @@ public class Game {
         for (int turn = 1; turn <= board.initialHandSize; turn++ ) {
             System.out.println("Round #" + roundCounter + " / Turn #" + turn);
 
-            State state = board.getState();
+            BoardState state = board.getState();
             HashMap<Card, Player> turnCards = new HashMap<>();
             for (Player player : players) {
                 Card chosenCard = player.chooseCard(state);

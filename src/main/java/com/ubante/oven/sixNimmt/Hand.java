@@ -9,7 +9,20 @@ public class Hand {
         return cards.toString();
     }
 
-    void add(Card c) { cards.add(c); }
+    ArrayList<Card> getCards() { return cards; }
+
+    void add(Card c) {
+        // To make this easier for humans, we'll insert the new card in order.
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).faceValue < c.faceValue) {
+                continue;
+            }
+            cards.add(i, c);
+            return;
+        }
+
+        cards.add(c);
+    }
 
     void remove(Card c) { cards.remove(c); }
 

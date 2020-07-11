@@ -9,7 +9,6 @@ import java.util.TreeMap;
  * The board controls the cards, all the cards, everywhere.
  */
 public class Board {
-    Player winner = null;
     Deck deck;
     ArrayList<Player> players = new ArrayList<>(2);
     Row[] rows = new Row[4];  // Tempted to create a RowSet class.
@@ -43,8 +42,13 @@ public class Board {
         }
     }
 
-    State getState() {
-        return new State();  // TODO: uh
+    BoardState getState() {
+        HashMap<String, Integer> playerScores = new HashMap<>();
+        for (Player p: players) {
+            playerScores.put(p.name, p.points);
+        }
+
+        return new BoardState(rows, playerScores);
     }
 
     Row getLowestRow() {
@@ -69,18 +73,12 @@ public class Board {
         Row row = rows[rowIndex];
         p.points -= row.beefHeadSum;
         System.out.println("Deducting " + row.beefHeadSum + " points from " + p.name);
-        System.out.println(p.name + " now has " + p.points + " points");;
+        System.out.println(p.name + " now has " + p.points + " points");
 
         // Replace the row with this card.
         row.replaceWith(c);
     }
 
-    /**
-     * We can assume that none of these cards are lower valued than the
-     * lowest valued rows.
-     *
-     * @param sortedCards
-     */
     void appendChosenCardsToRows(TreeMap<Card, Player> sortedCards) {
         // Loop through all the cards that the player chose for this
         // turn.
@@ -104,16 +102,12 @@ public class Board {
                     }
                 }
             }
-//            Row winningRow = rows[0];
-//            int winningIndex = 0;
-//            for (int i = 1; i < rows.length; i++) {
-//                if (rows[i].getHighestValue() < c.faceValue) {
-//                    if (winningRow.getHighestValue() < rows[i].getHighestValue()) {
-//                        winningRow = rows[i];
-//                        winningIndex = i;
-//                    }
-//                }
-//            }
+
+            if (winningRow == null) {
+                System.out.println("There was a fatal problem with the winning row.  Exiting.");
+                System.exit(8);
+            }
+
             if (winningRow.nearFull()) {
                 System.out.println("Found a row but it's near full.");
                 punishWithBeefHeads(entry.getValue(), winningIndex, c);
@@ -153,8 +147,19 @@ public class Board {
 
     }
 
+    /**
+     * There is a winner only when there is a loser.
+     *
+     * @return gameWon
+     */
     boolean winnerFound() {
-        return winner != null;
+        for (Player p: players) {
+            if (p.points < 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void display() {
