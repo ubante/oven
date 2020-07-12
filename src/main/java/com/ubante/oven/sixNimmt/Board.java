@@ -13,6 +13,9 @@ public class Board {
     ArrayList<Player> players = new ArrayList<>(2);
     Row[] rows = new Row[4];  // Tempted to create a RowSet class.
     int initialHandSize = 10;
+    boolean debugMode = true;
+    int turnCounter = 0;
+    Player winner = null;
 
     Board() {
         reset();
@@ -40,6 +43,8 @@ public class Board {
                 p.addCard(c);
             }
         }
+
+        turnCounter = 0;
     }
 
     BoardState getState() {
@@ -120,14 +125,23 @@ public class Board {
     }
 
     void processTurn(HashMap<Card, Player> cards) {
+        turnCounter++;
+
         // Order the cards.
         TreeMap<Card, Player> sortedCards = new TreeMap<>(cards);
         Card lowestCard = sortedCards.firstKey();
         Player lowestPlayer = sortedCards.get(lowestCard);
 
+        // Print all hands for debugging.
+        if (debugMode) {
+            for (Player p: players) {
+                System.out.println(p.name + " -> " + p.hand);
+            }
+        }
+
         System.out.print("-- ordered chosen cards: ");
         for (Map.Entry<Card, Player> entry: sortedCards.entrySet()) {
-            System.out.print(entry.getKey() + " ");
+            System.out.printf("%s (%s), ", entry.getKey(), entry.getValue().name);
         }
         System.out.println();
 
@@ -138,6 +152,9 @@ public class Board {
         System.out.println("Lowest row:" + lowestRow);
         if (lowestCard.faceValue < lowestRow.getHighestValue()) {
             int chosenRowIndex = lowestPlayer.chooseRow(getState());
+
+            // TODO need to validate chosenRowIndex since player logic is unreliable.
+
             punishWithBeefHeads(lowestPlayer, chosenRowIndex, lowestCard);
             sortedCards.remove(lowestCard);
         }
@@ -145,6 +162,27 @@ public class Board {
         // Append remaining chosen cards to the appropriate rows.
         appendChosenCardsToRows(sortedCards);
 
+        // The winner is determined only at the end of rounds.
+        if (turnCounter == initialHandSize) {
+            Player topScorer = null;
+            boolean isLoserPresent = false;
+            for (Player p: players) {
+                if (p.points < 0) {
+                    isLoserPresent = true;
+                }
+                if (topScorer == null) {
+                    topScorer = p;
+                    continue;
+                }
+                if (p.points > topScorer.points) {
+                    topScorer = p;
+                }
+            }
+
+            if (isLoserPresent) {
+                winner = topScorer;
+            }
+        }
     }
 
     /**
@@ -153,13 +191,7 @@ public class Board {
      * @return gameWon
      */
     boolean winnerFound() {
-        for (Player p: players) {
-            if (p.points < 0) {
-                return true;
-            }
-        }
-
-        return false;
+        return (winner != null);
     }
 
     void display() {

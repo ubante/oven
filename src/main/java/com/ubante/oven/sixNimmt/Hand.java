@@ -28,6 +28,9 @@ public class Hand {
 
     Card get(int i) { return cards.get(i); }
 
+    Card getHighestValueCard() {
+        return get(cards.size()-1);
+    }
     void empty() { cards.clear(); }
 
     int[] summarize() {

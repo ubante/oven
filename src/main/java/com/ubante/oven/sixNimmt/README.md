@@ -4,10 +4,10 @@ This is an old game that shouldn't be too hard to model.
 
 https://en.wikipedia.org/wiki/6_Nimmt!
 
-Use Game.run() to play a single game.
+Use SingleGameRunner to play a single game.
 
 ## glossary
-* game: what you think it is
+* game: a series of rounds until a player has a negative score
 * row: a series of cards in ascending order
 * turn: a chance for each player to select a card
 * round: a reset of the board and players' hands

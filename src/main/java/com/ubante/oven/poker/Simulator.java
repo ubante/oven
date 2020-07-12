@@ -14,15 +14,6 @@ public class Simulator {
         HandStatistics stats = new HandStatistics();
         CardStack stack = CardStack.getInstance(flopCards);
 
-        // Find the distribution of this cardstack
-//        System.out.println("The raw card deck.");
-//        HandDistribution distribution = new HandDistribution();
-//        for (Card c : stack.getStack()) {
-//            distribution.tally(c);
-//        }
-//        distribution.println();
-//        System.out.println();
-
         System.out.println("PokerSimulator: making "+flopAttempts+" attempts.");
         System.out.println("\nHere's the starting random hand:");
         Hole sh = new Hole();
@@ -34,7 +25,6 @@ public class Simulator {
             Flop f = new Flop(stack.getCard(), stack.getCard(), stack.getCard());
 
             Hand combinedHand = Hand.joinStartingHandWithFlop(sh, f);
-//            stats.measure(combinedHand); // this overcounts the hole cards
             stats.measure(f);
 
             String whatyouhave = combinedHand.evaluate();
@@ -52,10 +42,6 @@ public class Simulator {
                     flopFrequency,
                     flopFrequency*100.0/flopAttempts);
         }
-
-        // And the measurements
-//        System.out.println();
-//        stats.println();
     }
 
     void nonrandomHoleCards(Card a, Card b) {
@@ -76,7 +62,6 @@ public class Simulator {
             Flop f = new Flop(stack.getCard(), stack.getCard(), stack.getCard());
 
             Hand combinedHand = Hand.joinStartingHandWithFlop(sh, f);
-//            stats.measure(combinedHand); // this overcounts the hole cards
             stats.measure(f);
 
             String whatyouhave = combinedHand.evaluate();
@@ -94,10 +79,6 @@ public class Simulator {
                     flopFrequency,
                     flopFrequency*100.0/flopAttempts);
         }
-
-        // And the measurements
-//        System.out.println();
-//        stats.println();
     }
 
     public static void main(String[] args) {

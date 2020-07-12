@@ -10,6 +10,8 @@ public class Row {
         return (items.size() + " cards, " + beefHeadSum + " beefs, top card = " + getHighestValueCard().faceValue);
     }
 
+    int getBeefHeadSum() { return beefHeadSum; }
+
     void addCard(Card c) {
         items.add(c);
         beefHeadSum += c.beefHeads;

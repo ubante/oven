@@ -12,7 +12,8 @@ public class PlayerLogic {
         this.name = name;
     }
 
-    // The default card to choose is the first card in the hand.
+    // The default card to choose is the first card in the hand,
+    // which is the lowest value card in the hand.
     Card chooseCard(BoardState boardState, Hand hand) {
         return hand.get(0);
     }
