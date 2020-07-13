@@ -1,4 +1,8 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.logics;
+
+import com.ubante.oven.sixNimmt.models.BoardState;
+import com.ubante.oven.sixNimmt.models.Card;
+import com.ubante.oven.sixNimmt.models.Hand;
 
 /**
  * PlayerLogic classes do not contain game state.  Instead, they contain the logic
@@ -6,20 +10,20 @@ package com.ubante.oven.sixNimmt;
  * outside the VM.
  */
 public class PlayerLogic {
-    String name;
+    public String name;
 
-    PlayerLogic(String name) {
+    public PlayerLogic(String name) {
         this.name = name;
     }
 
     // The default card to choose is the first card in the hand,
     // which is the lowest value card in the hand.
-    Card chooseCard(BoardState boardState, Hand hand) {
+    public Card chooseCard(BoardState boardState, Hand hand) {
         return hand.get(0);
     }
 
     // The default row to choose is the first row.
-    int chooseRow(BoardState boardState) {
+    public int chooseRow(BoardState boardState) {
         return 0;
     }
 }

@@ -1,4 +1,4 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +35,7 @@ public class Deck {
     }
 
     public static void main(String[] args) {
-        Deck d = new Deck(104);
+        Deck d = new Deck(Settings.deckSize);
 
         Card c;
         for (int i = 0; i < 160; i++) {

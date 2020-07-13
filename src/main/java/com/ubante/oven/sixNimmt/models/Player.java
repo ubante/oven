@@ -1,4 +1,6 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.models;
+
+import com.ubante.oven.sixNimmt.logics.PlayerLogic;
 
 /**
  * This class uses composition to represent different types of Players.

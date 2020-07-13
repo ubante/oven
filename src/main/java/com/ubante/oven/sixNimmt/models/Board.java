@@ -1,4 +1,4 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,15 +7,19 @@ import java.util.TreeMap;
 
 /**
  * The board controls the cards, all the cards, everywhere.
+ *
+ * TODO: should a card tracker be implemented here?
  */
 public class Board {
     Deck deck;
     ArrayList<Player> players = new ArrayList<>(2);
-    Row[] rows = new Row[4];  // Tempted to create a RowSet class.
-    int initialHandSize = 10;
+    Row[] rows = new Row[Settings.rowCount];  // Tempted to create a RowSet class.
+    int initialHandSize = Settings.initalHandSize;
     boolean debugMode = true;
     int turnCounter = 0;
     Player winner = null;
+
+    ArrayList<Integer> playedCards = new ArrayList<>();
 
     Board() {
         reset();

@@ -1,4 +1,8 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.models;
+
+import com.ubante.oven.sixNimmt.logics.HighCardLogic;
+import com.ubante.oven.sixNimmt.logics.PlayerLogic;
+import com.ubante.oven.sixNimmt.logics.RandomLogic;
 
 import java.util.HashMap;
 

@@ -1,4 +1,6 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.models;
+
+import com.ubante.oven.sixNimmt.logics.PlayerLogic;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,11 +1,10 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.models;
 
 /**
  * This is a card.  And I need this.
  */
 public class Card implements Comparable<Card> {
-//public class Card {
-    Integer faceValue;
+    public Integer faceValue;
     Integer beefHeads;
 
     public Card (int value) {

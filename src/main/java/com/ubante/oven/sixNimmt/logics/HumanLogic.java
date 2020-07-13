@@ -1,4 +1,8 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.logics;
+
+import com.ubante.oven.sixNimmt.models.BoardState;
+import com.ubante.oven.sixNimmt.models.Card;
+import com.ubante.oven.sixNimmt.models.Hand;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,7 +10,7 @@ import java.util.Scanner;
 public class HumanLogic extends PlayerLogic {
     int previousScore = 60;  // This is an assumption.
 
-    HumanLogic(String name) {
+    public HumanLogic(String name) {
         super(name);
     }
 
@@ -22,7 +26,7 @@ public class HumanLogic extends PlayerLogic {
     }
 
     // The default card to choose is the first card in the hand.
-    Card chooseCard(BoardState boardState, Hand hand) {
+    public Card chooseCard(BoardState boardState, Hand hand) {
         System.out.println("\\/ \\/ \\/ \\/ \\/ \\/ \\/ \\/");
         int myScore = boardState.scores.get(name);
         if (myScore < previousScore) {
@@ -50,7 +54,7 @@ public class HumanLogic extends PlayerLogic {
     }
 
     // The default row to choose is the first row.
-    int chooseRow(BoardState boardState) {
+    public int chooseRow(BoardState boardState) {
         printBoard(boardState);
 
         System.out.print("Choose a row [1-4]: ");

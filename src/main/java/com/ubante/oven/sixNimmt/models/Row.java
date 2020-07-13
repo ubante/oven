@@ -1,4 +1,4 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.models;
 
 import java.util.ArrayList;
 
@@ -10,14 +10,16 @@ public class Row {
         return (items.size() + " cards, " + beefHeadSum + " beefs, top card = " + getHighestValueCard().faceValue);
     }
 
-    int getBeefHeadSum() { return beefHeadSum; }
+    public int getBeefHeadSum() { return beefHeadSum; }
+
+    int getFreeSpaces() { return Settings.rowWidth - items.size() - 1;}
 
     void addCard(Card c) {
         items.add(c);
         beefHeadSum += c.beefHeads;
     }
 
-    String getColumnarRepresentation() {
+    public String getColumnarRepresentation() {
         StringBuilder output = new StringBuilder();
         for (Card c: items) {
             output.append(String.format(" %3d", c.faceValue));
@@ -36,9 +38,7 @@ public class Row {
 
     int getHighestValue() { return getHighestValueCard().faceValue; }
 
-    Card getLowestValue() { return items.get(0); }
-
     boolean nearFull() {
-        return items.size() == 5;
+        return items.size() == Settings.rowWidth-1;
     }
 }

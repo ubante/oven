@@ -1,4 +1,4 @@
-package com.ubante.oven.sixNimmt;
+package com.ubante.oven.sixNimmt.models;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ public class Hand {
         return cards.toString();
     }
 
-    ArrayList<Card> getCards() { return cards; }
+    public ArrayList<Card> getCards() { return cards; }
 
     void add(Card c) {
         // To make this easier for humans, we'll insert the new card in order.
@@ -26,9 +26,9 @@ public class Hand {
 
     void remove(Card c) { cards.remove(c); }
 
-    Card get(int i) { return cards.get(i); }
+    public Card get(int i) { return cards.get(i); }
 
-    Card getHighestValueCard() {
+    public Card getHighestValueCard() {
         return get(cards.size()-1);
     }
     void empty() { cards.clear(); }
