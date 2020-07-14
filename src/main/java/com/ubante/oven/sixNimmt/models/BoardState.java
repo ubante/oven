@@ -10,9 +10,13 @@ import java.util.HashMap;
 public class BoardState {
     public Row[] rows;
     public HashMap<String, Integer> scores;
+    public HashMap<Card, Player> lastChosenCards;
 
-    BoardState(Row[] rows, HashMap<String, Integer> scores) {
+    BoardState(Row[] rows,
+               HashMap<String, Integer> scores,
+               HashMap<Card, Player> lastChosenCards) {
         this.rows = rows;
         this.scores = scores;
+        this.lastChosenCards = lastChosenCards;
     }
 }

@@ -18,8 +18,8 @@ public class Board {
     boolean debugMode = true;
     int turnCounter = 0;
     Player winner = null;
+    HashMap<Card, Player> lastChosenCards = null;
 
-    ArrayList<Integer> playedCards = new ArrayList<>();
 
     Board() {
         reset();
@@ -57,7 +57,7 @@ public class Board {
             playerScores.put(p.name, p.points);
         }
 
-        return new BoardState(rows, playerScores);
+        return new BoardState(rows, playerScores, lastChosenCards);
     }
 
     Row getLowestRow() {
@@ -142,6 +142,7 @@ public class Board {
                 System.out.println(p.name + " -> " + p.hand);
             }
         }
+        lastChosenCards = cards;
 
         System.out.print("-- ordered chosen cards: ");
         for (Map.Entry<Card, Player> entry: sortedCards.entrySet()) {

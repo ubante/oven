@@ -9,7 +9,7 @@ import com.ubante.oven.sixNimmt.logics.PlayerLogic;
  */
 public class Player {
     PlayerLogic logic;
-    Integer points = 60;
+    Integer points = Settings.startingPoints;
     Hand hand = new Hand();
     String name;
 

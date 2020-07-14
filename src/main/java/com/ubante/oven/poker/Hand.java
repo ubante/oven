@@ -101,10 +101,8 @@ public class Hand {
         if (valueFrequency.size() == 3) {
             for (Map.Entry entry : valueFrequency.entrySet()) {
 
-                // XXX
-//                System.out.println("Entry value: "+entry.getValue());
-                if (entry.getValue().equals(new Integer(3))) { return "three-of-a-kind"; }
-                if (entry.getValue().equals(new Integer(2))) { return "two pairs"; }
+                if (entry.getValue().equals(3)) { return "three-of-a-kind"; }
+                if (entry.getValue().equals(2)) { return "two pairs"; }
             }
         }
 

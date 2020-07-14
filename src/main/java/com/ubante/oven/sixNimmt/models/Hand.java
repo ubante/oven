@@ -3,7 +3,7 @@ package com.ubante.oven.sixNimmt.models;
 import java.util.ArrayList;
 
 public class Hand {
-    ArrayList<Card> cards = new ArrayList<>();
+    public ArrayList<Card> cards = new ArrayList<>();
 
     public String toString() {
         return cards.toString();
