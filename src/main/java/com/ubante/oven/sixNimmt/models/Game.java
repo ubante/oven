@@ -33,6 +33,7 @@ public class Game {
     void runRound() {
         reset();
 
+        // TODO when the players have one card left, they don't need to choose.
         for (int turn = 1; turn <= board.initialHandSize; turn++ ) {
             System.out.println("Round #" + roundCounter + " / Turn #" + turn);
 

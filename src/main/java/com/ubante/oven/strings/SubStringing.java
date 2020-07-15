@@ -6,6 +6,13 @@ package com.ubante.oven.strings;
  */
 public class SubStringing {
 
+    static void doListMagic(String... zks) {
+        System.out.println(zks);
+
+        for (String z: zks) {
+            System.out.println(z);
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -87,5 +94,29 @@ public class SubStringing {
         System.out.println("\nHere it is after replacing the non-existing newlines:");
         System.out.println(simplerLine);
 
+        System.out.println();
+        String something = "abcd:2181";
+        System.out.println(something);
+        String somethingelse = something.substring(0, something.indexOf(':'));
+        System.out.println(somethingelse);
+        System.out.println("also: " + something.substring(0, something.indexOf(':')));
+        System.out.println("Finally: " + "abcd:2181".substring(0, something.indexOf(':')));
+
+//        something = "abcdnoport";
+//        System.out.println(something);
+//        somethingelse = something.substring(0, something.indexOf(':'));
+//        System.out.println(somethingelse);
+//        System.out.println("also: " + something.substring(0, something.indexOf(':')));
+//        System.out.println("Finally: " + "abcd:2181".substring(0, something.indexOf(':')));
+
+        System.out.println();
+        String zk = "xyz:2181";
+        String[] zks = new String[3];
+        zks[0] = "one";
+        zks[1] = "two";
+        zks[2] = "three";
+
+        System.out.printf(":: %s -->\n", zk);
+        SubStringing.doListMagic(zk);
     }
 }

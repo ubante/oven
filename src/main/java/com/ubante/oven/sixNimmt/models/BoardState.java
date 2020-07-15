@@ -5,7 +5,6 @@ import java.util.HashMap;
 /**
  * Represents the state of the board.
  *
- * TODO: this should include the cards chosen in the last turn.
  */
 public class BoardState {
     public Row[] rows;

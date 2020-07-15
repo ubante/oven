@@ -26,4 +26,7 @@ public class PlayerLogic {
     public int chooseRow(BoardState boardState) {
         return 0;
     }
+
+    // Subclasses may want to do something smart at the start of each round.
+    public void reset() {}
 }

@@ -4,11 +4,13 @@ import com.ubante.oven.sixNimmt.models.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HumanLogic extends PlayerLogic {
     int previousScore = Settings.startingPoints;
     HashMap<Card, Player> everyonesLastCard = null;
+    // TODO do I need CardSet?
     ArrayList<Integer> playedCards = new ArrayList<>();
     ArrayList<Integer> remainingCards = new ArrayList<>();
     boolean isHandRecorded = false;
@@ -20,6 +22,11 @@ public class HumanLogic extends PlayerLogic {
         for (int i = 1; i <= Settings.deckSize; i++) {
             remainingCards.add(i);
         }
+    }
+
+    public void reset() {
+        playedCards.clear();
+        remainingCards.clear();
     }
 
     // Maybe boardState should be an instance variable so I wouldn't
@@ -75,9 +82,31 @@ public class HumanLogic extends PlayerLogic {
         }
 
         for (Card c : cards.keySet()) {
-            playedCards.remove(c.faceValue);
+            playedCards.add(c.faceValue);  // This creates duplicates.
             remainingCards.remove(c.faceValue);
         }
+    }
+
+    int getInput(int maxValue) {
+        Scanner input = new Scanner(System.in);
+        int choice;
+
+        do {
+            try {
+                choice = input.nextInt();
+            } catch (InputMismatchException ime) {
+                System.out.println("Please input an integer.");
+                choice = -2;
+            }
+
+            if (choice < 1 || choice > maxValue) {
+                System.out.printf("Try again [1-%d]: ", maxValue);
+                input.nextLine();
+            }
+
+        } while (choice < 1 || choice > maxValue);
+
+        return choice;
     }
 
     public Card chooseCard(BoardState boardState, Hand hand) {
@@ -104,11 +133,13 @@ public class HumanLogic extends PlayerLogic {
             String sfmt = String.format("%2d: %s", i, cards.get(i-1).faceValue);
             System.out.println(sfmt);
         }
-        System.out.printf("There remains %d cards.\n", remainingCards.size());
-        System.out.print("Choose a card: ");
+        System.out.printf("There are %d unknown cards.\n", remainingCards.size());
+        System.out.printf("There are %d cards shown.\n", playedCards.size());
+        System.out.println(playedCards);
 
-        Scanner input = new Scanner(System.in);
-        int cardChoice = input.nextInt();
+        System.out.printf("Choose a card: [1-%s]: ", cards.size());
+        int cardChoice = getInput(cards.size());
+
         return hand.get(cardChoice-1);
     }
 

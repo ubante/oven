@@ -22,6 +22,11 @@ public class Player {
         return "Name: " + name + ", points=" + points + ", hand=" + hand;
     }
 
+    void reset() {
+        emptyHand();
+        logic.reset();
+
+    }
     void emptyHand() { hand.empty(); }
 
     void addCard(Card c) { hand.add(c); }

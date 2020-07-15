@@ -62,7 +62,7 @@ public class CoincidentPowers {
 
         // Was at 60 ^ ? (60) and 2 ^ ? (64)
         // This gave a base2 to base-60 ratio of  1.06667
-        Double base = new Double(60);
+        Double base = 60d;
 
 
         int highestPower = 10;
@@ -72,7 +72,7 @@ public class CoincidentPowers {
 
         // Make a list of powers of two that is as large as necessary to include the largest power
         // of the given base
-        List<Double> twoList = getPowers(new Double(2),20);
+        List<Double> twoList = getPowers(2d,20);
 
         // For each power of the given base
         Double bestTwoPower = 1d;

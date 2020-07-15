@@ -30,7 +30,7 @@ public class Board {
     }
 
     void reset() {
-        deck = new Deck(104);  // Might parameterize this in the future.
+        deck = new Deck(Settings.deckSize);
 
         // Start the rows with a card each.
         deck.shuffle();
@@ -41,7 +41,7 @@ public class Board {
 
         // Deal 10 cards to each player.
         for (Player p: players) {
-            p.emptyHand();
+            p.reset();
             for (int i = 0; i < initialHandSize; i++) {
                 Card c = deck.getCard();
                 p.addCard(c);
