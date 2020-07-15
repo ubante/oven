@@ -37,6 +37,19 @@ public class Player {
         return chosenCard;
     }
 
+    /**
+     * Call this to get the players last card instead of asking player to choose
+     * a card.
+     *
+     * @return
+     */
+    Card getLastCard() {
+       Card last = hand.get(0);
+       hand.remove(last);
+
+       return last;
+    }
+
     int chooseRow(BoardState state) {
 
         return logic.chooseRow(state);

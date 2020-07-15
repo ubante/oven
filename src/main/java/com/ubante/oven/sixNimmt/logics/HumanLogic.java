@@ -2,35 +2,32 @@ package com.ubante.oven.sixNimmt.logics;
 
 import com.ubante.oven.sixNimmt.models.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class HumanLogic extends PlayerLogic {
     int previousScore = Settings.startingPoints;
-    HashMap<Card, Player> everyonesLastCard = null;
+    HashMap<Card, Player> everyonesLastCards = null;
     // TODO do I need CardSet?
     ArrayList<Integer> playedCards = new ArrayList<>();
     ArrayList<Integer> remainingCards = new ArrayList<>();
     boolean isHandRecorded = false;
     BoardState boardState;
+    ArrayList<Integer> zoneBoundaries = new ArrayList<>();
 
     public HumanLogic(String name) {
         super(name);
 
-        for (int i = 1; i <= Settings.deckSize; i++) {
-            remainingCards.add(i);
-        }
+        reset();
     }
 
     public void reset() {
         playedCards.clear();
         remainingCards.clear();
+        for (int i = 1; i <= Settings.deckSize; i++) {
+            remainingCards.add(i);
+        }
     }
 
-    // Maybe boardState should be an instance variable so I wouldn't
-    // have to pass it around.
     void printBoard() {
         System.out.println("\nBoard:");
         for (int i = 0; i < 4; i++) {
@@ -58,8 +55,12 @@ public class HumanLogic extends PlayerLogic {
      * high B.  Inversely, for the same game, ending a round with many cards in low
      * B is dangerous.
      */
-    void getHandZones() {
-        // TODO
+    void setBoardZones() {
+        zoneBoundaries.clear();
+        for (Row r: boardState.rows) {
+            zoneBoundaries.add(r.getHighestValue());
+        }
+        Collections.sort(zoneBoundaries);
     }
 
     void recordHand(Hand hand) {
@@ -68,16 +69,22 @@ public class HumanLogic extends PlayerLogic {
         }
 
         for (Card c: hand.cards) {
+            // Tempted to make a method for these two lines so I can
+            // also call it in recordLastChosenCards().
             playedCards.add(c.faceValue);
             remainingCards.remove(c.faceValue);
         }
         isHandRecorded = true;
     }
 
-    void recordCards(HashMap<Card, Player> cards) {
-        everyonesLastCard = cards;
+    /**
+     * This r
+     * @param cards
+     */
+    void recordLastChosenCards(HashMap<Card, Player> cards) {
+        everyonesLastCards = cards;
 
-        if (everyonesLastCard == null) {
+        if (everyonesLastCards == null) {
             return;
         }
 
@@ -112,7 +119,7 @@ public class HumanLogic extends PlayerLogic {
     public Card chooseCard(BoardState boardState, Hand hand) {
         this.boardState = boardState;
         recordHand(hand);
-        recordCards(boardState.lastChosenCards);
+        recordLastChosenCards(boardState.lastChosenCards);
 
         System.out.println("\\/ \\/ \\/ \\/ \\/ \\/ \\/ \\/");
         int myScore = boardState.scores.get(name);
@@ -127,15 +134,37 @@ public class HumanLogic extends PlayerLogic {
         }
 
         printBoard();
-        System.out.println("\nYour hand:");
-        ArrayList<Card> cards = hand.getCards();
-        for (int i = 1; i <= cards.size(); i++) {
-            String sfmt = String.format("%2d: %s", i, cards.get(i-1).faceValue);
-            System.out.println(sfmt);
-        }
+        setBoardZones();
+        System.out.println("\nZone boundries");
+        System.out.println(zoneBoundaries);
         System.out.printf("There are %d unknown cards.\n", remainingCards.size());
         System.out.printf("There are %d cards shown.\n", playedCards.size());
         System.out.println(playedCards);
+        System.out.println();
+        System.out.println("Your hand:");
+        System.out.println("   |  |  |  |  |  |");
+        ArrayList<Card> cards = hand.getCards();
+        for (int i = 1; i <= cards.size(); i++) {
+            int cardValue = cards.get(i-1).faceValue;
+
+            StringBuilder zonePadding = new StringBuilder();
+            String safetyLevel = "";
+            for (int zb: zoneBoundaries) {
+                if (cardValue <= zb) {
+                    continue;
+                }
+                zonePadding.append("   ");
+
+                // Decide how safe this card is.
+                if (safetyLevel.equals("")) {
+                    if (cardValue - zb < 2) {
+                        safetyLevel = "+";  // This should use row.getFreeSpace()
+                    }
+                }
+            }
+
+            System.out.printf("%2d: %s%d %s\n", i, zonePadding.toString(), cardValue, safetyLevel);
+        }
 
         System.out.printf("Choose a card: [1-%s]: ", cards.size());
         int cardChoice = getInput(cards.size());

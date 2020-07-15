@@ -28,6 +28,11 @@ public class Row {
         return output.toString();
     }
 
+    /**
+     * This is called when a row gets picked up by a player.
+     *
+     * @param c
+     */
     void replaceWith(Card c) {
         items.clear();
         beefHeadSum = 0;
@@ -36,7 +41,7 @@ public class Row {
 
     Card getHighestValueCard() { return items.get(items.size() - 1); }
 
-    int getHighestValue() { return getHighestValueCard().faceValue; }
+    public int getHighestValue() { return getHighestValueCard().faceValue; }
 
     boolean nearFull() {
         return items.size() == Settings.rowWidth-1;

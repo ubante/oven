@@ -40,9 +40,13 @@ public class Game {
             BoardState state = board.getState();
             HashMap<Card, Player> turnCards = new HashMap<>();
             for (Player player : players) {
-                Card chosenCard = player.chooseCard(state);
-
-                // TODO need to validate chosenCard since player logic is unreliable.
+                Card chosenCard;
+                if ( turn == board.initialHandSize) {
+                    chosenCard = player.getLastCard();
+                } else {
+                    chosenCard = player.chooseCard(state);
+                    // TODO need to validate chosenCard since player logic is unreliable.
+                }
 
                 turnCards.put(chosenCard, player);
             }
