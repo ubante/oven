@@ -8,7 +8,6 @@ import java.util.TreeMap;
 /**
  * The board controls the cards, all the cards, everywhere.
  *
- * TODO: should a card tracker be implemented here?
  */
 public class Board {
     Deck deck;
@@ -157,9 +156,6 @@ public class Board {
         System.out.println("Lowest row:" + lowestRow);
         if (lowestCard.faceValue < lowestRow.getHighestValue()) {
             int chosenRowIndex = lowestPlayer.chooseRow(getState());
-
-            // TODO need to validate chosenRowIndex since player logic is unreliable.
-
             punishWithBeefHeads(lowestPlayer, chosenRowIndex, lowestCard);
             sortedCards.remove(lowestCard);
         }

@@ -22,8 +22,11 @@ public class Deck {
         }
     }
 
-    // TODO: how to deal with an empty deck?  Throw exception or return null?
     Card getCard() {
+        if (list.size() == 0) {
+            System.out.println("The deck is empty and you are trying to get a card.  Exiting.");
+            System.exit(83);
+        }
         Card card = list.get(0);
         list.remove(0);
 

@@ -24,7 +24,7 @@ public class Hand {
         cards.add(c);
     }
 
-    void remove(Card c) { cards.remove(c); }
+    boolean remove(Card c) { return cards.remove(c); }
 
     public Card get(int i) { return cards.get(i); }
 

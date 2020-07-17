@@ -7,12 +7,14 @@ import java.util.*;
 public class HumanLogic extends PlayerLogic {
     int previousScore = Settings.startingPoints;
     HashMap<Card, Player> everyonesLastCards = null;
-    // TODO do I need CardSet?
     ArrayList<Integer> playedCards = new ArrayList<>();
     ArrayList<Integer> remainingCards = new ArrayList<>();
     boolean isHandRecorded = false;
     BoardState boardState;
+
+    // These two could be combined.
     ArrayList<Integer> zoneBoundaries = new ArrayList<>();
+    HashMap<Integer, Row> zoneMap = new HashMap<>();
 
     public HumanLogic(String name) {
         super(name);
@@ -57,8 +59,11 @@ public class HumanLogic extends PlayerLogic {
      */
     void setBoardZones() {
         zoneBoundaries.clear();
+        zoneMap.clear();
         for (Row r: boardState.rows) {
-            zoneBoundaries.add(r.getHighestValue());
+            Integer highestValueInRow = r.getHighestValue();
+            zoneBoundaries.add(highestValueInRow);
+            zoneMap.put(highestValueInRow, r);
         }
         Collections.sort(zoneBoundaries);
     }
@@ -135,7 +140,7 @@ public class HumanLogic extends PlayerLogic {
 
         printBoard();
         setBoardZones();
-        System.out.println("\nZone boundries");
+        System.out.println("\nZone boundaries");
         System.out.println(zoneBoundaries);
         System.out.printf("There are %d unknown cards.\n", remainingCards.size());
         System.out.printf("There are %d cards shown.\n", playedCards.size());
@@ -157,8 +162,9 @@ public class HumanLogic extends PlayerLogic {
 
                 // Decide how safe this card is.
                 if (safetyLevel.equals("")) {
-                    if (cardValue - zb < 2) {
-                        safetyLevel = "+";  // This should use row.getFreeSpace()
+                    // This condition should factor in playedCards.
+                    if (cardValue - zb <= zoneMap.get(zb).getFreeSpaces()) {
+                        safetyLevel = "+";
                     }
                 }
             }

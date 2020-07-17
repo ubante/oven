@@ -32,8 +32,18 @@ public class Player {
     void addCard(Card c) { hand.add(c); }
 
     Card chooseCard(BoardState state) {
+        String beforeHand = hand.toString();
         Card chosenCard = logic.chooseCard(state, hand.copy());
-        hand.remove(chosenCard);
+
+        // Validate chosenCard since player logic is unreliable.
+        boolean found = hand.remove(chosenCard);
+        if (! found) {
+            System.out.printf("%s chose card %d.\n", name, chosenCard.faceValue);
+            System.out.printf("Their hand was %s\n", beforeHand);
+            System.out.println("This is an error - exiting.");
+            System.exit(91);
+        }
+
         return chosenCard;
     }
 
@@ -41,7 +51,7 @@ public class Player {
      * Call this to get the players last card instead of asking player to choose
      * a card.
      *
-     * @return
+     * @return Card
      */
     Card getLastCard() {
        Card last = hand.get(0);
@@ -51,7 +61,14 @@ public class Player {
     }
 
     int chooseRow(BoardState state) {
-
-        return logic.chooseRow(state);
+        int choice = logic.chooseRow(state);
+        // Internally, rows start at 0.  This might be confusing.
+        // Validate player choice because it is unreliable.
+        if (choice < 0 || Settings.rowCount+1 < choice) {
+            System.out.printf("%s chose row %d.\n", name, choice);
+            System.out.printf("Valid choices are 0-%d inclusive - exiting.", Settings.rowCount-1);
+            System.exit(92);
+        }
+        return choice;
     }
 }

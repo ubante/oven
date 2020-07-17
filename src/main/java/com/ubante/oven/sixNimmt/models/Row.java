@@ -12,7 +12,7 @@ public class Row {
 
     public int getBeefHeadSum() { return beefHeadSum; }
 
-    int getFreeSpaces() { return Settings.rowWidth - items.size() - 1;}
+    public int getFreeSpaces() { return Settings.rowWidth - items.size() - 1;}
 
     void addCard(Card c) {
         items.add(c);
