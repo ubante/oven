@@ -90,7 +90,13 @@ public class HumanLogic extends PlayerLogic {
         }
 
         for (Card c : cards.keySet()) {
-            playedCards.add(c.faceValue);  // This creates duplicates.
+
+            // Since we record our starting cards, make sure we do not
+            // record them twice.
+            if (! playedCards.contains(c.faceValue)) {
+                playedCards.add(c.faceValue);
+                Collections.sort(playedCards);  // Should convert these to sets.
+            }
             remainingCards.remove(c.faceValue);
         }
     }
@@ -118,15 +124,48 @@ public class HumanLogic extends PlayerLogic {
     }
 
     // This condition should factor in playedCards.
+    // For now, keep it simple; later return a HashMap.
     String measureSafety(int cardValue, int zoneBoundary) {
         String safetyString = "";
-        if (cardValue - zoneBoundary <= zoneMap.get(zoneBoundary).getFreeSpaces()) {
-            safetyString = "+";
-        } else if (cardValue - zoneBoundary == 1 && zoneMap.get(zoneBoundary).getFreeSpaces() == 1) {
-            safetyString = "--";
-        } else if (cardValue - zoneBoundary == 2 && zoneMap.get(zoneBoundary).getFreeSpaces() == 1) {
-            safetyString = "-";
+        int cardGap = cardValue - zoneBoundary;
+        int freeSpaces = zoneMap.get(zoneBoundary).getFreeSpaces();
+
+//        boolean start = true;
+//        if (start) {
+//            System.out.println("...");
+//            start = false;
+//        }
+
+        StringBuilder explanation = new StringBuilder();
+        for (int seenCard: playedCards) {
+            if (zoneBoundary < seenCard && seenCard < cardValue) {
+                cardGap--;
+//                System.out.println("deducting from cardGap because " + seenCard);
+//                System.out.printf("deducting: %d < (%d) < %d\n", zoneBoundary, seenCard, cardValue);
+                explanation.append(String.format("deducting: %d < (%d) < %d\n", zoneBoundary, seenCard, cardValue));
+            }
         }
+
+        // Unless this row is picked up, guaranteed safe.
+        // For the future, tiebreakers should be the row's beefHeadSum.
+        if (cardGap <= freeSpaces) {
+//            System.out.print(explanation);
+            return "+" + explanation;
+        }
+
+        // Row is almost full and you have the next card.  You will
+        // pick up this row unless someone goes under.
+        if (cardGap == 1 && freeSpaces == 0) {
+//            System.out.print(explanation);
+            return "--" + explanation;
+        }
+
+        // You pick up the row if someone plays the next card.
+        if (cardGap == 2 && freeSpaces == 1) {
+//            System.out.print(explanation);
+            return "-" + explanation;
+        }
+
         return safetyString;
     }
 
