@@ -2,41 +2,28 @@ package com.ubante.oven.sixNimmt.logics;
 
 import com.ubante.oven.sixNimmt.models.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
-public class HumanLogic extends PlayerLogic {
+/**
+ * This logic will choose:
+ *  (1) a safe card and
+ *  (2) the lowest value row.
+ */
+public class CardCountingLogic extends PlayerLogic {
     int previousScore = Settings.startingPoints;
+    BoardState boardState;
+    boolean isHandRecorded = false;
     HashMap<Card, Player> everyonesLastCards = null;
     ArrayList<Integer> playedCards = new ArrayList<>();
     ArrayList<Integer> remainingCards = new ArrayList<>();
-    boolean isHandRecorded = false;
-    BoardState boardState;
-
     // These two could be combined.
     ArrayList<Integer> zoneBoundaries = new ArrayList<>();
     HashMap<Integer, Row> zoneMap = new HashMap<>();
 
-    public HumanLogic(String name) {
+    public CardCountingLogic(String name) {
         super(name);
-
-        reset();
-    }
-
-    public void reset() {
-        playedCards.clear();
-        remainingCards.clear();
-        for (int i = 1; i <= Settings.deckSize; i++) {
-            remainingCards.add(i);
-        }
-    }
-
-    void printBoard() {
-        System.out.println("\nBoard:");
-        for (int i = 0; i < 4; i++) {
-            String rowLine = String.format("%d (%d): %s", i+1, boardState.rows[i].getBeefHeadSum(),
-                    boardState.rows[i].getColumnarRepresentation());
-            System.out.println(rowLine);
-        }
     }
 
     /***
@@ -95,28 +82,6 @@ public class HumanLogic extends PlayerLogic {
         }
     }
 
-    int getInput(int maxValue) {
-        Scanner input = new Scanner(System.in);
-        int choice;
-
-        do {
-            try {
-                choice = input.nextInt();
-            } catch (InputMismatchException ime) {
-                System.out.println("Please input an integer.");
-                choice = -2;
-            }
-
-            if (choice < 1 || choice > maxValue) {
-                System.out.printf("Try again [1-%d]: ", maxValue);
-                input.nextLine();
-            }
-
-        } while (choice < 1 || choice > maxValue);
-
-        return choice;
-    }
-
     // This condition should factor in playedCards.
     String measureSafety(int cardValue, int zoneBoundary) {
         String safetyString = "";
@@ -135,12 +100,8 @@ public class HumanLogic extends PlayerLogic {
         recordHand(hand);
         recordLastChosenCards(boardState.lastChosenCards);
 
-        System.out.println("\\/ \\/ \\/ \\/ \\/ \\/ \\/ \\/");
         int myScore = boardState.scores.get(name);
         if (myScore < previousScore) {
-            System.out.println("*******************************************************");
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            System.out.println("You have lost " + (previousScore-myScore) + " points!\n");
             previousScore = myScore;
         }
         System.out.println("Opponents:");
@@ -148,16 +109,15 @@ public class HumanLogic extends PlayerLogic {
             System.out.println(String.format("%20s: %d", name, boardState.scores.get(name)));
         }
 
-        printBoard();
         setBoardZones();
-        System.out.println("\nZone boundaries");
-        System.out.println(zoneBoundaries);
-        System.out.printf("There are %d unknown cards.\n", remainingCards.size());
-        System.out.printf("There are %d cards shown.\n", playedCards.size());
-        System.out.println(playedCards);
-        System.out.println();
-        System.out.println("Your hand:");
-        System.out.println("   |  |  |  |  |  |");
+//        System.out.println("\nZone boundaries");
+//        System.out.println(zoneBoundaries);
+//        System.out.printf("There are %d unknown cards.\n", remainingCards.size());
+//        System.out.printf("There are %d cards shown.\n", playedCards.size());
+//        System.out.println(playedCards);
+//        System.out.println();
+//        System.out.println("Your hand:");
+//        System.out.println("   |  |  |  |  |  |");
         ArrayList<Card> cards = hand.getCards();
         for (int i = 1; i <= cards.size(); i++) {
             int cardValue = cards.get(i-1).faceValue;
@@ -176,23 +136,28 @@ public class HumanLogic extends PlayerLogic {
                 }
             }
 
-            System.out.printf("%2d: %s%d %s\n", i, zonePadding.toString(), cardValue, safetyLevel);
+//            System.out.printf("%2d: %s%d %s\n", i, zonePadding.toString(), cardValue, safetyLevel);
         }
 
-        System.out.printf("Choose a card: [1-%s]: ", cards.size());
-        int cardChoice = getInput(cards.size());
-
+//        System.out.printf("Choose a card: [1-%s]: ", cards.size());
+//        int cardChoice = getInput(cards.size());
+        int cardChoice = 1;
+        
         return hand.get(cardChoice-1);
     }
 
-    // The default row to choose is the first row.
     public int chooseRow(BoardState boardState) {
-        this.boardState = boardState;
-        printBoard();
+        int lowestBeefHeadRowIndex = -1;
+        int lowestBeefHeadScore = 99;
+        for (int i = 0; i < 4; i++) {
+            int thisRowsBeefHeadSum = boardState.rows[i].getBeefHeadSum();
+            if (thisRowsBeefHeadSum < lowestBeefHeadScore) {
+                lowestBeefHeadRowIndex = i;
+                lowestBeefHeadScore = thisRowsBeefHeadSum;
+            }
+        }
 
-        System.out.print("Choose a row [1-4]: ");
-        Scanner input = new Scanner(System.in);
-        return input.nextInt() - 1;
+        return lowestBeefHeadRowIndex;
     }
 
 }
