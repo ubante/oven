@@ -123,50 +123,78 @@ public class HumanLogic extends PlayerLogic {
         return choice;
     }
 
-    // This condition should factor in playedCards.
-    // For now, keep it simple; later return a HashMap.
+    /*
+     This condition should factor in playedCards.
+     For now, keep it simple; later return a HashMap.  And consider
+     other zones.
+    */
     String measureSafety(int cardValue, int zoneBoundary) {
-        String safetyString = "";
+        // A cardGap of 1 means you have the next card and no one can
+        // squeeze in.
         int cardGap = cardValue - zoneBoundary;
         int freeSpaces = zoneMap.get(zoneBoundary).getFreeSpaces();
-
-//        boolean start = true;
-//        if (start) {
-//            System.out.println("...");
-//            start = false;
-//        }
-
+        int numPlayers = boardState.scores.size();
         StringBuilder explanation = new StringBuilder();
+
+        // If this card doesn't belong in this boundary, return empty
+        // string so caller can try again.
+        int index = zoneBoundaries.indexOf(zoneBoundary);
+        if (index < zoneBoundaries.size()-1) {
+            int nextZoneBoundary = zoneBoundaries.get(index+1);
+            if (cardValue > nextZoneBoundary) {
+                return "";
+            }
+        }
+
         for (int seenCard: playedCards) {
             if (zoneBoundary < seenCard && seenCard < cardValue) {
                 cardGap--;
-//                System.out.println("deducting from cardGap because " + seenCard);
-//                System.out.printf("deducting: %d < (%d) < %d\n", zoneBoundary, seenCard, cardValue);
-                explanation.append(String.format("deducting: %d < (%d) < %d\n", zoneBoundary, seenCard, cardValue));
+//                explanation.append(String.format("deducting: %d, ", seenCard));
             }
         }
 
         // Unless this row is picked up, guaranteed safe.
         // For the future, tiebreakers should be the row's beefHeadSum.
         if (cardGap <= freeSpaces) {
-//            System.out.print(explanation);
             return "+" + explanation;
+        }
+
+        /*
+         If there are less than 5 players, you can safely choose a
+         row with just one card.  Of course, you have to watch for
+         someone going under.
+        */
+        if (numPlayers <= freeSpaces) {
+            return "+ row can fit all players";
         }
 
         // Row is almost full and you have the next card.  You will
         // pick up this row unless someone goes under.
         if (cardGap == 1 && freeSpaces == 0) {
-//            System.out.print(explanation);
             return "--" + explanation;
         }
 
         // You pick up the row if someone plays the next card.
         if (cardGap == 2 && freeSpaces == 1) {
-//            System.out.print(explanation);
             return "-" + explanation;
         }
 
-        return safetyString;
+        // If the row is almost full, what are the odds that someone
+        // squeeze in and take the row instead of you if you play this
+        // card?
+        if (freeSpaces == 0) {
+            explanation.append(String.format("-   You might pick up this row."));
+            return String.valueOf(explanation);
+        } else if (cardValue > zoneBoundary) {
+            // Compute the likelihood that this row will bust.
+            explanation.append(String.format("?     -> %d/%d other players have to play %d/%d cards for you to bust.",
+                    freeSpaces, numPlayers-1, freeSpaces, cardGap-1));
+
+            return String.valueOf(explanation);
+        }
+
+        // Return "" if none of the above applies so caller can keep trying.
+        return "";
     }
 
     public Card chooseCard(BoardState boardState, Hand hand) {
@@ -189,14 +217,15 @@ public class HumanLogic extends PlayerLogic {
 
         printBoard();
         setBoardZones();
-        System.out.println("\nZone boundaries");
-        System.out.println(zoneBoundaries);
-        System.out.printf("There are %d unknown cards.\n", remainingCards.size());
-        System.out.printf("There are %d cards shown.\n", playedCards.size());
+        System.out.printf("There are %d unknown cards and %d cards shown: ", remainingCards.size(), playedCards.size());
         System.out.println(playedCards);
-        System.out.println();
-        System.out.println("Your hand:");
-        System.out.println("   |  |  |  |  |  |");
+
+        // Using a loop because the other methods don't pad.
+        StringBuilder zones = new StringBuilder();
+        for (Integer zb: zoneBoundaries) {
+            zones.append(String.format("|%2s", zb));
+        }
+        System.out.printf("   |  %s|\n", zones);
         ArrayList<Card> cards = hand.getCards();
         for (int i = 1; i <= cards.size(); i++) {
             int cardValue = cards.get(i-1).faceValue;
@@ -215,7 +244,7 @@ public class HumanLogic extends PlayerLogic {
                 }
             }
 
-            System.out.printf("%2d: %s%d %s\n", i, zonePadding.toString(), cardValue, safetyLevel);
+            System.out.printf("%2d: %s%2d %s\n", i, zonePadding.toString(), cardValue, safetyLevel);
         }
 
         System.out.printf("Choose a card: [1-%s]: ", cards.size());

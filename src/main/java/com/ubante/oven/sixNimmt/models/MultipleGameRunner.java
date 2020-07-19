@@ -1,5 +1,6 @@
 package com.ubante.oven.sixNimmt.models;
 
+import com.ubante.oven.sixNimmt.logics.CardCountingLogic;
 import com.ubante.oven.sixNimmt.logics.HighCardLogic;
 import com.ubante.oven.sixNimmt.logics.PlayerLogic;
 import com.ubante.oven.sixNimmt.logics.RandomLogic;
@@ -17,6 +18,8 @@ public class MultipleGameRunner {
         g.addPlayer(new PlayerLogic("Genero"));
         g.addPlayer(new RandomLogic("Random"));
         g.addPlayer(new HighCardLogic("HighCard"));
+        g.addPlayer(new CardCountingLogic("TheCount"));
+
         g.run();
 
         // Increment the games won for the winner.

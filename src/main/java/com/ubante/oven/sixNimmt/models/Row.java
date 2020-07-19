@@ -12,6 +12,13 @@ public class Row {
 
     public int getBeefHeadSum() { return beefHeadSum; }
 
+    /**
+     * Returns the number of spaces available before this row fills.
+     *
+     * Eg, a row with two cards has three free spaces.
+     *
+     * @return int representing the number of spaces before this row fills.
+     */
     public int getFreeSpaces() { return Settings.rowWidth - items.size() - 1;}
 
     void addCard(Card c) {

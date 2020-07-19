@@ -12,3 +12,5 @@ Use SingleGameRunner to play a single game.
 * turn: a chance for each player to select a card
 * round: a reset of the board and players' hands
 * tournament: what you think it is
+* zones: the five numerical ranges bounded by highest card in each of the four rows
+* goes under: when a player places a card that can cause them to pick up a row

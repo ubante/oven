@@ -1,9 +1,6 @@
 package com.ubante.oven.sixNimmt.models;
 
-import com.ubante.oven.sixNimmt.logics.HighCardLogic;
-import com.ubante.oven.sixNimmt.logics.HumanLogic;
-import com.ubante.oven.sixNimmt.logics.PlayerLogic;
-import com.ubante.oven.sixNimmt.logics.RandomLogic;
+import com.ubante.oven.sixNimmt.logics.*;
 
 public class SingleGameRunner {
 
@@ -15,6 +12,7 @@ public class SingleGameRunner {
         g.addPlayer(new RandomLogic("Random"));
         g.addPlayer(new HighCardLogic("HighCard"));
         g.addPlayer(new HumanLogic("TheCond"));
+        g.addPlayer(new CardCountingLogic("TheCount"));
         g.run();
 
         g.printConclusion();
