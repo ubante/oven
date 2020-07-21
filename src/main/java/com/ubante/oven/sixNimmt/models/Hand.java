@@ -28,6 +28,8 @@ public class Hand {
 
     public Card get(int i) { return cards.get(i); }
 
+    public int size() { return cards.size(); }
+
     public Card getHighestValueCard() {
         return get(cards.size()-1);
     }

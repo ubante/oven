@@ -13,4 +13,5 @@ Use SingleGameRunner to play a single game.
 * round: a reset of the board and players' hands
 * tournament: what you think it is
 * zones: the five numerical ranges bounded by highest card in each of the four rows
-* goes under: when a player places a card that can cause them to pick up a row
+* goes under: when a player places a card that is lower than the lowest row
+* squeeze: when another you try to play the lowest card for a given row but another player plays a lower card

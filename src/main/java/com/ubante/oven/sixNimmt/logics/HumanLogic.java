@@ -123,17 +123,28 @@ public class HumanLogic extends PlayerLogic {
         return choice;
     }
 
+    // What are the odds of drawing at least one card of numGoodCards from numCandidates
+    // if you have numAttempts?
+    float odds(int numGoodCards, int numAttempts, int numCandidates) {
+        float oppositeOdds = 1;
+        for (int i = 1; i <= numAttempts; i++) {
+            oppositeOdds *= (float) (numCandidates - numGoodCards) / numCandidates;
+        }
+
+        return (1-oppositeOdds)*100;  // Return a percentage.
+    }
+
     /*
      This condition should factor in playedCards.
      For now, keep it simple; later return a HashMap.  And consider
      other zones.
     */
-    String measureSafety(int cardValue, int zoneBoundary) {
+    String measureSafety(int cardValue, int zoneBoundary, int turn) {
         // A cardGap of 1 means you have the next card and no one can
         // squeeze in.
         int cardGap = cardValue - zoneBoundary;
         int freeSpaces = zoneMap.get(zoneBoundary).getFreeSpaces();
-        int numPlayers = boardState.scores.size();
+        int numPlayers = boardState.playerCount();
         StringBuilder explanation = new StringBuilder();
 
         // If this card doesn't belong in this boundary, return empty
@@ -174,7 +185,7 @@ public class HumanLogic extends PlayerLogic {
             return "--" + explanation;
         }
 
-        // You pick up the row if someone plays the next card.
+        // You pick up the row if someone squeezes in.
         if (cardGap == 2 && freeSpaces == 1) {
             return "-" + explanation;
         }
@@ -183,12 +194,30 @@ public class HumanLogic extends PlayerLogic {
         // squeeze in and take the row instead of you if you play this
         // card?
         if (freeSpaces == 0) {
-            explanation.append(String.format("-   You might pick up this row."));
+            explanation.append(String.format("-   You will pick up this row if there are no squeezes."));
             return String.valueOf(explanation);
-        } else if (cardValue > zoneBoundary) {
+        }
+
+        if (freeSpaces == 1) {
+            // To compute odds, we need to consider the number of cards held by other players.
+            int cardsHeld = (11-turn) * (numPlayers-1);
+
+//            explanation.append(String.format("#    -> There is one space; %2.1f%% chance that someone can squeeze.  ",
+//                    4.3));
+//            explanation.append(100*odds(cardsHeld, remainingCards.size()));
+            explanation.append(String.format("#    -> There is one space; %2.1f%% chance that someone can squeeze.  ",
+                    odds(cardGap-1, cardsHeld, remainingCards.size())));
+//            explanation.append(String.format("#    -> There is one space.  T%d P%d: %d held cards & %d unknowns cards.",
+//                    turn, numPlayers, cardsHeld, remainingCards.size()));
+//            explanation.append(boardState.scores);
+            return String.valueOf(explanation);
+        }
+
+        if (cardValue > zoneBoundary) {
             // Compute the likelihood that this row will bust.
-            explanation.append(String.format("?     -> %d/%d other players have to play %d/%d cards for you to bust.",
-                    freeSpaces, numPlayers-1, freeSpaces, cardGap-1));
+            explanation.append(String.format("?    -> %d/%d other players have to play %d/%d cards for you to bust.  " +
+                            "%d unknowns",
+                    freeSpaces, numPlayers-1, freeSpaces, cardGap-1, remainingCards.size()));
 
             return String.valueOf(explanation);
         }
@@ -240,7 +269,7 @@ public class HumanLogic extends PlayerLogic {
 
                 // Decide how safe this card is.
                 if (safetyLevel.equals("")) {
-                    safetyLevel = measureSafety(cardValue, zb);
+                    safetyLevel = measureSafety(cardValue, zb, 10-hand.size()+1);
                 }
             }
 
