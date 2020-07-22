@@ -134,12 +134,17 @@ public class HumanLogic extends PlayerLogic {
         return (1-oppositeOdds)*100;  // Return a percentage.
     }
 
-    /*
-     This condition should factor in playedCards.
-     For now, keep it simple; later return a HashMap.  And consider
-     other zones.
-    */
-    String measureSafety(int cardValue, int zoneBoundary, int turn) {
+    /**
+     * This evaluates a single card for each row.
+     *
+     * To avoid creating a Safety class, this returns an ArrayList the numeric and text evaluations.
+     *
+     * @param cardValue is the face value of that card
+     * @param zoneBoundary is boundary for that row
+     * @param turn is the game's current turn
+     * @return ArrayList of a float score and a human-readable string score.
+     */
+    ArrayList<Object> measureSafety(int cardValue, int zoneBoundary, int turn) {
         // A cardGap of 1 means you have the next card and no one can
         // squeeze in.
         int cardGap = cardValue - zoneBoundary;
@@ -147,27 +152,31 @@ public class HumanLogic extends PlayerLogic {
         int numPlayers = boardState.playerCount();
         StringBuilder explanation = new StringBuilder();
 
+        // Return both a number and string.
+        ArrayList<Object> safetyValue = new ArrayList<>();
+
         // If this card doesn't belong in this boundary, return empty
         // string so caller can try again.
         int index = zoneBoundaries.indexOf(zoneBoundary);
         if (index < zoneBoundaries.size()-1) {
             int nextZoneBoundary = zoneBoundaries.get(index+1);
             if (cardValue > nextZoneBoundary) {
-                return "";
+                return null;
             }
         }
 
         for (int seenCard: playedCards) {
             if (zoneBoundary < seenCard && seenCard < cardValue) {
                 cardGap--;
-//                explanation.append(String.format("deducting: %d, ", seenCard));
             }
         }
 
         // Unless this row is picked up, guaranteed safe.
         // For the future, tiebreakers should be the row's beefHeadSum.
         if (cardGap <= freeSpaces) {
-            return "+" + explanation;
+            safetyValue.add(1f);
+            safetyValue.add("+");
+            return safetyValue;
         }
 
         /*
@@ -176,41 +185,44 @@ public class HumanLogic extends PlayerLogic {
          someone going under.
         */
         if (numPlayers <= freeSpaces) {
-            return "+ row can fit all players";
+            safetyValue.add(2f);
+            safetyValue.add("+ row can fit all players");
+            return safetyValue;
         }
 
         // Row is almost full and you have the next card.  You will
-        // pick up this row unless someone goes under.
+        // pick up this row unless someone goes under and picks this row.
         if (cardGap == 1 && freeSpaces == 0) {
-            return "--" + explanation;
-        }
-
-        // You pick up the row if someone squeezes in.
-        if (cardGap == 2 && freeSpaces == 1) {
-            return "-" + explanation;
+            safetyValue.add(2f);
+            safetyValue.add("--");
+            return safetyValue;
         }
 
         // If the row is almost full, what are the odds that someone
         // squeeze in and take the row instead of you if you play this
         // card?
         if (freeSpaces == 0) {
-            explanation.append(String.format("-   You will pick up this row if there are no squeezes."));
-            return String.valueOf(explanation);
+            safetyValue.add(2f);
+            safetyValue.add("-   You will pick up this row if there are no squeezes.");
+            return safetyValue;
+        }
+
+        // You pick up the row if someone squeezes in.
+        if (cardGap == 2 && freeSpaces == 1) {
+            safetyValue.add(2f);
+            safetyValue.add("-   If someone has the single card that can squeeze, they will probably play it now.");
+            return safetyValue;
         }
 
         if (freeSpaces == 1) {
             // To compute odds, we need to consider the number of cards held by other players.
             int cardsHeld = (11-turn) * (numPlayers-1);
-
-//            explanation.append(String.format("#    -> There is one space; %2.1f%% chance that someone can squeeze.  ",
-//                    4.3));
-//            explanation.append(100*odds(cardsHeld, remainingCards.size()));
+            float squeezeOdds = odds(cardGap-1, cardsHeld, remainingCards.size());
             explanation.append(String.format("#    -> There is one space; %2.1f%% chance that someone can squeeze.  ",
-                    odds(cardGap-1, cardsHeld, remainingCards.size())));
-//            explanation.append(String.format("#    -> There is one space.  T%d P%d: %d held cards & %d unknowns cards.",
-//                    turn, numPlayers, cardsHeld, remainingCards.size()));
-//            explanation.append(boardState.scores);
-            return String.valueOf(explanation);
+                    squeezeOdds));
+            safetyValue.add(2f);
+            safetyValue.add(String.valueOf(explanation));
+            return safetyValue;
         }
 
         if (cardValue > zoneBoundary) {
@@ -219,11 +231,12 @@ public class HumanLogic extends PlayerLogic {
                             "%d unknowns",
                     freeSpaces, numPlayers-1, freeSpaces, cardGap-1, remainingCards.size()));
 
-            return String.valueOf(explanation);
+            safetyValue.add(2f);
+            safetyValue.add(String.valueOf(explanation));
         }
 
-        // Return "" if none of the above applies so caller can keep trying.
-        return "";
+        // Return null if none of the above applies so caller can keep trying.
+        return null;
     }
 
     public Card chooseCard(BoardState boardState, Hand hand) {
@@ -256,6 +269,7 @@ public class HumanLogic extends PlayerLogic {
         }
         System.out.printf("   |  %s|\n", zones);
         ArrayList<Card> cards = hand.getCards();
+        ArrayList<Object> safety;
         for (int i = 1; i <= cards.size(); i++) {
             int cardValue = cards.get(i-1).faceValue;
 
@@ -269,7 +283,10 @@ public class HumanLogic extends PlayerLogic {
 
                 // Decide how safe this card is.
                 if (safetyLevel.equals("")) {
-                    safetyLevel = measureSafety(cardValue, zb, 10-hand.size()+1);
+                    safety = measureSafety(cardValue, zb, 10-hand.size()+1);
+                    if (safety != null) {
+                        safetyLevel = (String) safety.get(1);
+                    }
                 }
             }
 

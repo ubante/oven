@@ -18,5 +18,11 @@ public class ExtraQuotes {
 
         System.out.println("\nreplace and three backslashes:");
         System.out.println(raw.replace("\"", "\\\""));
+
+        System.out.printf("yes %f ", (double) 11/7);
+
+        StringBuilder explanation = new StringBuilder();
+        explanation.append(String.format("Hello %f and %2.1f%%.  Bye.\n", 0.4, (float) 100/7));
+        System.out.println(explanation);
     }
 }
