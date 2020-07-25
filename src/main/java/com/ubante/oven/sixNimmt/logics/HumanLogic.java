@@ -139,6 +139,8 @@ public class HumanLogic extends PlayerLogic {
      *
      * To avoid creating a Safety class, this returns an ArrayList the numeric and text evaluations.
      *
+     * The greater the numeric evaluation, the safer the card.
+     *
      * @param cardValue is the face value of that card
      * @param zoneBoundary is boundary for that row
      * @param turn is the game's current turn
@@ -174,7 +176,7 @@ public class HumanLogic extends PlayerLogic {
         // Unless this row is picked up, guaranteed safe.
         // For the future, tiebreakers should be the row's beefHeadSum.
         if (cardGap <= freeSpaces) {
-            safetyValue.add(1f);
+            safetyValue.add(9f);
             safetyValue.add("+");
             return safetyValue;
         }
@@ -185,7 +187,7 @@ public class HumanLogic extends PlayerLogic {
          someone going under.
         */
         if (numPlayers <= freeSpaces) {
-            safetyValue.add(2f);
+            safetyValue.add(8f);
             safetyValue.add("+ row can fit all players");
             return safetyValue;
         }
@@ -193,7 +195,7 @@ public class HumanLogic extends PlayerLogic {
         // Row is almost full and you have the next card.  You will
         // pick up this row unless someone goes under and picks this row.
         if (cardGap == 1 && freeSpaces == 0) {
-            safetyValue.add(2f);
+            safetyValue.add(1f);
             safetyValue.add("--");
             return safetyValue;
         }
@@ -209,7 +211,7 @@ public class HumanLogic extends PlayerLogic {
 
         // You pick up the row if someone squeezes in.
         if (cardGap == 2 && freeSpaces == 1) {
-            safetyValue.add(2f);
+            safetyValue.add(3f);
             safetyValue.add("-   If someone has the single card that can squeeze, they will probably play it now.");
             return safetyValue;
         }
@@ -220,7 +222,7 @@ public class HumanLogic extends PlayerLogic {
             float squeezeOdds = odds(cardGap-1, cardsHeld, remainingCards.size());
             explanation.append(String.format("#    -> There is one space; %2.1f%% chance that someone can squeeze.  ",
                     squeezeOdds));
-            safetyValue.add(2f);
+            safetyValue.add(4f + (100-squeezeOdds)/100);
             safetyValue.add(String.valueOf(explanation));
             return safetyValue;
         }
@@ -270,11 +272,14 @@ public class HumanLogic extends PlayerLogic {
         System.out.printf("   |  %s|\n", zones);
         ArrayList<Card> cards = hand.getCards();
         ArrayList<Object> safety;
+        int bestCardIndex = 0;
+        float bestSafetyNumber = 0f;
         for (int i = 1; i <= cards.size(); i++) {
             int cardValue = cards.get(i-1).faceValue;
 
             StringBuilder zonePadding = new StringBuilder();
             String safetyLevel = "";
+            float safetyNumber;
             for (int zb: zoneBoundaries) {
                 if (cardValue <= zb) {
                     continue;
@@ -285,7 +290,15 @@ public class HumanLogic extends PlayerLogic {
                 if (safetyLevel.equals("")) {
                     safety = measureSafety(cardValue, zb, 10-hand.size()+1);
                     if (safety != null) {
+                        safetyNumber = (float) safety.get(0);
                         safetyLevel = (String) safety.get(1);
+//                        System.out.printf("%f  %s --\\/\n", safetyNumber, safetyLevel);
+                        if (safetyNumber > bestSafetyNumber) {
+//                            System.out.printf("%f > %f so replacing %d with %d\n",
+//                                    safetyNumber, bestSafetyNumber, bestCardIndex, i);
+                            bestSafetyNumber = safetyNumber;
+                            bestCardIndex = i;
+                        }
                     }
                 }
             }
@@ -293,7 +306,7 @@ public class HumanLogic extends PlayerLogic {
             System.out.printf("%2d: %s%2d %s\n", i, zonePadding.toString(), cardValue, safetyLevel);
         }
 
-        System.out.printf("Choose a card: [1-%s]: ", cards.size());
+        System.out.printf("Choose a card: [1-%s] {%s}: ", cards.size(), bestCardIndex);
         int cardChoice = getInput(cards.size());
 
         return hand.get(cardChoice-1);
