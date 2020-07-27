@@ -46,8 +46,13 @@ public class MultipleGameRunner {
         System.out.printf("\n\nSummary of %d games:\n", gameCounter);
         for (String name: totalScore.keySet()) {
             float ave = (float) totalScore.get(name) / gameCounter;
+            int wins = 0;
+            if (gamesWon.containsKey(name)) {
+                wins = gamesWon.get(name);
+            }
+
             System.out.printf("%15s won %d games with an average score of %4.1f\n",
-                    name, gamesWon.get(name), ave);
+                    name, wins, ave);
         }
     }
 
@@ -55,12 +60,18 @@ public class MultipleGameRunner {
         System.out.println("Starting up multiple game runner.");
 
         MultipleGameRunner mgr = new MultipleGameRunner();
-        mgr.playMultipleGames(10);
+        mgr.playMultipleGames(1000);
         mgr.printSummary();
     }
 }
 
 /*
+Summary of 1000 games:
+         Random won 56 games with an average score of  2.7
+       TheCount won 398 games with an average score of 24.4
+         Genero won 58 games with an average score of  3.2
+       HighCard won 488 games with an average score of 28.9
+
 Summary of 10 games:
          Random won 1 games with an average score of -8.3
          Genero won 1 games with an average score of  7.2

@@ -134,7 +134,7 @@ public class HumanLogic extends PlayerLogic {
         return (1-oppositeOdds)*100;  // Return a percentage.
     }
 
-    /**
+    /**g
      * This evaluates a single card for each row.
      *
      * To avoid creating a Safety class, this returns an ArrayList the numeric and text evaluations.
@@ -220,8 +220,8 @@ public class HumanLogic extends PlayerLogic {
             // To compute odds, we need to consider the number of cards held by other players.
             int cardsHeld = (11-turn) * (numPlayers-1);
             float squeezeOdds = odds(cardGap-1, cardsHeld, remainingCards.size());
-            explanation.append(String.format("#    -> There is one space; %2.1f%% chance that someone can squeeze.  ",
-                    squeezeOdds));
+            explanation.append(String.format("#    -> There is one space and %d cards can fit; %2.1f%% chance that " +
+                            "someone can squeeze.  ", cardGap-1, squeezeOdds));
             safetyValue.add(4f + (100-squeezeOdds)/100);
             safetyValue.add(String.valueOf(explanation));
             return safetyValue;
@@ -318,8 +318,8 @@ public class HumanLogic extends PlayerLogic {
         printBoard();
 
         System.out.print("Choose a row [1-4]: ");
-        Scanner input = new Scanner(System.in);
-        return input.nextInt() - 1;
+        int rowChoice = getInput(4);
+        return rowChoice - 1;
     }
 
 }
