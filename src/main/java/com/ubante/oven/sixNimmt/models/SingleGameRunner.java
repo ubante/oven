@@ -11,7 +11,7 @@ public class SingleGameRunner {
         g.addPlayer(new PlayerLogic("Genero"));
         g.addPlayer(new RandomLogic("Random"));
         g.addPlayer(new HighCardLogic("HighCard"));
-//        g.addPlayer(new HumanLogic("TheCond"));
+        g.addPlayer(new HumanLogic("TheCond"));
         g.addPlayer(new CardCountingLogic("TheCount"));
         g.run();
 

@@ -220,8 +220,8 @@ public class HumanLogic extends PlayerLogic {
             // To compute odds, we need to consider the number of cards held by other players.
             int cardsHeld = (11-turn) * (numPlayers-1);
             float squeezeOdds = odds(cardGap-1, cardsHeld, remainingCards.size());
-            explanation.append(String.format("#    -> There is one space and %d cards can fit; %2.1f%% chance that " +
-                            "someone can squeeze.  ", cardGap-1, squeezeOdds));
+            explanation.append(String.format("#    -> %d cards can fit in single free space; %2.1f%% chance of a " +
+                            "squeeze.  ", cardGap-1, squeezeOdds));
             safetyValue.add(4f + (100-squeezeOdds)/100);
             safetyValue.add(String.valueOf(explanation));
             return safetyValue;
@@ -232,12 +232,11 @@ public class HumanLogic extends PlayerLogic {
             explanation.append(String.format("?    -> %d/%d other players have to play %d/%d cards for you to bust.  " +
                             "%d unknowns",
                     freeSpaces, numPlayers-1, freeSpaces, cardGap-1, remainingCards.size()));
-
             safetyValue.add(2f);
             safetyValue.add(String.valueOf(explanation));
         }
 
-        // Return null if none of the above applies so caller can keep trying.
+        // Return null if none of the above applies.
         return null;
     }
 
@@ -281,8 +280,10 @@ public class HumanLogic extends PlayerLogic {
             String safetyLevel = "";
             float safetyNumber;
             for (int zb: zoneBoundaries) {
+                // TODO if the card is in zone A, score it by how likely someone
+                //  else will go under.
                 if (cardValue <= zb) {
-                    continue;
+                    break;
                 }
                 zonePadding.append("   ");
 
@@ -292,10 +293,7 @@ public class HumanLogic extends PlayerLogic {
                     if (safety != null) {
                         safetyNumber = (float) safety.get(0);
                         safetyLevel = (String) safety.get(1);
-//                        System.out.printf("%f  %s --\\/\n", safetyNumber, safetyLevel);
                         if (safetyNumber > bestSafetyNumber) {
-//                            System.out.printf("%f > %f so replacing %d with %d\n",
-//                                    safetyNumber, bestSafetyNumber, bestCardIndex, i);
                             bestSafetyNumber = safetyNumber;
                             bestCardIndex = i;
                         }
