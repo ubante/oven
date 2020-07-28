@@ -143,6 +143,7 @@ public class CardCountingLogic extends PlayerLogic {
      * To avoid creating a Safety class, this returns an ArrayList the numeric and text evaluations.
      *
      * The greater the numeric evaluation, the safer the card.
+     * Safety above 5 is good.  Safety below 5 is not good.
      *
      * @param cardValue is the face value of that card
      * @param zoneBoundary is boundary for that row
@@ -241,11 +242,16 @@ public class CardCountingLogic extends PlayerLogic {
         }
 
         // Return null if none of the above applies so caller can keep trying.
+        // TODO This is a problem because a score of 1, which is real bad, is
+        //  worse than no score, which is just average.
         return null;
     }
 
     public Card chooseCard(BoardState boardState, Hand hand) {
         this.boardState = boardState;
+        float defaultCardValue = 5f;
+        String defaultCardDescription = "This card has no description.";
+
         recordHand(hand);
         recordLastChosenCards(boardState.lastChosenCards);
 
@@ -292,13 +298,19 @@ public class CardCountingLogic extends PlayerLogic {
                 // Decide how safe this card is.
                 if (safetyLevel.equals("")) {
                     safety = measureSafety(cardValue, zb, 10-hand.size()+1);
-                    if (safety != null) {
+                    if (safety == null) {
+                        // If this card didn't give it a safety description,
+                        // assign it the default value.
+                        safetyNumber = defaultCardValue;
+                        safetyLevel = defaultCardDescription;
+                    } else {
                         safetyNumber = (float) safety.get(0);
                         safetyLevel = (String) safety.get(1);
-                        if (safetyNumber > bestSafetyNumber) {
-                            bestSafetyNumber = safetyNumber;
-                            bestCardIndex = i;
-                        }
+                    }
+
+                    if (safetyNumber > bestSafetyNumber) {
+                        bestSafetyNumber = safetyNumber;
+                        bestCardIndex = i;
                     }
                 }
             }
@@ -309,7 +321,9 @@ public class CardCountingLogic extends PlayerLogic {
         System.out.printf("CCL choosing a card: [1-%s] {%s}\n", cards.size(), bestCardIndex);
         int cardChoice = bestCardIndex;
         if (bestCardIndex == 0) {
-            cardChoice = cards.size();  // If there are no safety suggestions, choose the highest valued card.
+            // If there are no safety suggestions, then all the cards are in zone A.
+            // Choose the highest valued card.  This could be improved.
+            cardChoice = cards.size();
         }
 
         return hand.get(cardChoice-1);

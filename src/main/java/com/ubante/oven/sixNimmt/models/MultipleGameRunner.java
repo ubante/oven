@@ -66,6 +66,13 @@ public class MultipleGameRunner {
 }
 
 /*
+After giving cards without a safety description, a middle value, CCL improved.
+Summary of 1000 games:
+         Random won 74 games with an average score of  3.1
+       TheCount won 428 games with an average score of 25.6
+         Genero won 73 games with an average score of  3.1
+       HighCard won 425 games with an average score of 26.4
+
 Summary of 1000 games:
          Random won 56 games with an average score of  2.7
        TheCount won 398 games with an average score of 24.4
